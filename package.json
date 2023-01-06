@@ -38,5 +38,8 @@
     "stylelint-config-recommended-scss": "^8.0.0",
     "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.3.0"
+  },
+  "volta": {
+    "node": "18.13.0"
   }
 }
