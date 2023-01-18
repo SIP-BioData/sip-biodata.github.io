@@ -38,6 +38,8 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --item-textW: 875px;
 }
 
 * {
@@ -54,6 +56,10 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
+}
+
+p {
+  font-size: 20px;
 }
 
 a {
