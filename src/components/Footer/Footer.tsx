@@ -10,7 +10,7 @@ const footerStyle = css`
   padding: 40px 0;
 `
 const footerLogoStyle = css`
-  max-width: var(--inner1000);
+  max-width: var(--inn1000);
   margin: 0 auto;
   display: flex;
   align-items: flex-end;
@@ -22,7 +22,7 @@ const footerLogoStyle = css`
 `
 
 const menuStyle = css`
-  max-width: var(--inner1000);
+  max-width: var(--inn1000);
   margin: 56px auto 0;
   display: flex;
   li {

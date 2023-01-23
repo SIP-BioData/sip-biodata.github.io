@@ -1,10 +1,11 @@
 import { css } from '@emotion/react'
+import Link from "next/link";
 import { ReactNode } from 'react'
 
 type Props = {
-  title: string
-  text: ReactNode
-  item?: ReactNode
+  slug: string
+  text: string
+  icon?: ReactNode
 }
 
 const style = css`
@@ -32,18 +33,19 @@ const style = css`
     background: var(--col-bk);
     a {
       color: #fff;
-      &::after {
-      }
     }
   }
 `
-const HomeItem = ({ title, text, item }: Props) => {
+const HomeItem = ({ slug, text, icon }: Props) => {
   return (
-    <section css={style}>
-      <h3>{title}</h3>
-      <p>{text}</p>
-      <>{item}</>
-    </section>
+    <>
+      <button>
+        <Link href="{slug}">
+            <span>{text}</span>
+            <>{icon}</>
+        </Link>
+      </button>
+    </>
   )
 }
 

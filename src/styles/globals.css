@@ -39,7 +39,12 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 
-  --item-textW: 875px;
+  --w875: 875px;
+  --inn1000: 1000px;
+  --conts-inn: 1200px;
+  --col-bk: #000118;
+  --col-wh: #fff;
+  --border-form: 1px solid #9B9B9B;
 }
 
 * {
@@ -52,10 +57,13 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  color: rgb(var(--foreground-rgb));
+  background-color: #F8F8F8;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
+h1 {
+  font-size: 18px;
+  font-weight: 400;
 }
 
 p {
@@ -65,4 +73,8 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }
