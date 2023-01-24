@@ -25,6 +25,7 @@ const btnStyle = css`
 
 const imgStyle = css`
   max-width: var(--w875);
+  width: calc(100% - 20px);
   background-color: var(--col-wh);
   margin: 60px 0 0;
   padding: 18px 22px;
@@ -92,7 +93,7 @@ const Home = () => {
                 <Image
                     src={aboutImg}
                     alt="スマートバイオ産業・農業基盤技術についての画像"
-                    width={830}
+                    max-width={830} layout={'responsive'}
                 />
               </div>
               <p css={txtStyle}>
