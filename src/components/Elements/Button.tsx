@@ -1,51 +1,36 @@
 import { css } from '@emotion/react'
-import Link from "next/link";
+import Link from 'next/link'
 import { ReactNode } from 'react'
 
 type Props = {
+  iconLeft?: ReactNode
   slug: string
   text: string
-  icon?: ReactNode
+  iconRight?: ReactNode
 }
 
 const style = css`
-  max-width: var(--w875);
-  margin: 100px auto;
-
-  h3 {
-    font-size: 38px;
-    text-align: center;
-  }
-
-  p {
-    margin: 76px 0 0;
-    line-height: calc(38 / 20);
-  }
-
-  button {
-    display: block;
-    width: 240px;
-    line-height: 48px;
-    margin: 50px auto 0;
-    appearance: none;
-    border: 0;
-    border-radius: 24px;
-    background: var(--col-bk);
-    a {
-      color: #fff;
-    }
+  display: block;
+  width: 240px;
+  line-height: 48px;
+  margin: 50px 0 0;
+  appearance: none;
+  border: 0;
+  border-radius: 24px;
+  background: var(--col-bk);
+  a {
+    color: #fff;
   }
 `
-const HomeItem = ({ slug, text, icon }: Props) => {
+const HomeItem = ({ iconLeft, slug, text, iconRight }: Props) => {
   return (
-    <>
-      <button>
-        <Link href="{slug}">
-            <span>{text}</span>
-            <>{icon}</>
-        </Link>
-      </button>
-    </>
+    <button css={style}>
+      <Link href={slug}>
+        <>{iconLeft}</>
+        <span>{text}</span>
+        <>{iconRight}</>
+      </Link>
+    </button>
   )
 }
 

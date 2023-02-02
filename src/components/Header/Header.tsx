@@ -13,18 +13,26 @@ const logoStyle = css`
   background-color: var(--col-wh);
   padding: 42px 22px;
   border-radius: 0 0 10px 0;
+  box-shadow: var(--shadow);
   z-index: 100;
 `
 
-const navigationStyle = css`
+const naviStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: var(--inn1000);
+  width: var(--inn1000);
   background-color: var(--col-wh);
   padding: 22px 36px;
   border-radius: 36px;
   line-heignt: 70px;
+  box-shadow: var(--shadow);
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   h1 {
     font-size: 18px;
   }
@@ -53,7 +61,7 @@ const Header = () => {
       <div css={logoStyle}>
         <Image src={logoImg} alt="SIP" />
       </div>
-      <nav css={navigationStyle}>
+      <nav css={naviStyle}>
         <h1>
           <Link href="/">
             SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル

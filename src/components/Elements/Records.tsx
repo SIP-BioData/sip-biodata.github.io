@@ -6,17 +6,18 @@ type Props = {
 
 const style = css`
   font-size: 14px;
-  
-  span{
+
+  span {
     display: inline-flex;
     margin-left: 8px;
   }
 `
 const Records = ({ num }: Props) => {
   return (
-    <>
-      <p css={style}>{num}<span>records</span></p>
-    </>
+    <p css={style}>
+      {num}
+      <span>records</span>
+    </p>
   )
 }
 

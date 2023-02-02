@@ -1,23 +1,15 @@
 import { css } from '@emotion/react'
-import Image from "next/image";
-import { ReactNode } from 'react'
+import Image from 'next/image'
 
-import serchImg from "../../../public/iconSearch.svg";
-
-type Props = {
-  slug: string
-  text: string
-  icon?: ReactNode
-}
+import serchImg from '../../../public/iconSearch.svg'
 
 const style = css`
   displey: flex;
   border: var(--border-form);
   border-radius: 4px;
   padding: 16px 14px;
-  
-  form { 
-  
+
+  form {
     input {
       padding: 0;
       border: none;
@@ -28,12 +20,12 @@ const style = css`
 `
 const SearchForm = () => {
   return (
-      <div css={style}>
-        <Image src={serchImg} alt="検索"/>
-        <form action="" method="get">
-          <input type="search" name="search" placeholder="キーワードで検索"/>
-        </form>
-      </div>
+    <div css={style}>
+      <Image src={serchImg} alt="検索" />
+      <form action="" method="get">
+        <input type="search" name="search" placeholder="キーワードで検索" />
+      </form>
+    </div>
   )
 }
 

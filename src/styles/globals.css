@@ -47,6 +47,7 @@
   --border-form: 1px solid #9b9b9b;
   --border-list: 1px solid #707070;
   --list-padding: 16px 20px;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 * {

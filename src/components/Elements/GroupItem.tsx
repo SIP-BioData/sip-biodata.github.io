@@ -19,6 +19,7 @@ type Props = {
 
 const style = css`
   border: 1px solid #707070;
+  margin-top: 32px;
   padding: 28px;
 
   dl {
