@@ -32,6 +32,15 @@ const style = css`
       font-weight: 600;
     }
   }
+
+  button {
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+    margin-top: 16px;
+    color: var(--col-bl);
+  }
 `
 
 const borderStyle = css`
@@ -42,8 +51,8 @@ const linkStyle = css`
   color: #0068d0;
 `
 
-const layoutStyle = css`
-  margin-top: 20px;
+const displayAllStyle = css`
+  display: none;
 `
 
 const GroupItem = ({
@@ -122,14 +131,14 @@ const GroupItem = ({
             <dt>参考</dt>
             <dd>{reference}</dd>
           </dl>
-          <div css={layoutStyle}>
-            <Link css={linkStyle} href="">
-              表示内容を減らす
-            </Link>
-          </div>
+          <button onClick={() => setIsDisplayAll(false)}>
+            表示内容を減らす
+          </button>
         </>
       )}
-      <button onClick={() => setIsDisplayAll(true)}>more</button>
+      <div css={isDisplayAll ? displayAllStyle : undefined}>
+        <button onClick={() => setIsDisplayAll(true)}>もっと見る</button>
+      </div>
     </section>
   )
 }

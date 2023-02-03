@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 type Props = {
   title?: string
+  path?: string
   childTitle?: string
 }
 
@@ -14,12 +15,6 @@ const style = css`
     &:last-child {
       color: #646464;
     }
-    &:not(:first-child) {
-      ::before {
-        content: '>';
-        margin: 0 8px;
-      }
-    }
   }
 `
 const childStyle = css`
@@ -30,9 +25,12 @@ const childStyle = css`
   &:last-child {
     color: #646464;
   }
+  &:empty {
+    display: none;
+  }
 `
 
-const Breadcrumbs = ({ title, childTitle }: Props) => {
+const Breadcrumbs = ({ title, childTitle, path }: Props) => {
   return (
     <nav css={style}>
       <Link href="/">HOME</Link>

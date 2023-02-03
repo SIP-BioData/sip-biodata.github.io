@@ -4,7 +4,8 @@ import Image from 'next/image'
 import serchImg from '../../../public/iconSearch.svg'
 
 const style = css`
-  displey: flex;
+  display: flex;
+  align-items: center;
   border: var(--border-form);
   border-radius: 4px;
   padding: 16px 14px;
@@ -15,6 +16,8 @@ const style = css`
       border: none;
       outline: none;
       background: none;
+      margin-left: 16px;
+      font-size: 16px;
     }
   }
 `

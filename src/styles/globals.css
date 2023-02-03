@@ -44,6 +44,7 @@
   --conts-inn: 1200px;
   --col-bk: #000118;
   --col-wh: #fff;
+  --col-bl: #0068d0;
   --border-form: 1px solid #9b9b9b;
   --border-list: 1px solid #707070;
   --list-padding: 16px 20px;
@@ -60,6 +61,9 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: 'noto-sans-cjk-jp', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   color: rgb(var(--foreground-rgb));
   background-color: #f8f8f8;
 }

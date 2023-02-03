@@ -7,7 +7,7 @@ type Props = {
 
 const style = css`
   background: var(--col-wh);
-  margin-top: 26px;
+  margin: 26px 0 100px;
   padding: 60px;
 `
 

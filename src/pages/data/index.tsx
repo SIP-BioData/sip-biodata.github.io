@@ -71,6 +71,20 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
             }
             reference="特許出願（特願2020-512343）"
           />
+          <GroupItem
+            group="農業環境エンジニアリングシステム"
+            data="農業環境エンジニアリングシステムメタデータ"
+            target="ダイズ/コマツナ"
+            provider="桝屋啓志"
+            accessLevel="公開（CC BY）"
+            content="{}"
+            storage="{}"
+            dataForm="{}"
+            admin="{}"
+            publicPrivate="{}"
+            database="{}"
+            reference="{}"
+          />
         </section>
       </LowerPageLayout>
     </DefaultLayout>

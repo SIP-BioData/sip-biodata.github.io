@@ -10,25 +10,42 @@ type Props = {
 }
 
 const style = css`
-  display: block;
+  margin: 0 15px;
+  display: inline-block;
   width: 240px;
   line-height: 48px;
-  margin: 50px 0 0;
   appearance: none;
   border: 0;
-  border-radius: 24px;
+  border-radius: 40px;
   background: var(--col-bk);
   a {
     color: #fff;
   }
 `
+
+const innerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+
+  span {
+    &:first-child {
+      margin-right: 10px;
+    }
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+`
+
 const HomeItem = ({ iconLeft, slug, text, iconRight }: Props) => {
   return (
     <button css={style}>
-      <Link href={slug}>
-        <>{iconLeft}</>
+      <Link css={innerStyle} href={slug}>
+        <span>{iconLeft}</span>
         <span>{text}</span>
-        <>{iconRight}</>
+        <span>{iconRight}</span>
       </Link>
     </button>
   )
