@@ -14,6 +14,9 @@ const logoStyle = css`
   padding: 42px 22px;
   border-radius: 0 0 10px 0;
   box-shadow: var(--shadow);
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 100;
 `
 
@@ -33,6 +36,7 @@ const naviStyle = css`
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
+  z-index: 100;
   h1 {
     font-size: 18px;
   }

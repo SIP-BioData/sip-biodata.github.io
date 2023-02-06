@@ -8,8 +8,7 @@ type Props = {
 }
 
 const style = css`
-  max-width: var(--w875);
-  margin: 100px auto;
+  margin: 100px 0;
 
   h3 {
     font-size: 38px;
@@ -17,7 +16,9 @@ const style = css`
   }
 
   p {
-    margin: 76px 0 0;
+    max-width: var(--w875);
+    width: 100%;
+    margin: 76px auto 50px;
     line-height: calc(38 / 20);
   }
 
@@ -39,11 +40,11 @@ const style = css`
 `
 const HomeItem = ({ title, text, item }: Props) => {
   return (
-    <section css={style}>
+    <div css={style}>
       <h3>{title}</h3>
       <p>{text}</p>
       <>{item}</>
-    </section>
+    </div>
   )
 }
 
