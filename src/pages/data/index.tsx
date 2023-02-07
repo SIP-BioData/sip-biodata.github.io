@@ -3,12 +3,12 @@ import { css } from '@emotion/react'
 // import Image from "next/image";
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import GroupItem from '@/components/Elements/GroupItem'
-import LowerPageLayout from '@/components/Elements/LowerPageLayout'
 import Pagenation from '@/components/Elements/Pagination'
 import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 
 type Props = {
   title?: string
@@ -38,7 +38,7 @@ const flexStyleAll = css`
 
 const DataIndex = ({ title = 'データリスト' }: Props) => {
   return (
-    <DefaultLayout title={title}>
+    <Layout title={title}>
       <LowerPageLayout>
         <Breadcrumbs childTitle={title} />
         <section css={style}>
@@ -52,6 +52,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
             <SelectBox />
           </div>
           <GroupItem
+            id="1A-1"
             group="精密ゲノム編集"
             data="蛋白質構造データ"
             target="-"
@@ -72,6 +73,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
             reference="特許出願（特願2020-512343）"
           />
           <GroupItem
+            id="1A-2"
             group="農業環境エンジニアリングシステム"
             data="農業環境エンジニアリングシステムメタデータ"
             target="ダイズ/コマツナ"
@@ -87,7 +89,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
           />
         </section>
       </LowerPageLayout>
-    </DefaultLayout>
+    </Layout>
   )
 }
 

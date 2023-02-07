@@ -1,9 +1,7 @@
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
 
 const GroupIndex = () => {
-  return (
-    <DefaultLayout title="研究グループ一覧">研究グループ一覧</DefaultLayout>
-  )
+  return <Layout title="研究グループ一覧">研究グループ一覧</Layout>
 }
 
 export default GroupIndex

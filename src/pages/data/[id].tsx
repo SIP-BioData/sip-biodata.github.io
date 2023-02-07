@@ -3,16 +3,21 @@ import { useRouter } from 'next/router'
 
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import Button from '@/components/Elements/Button'
-import DetailItem from '@/components/Elements/DetailItem'
 import ListItem from '@/components/Elements/ListItem'
-import LowerPageLayout from '@/components/Elements/LowerPageLayout'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 
 type Props = {
   title?: string
   path?: string
   childTitle?: string
 }
+
+const sectionStyle = css`
+  background: var(--col-wh);
+  margin: 26px 0 100px;
+  padding: 60px;
+`
 
 const buttonStyle = css`
   margin: 50px auto 0;
@@ -27,12 +32,12 @@ const DataDetail = ({
   const { id } = router.query
 
   return (
-    <DefaultLayout title="データ詳細">
+    <Layout title="データ詳細">
       {/*データ詳細*/}
       {/*<p>ID: {id}</p>*/}
       <LowerPageLayout>
         <Breadcrumbs title={title} path="data" childTitle={childTitle} />
-        <DetailItem>
+        <section css={sectionStyle}>
           <h2>{childTitle}</h2>
           <ListItem
             group="精密ゲノム編集"
@@ -87,9 +92,9 @@ const DataDetail = ({
               text="研究グループに戻る"
             />
           </div>
-        </DetailItem>
+        </section>
       </LowerPageLayout>
-    </DefaultLayout>
+    </Layout>
   )
 }
 

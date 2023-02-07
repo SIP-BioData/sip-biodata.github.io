@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ReactNode, useState } from 'react'
 
 type Props = {
+  id: string
   group: string
   data: string
   target: string
@@ -56,6 +57,7 @@ const displayAllStyle = css`
 `
 
 const GroupItem = ({
+  id,
   group,
   data,
   target,
@@ -84,7 +86,7 @@ const GroupItem = ({
       <dl>
         <dt>データ</dt>
         <dd>
-          <Link css={linkStyle} href="">
+          <Link css={linkStyle} href={`/data/${id}`}>
             {data}
           </Link>
         </dd>
