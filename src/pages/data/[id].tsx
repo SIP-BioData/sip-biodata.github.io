@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import Button from '@/components/Elements/Button'
-import DetailItem from '@/components/Elements/DetailItem'
 import ListItem from '@/components/Elements/ListItem'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
@@ -13,6 +12,12 @@ type Props = {
   path?: string
   childTitle?: string
 }
+
+const sectionStyle = css`
+  background: var(--col-wh);
+  margin: 26px 0 100px;
+  padding: 60px;
+`
 
 const buttonStyle = css`
   margin: 50px auto 0;
@@ -32,7 +37,7 @@ const DataDetail = ({
       {/*<p>ID: {id}</p>*/}
       <LowerPageLayout>
         <Breadcrumbs title={title} path="data" childTitle={childTitle} />
-        <DetailItem>
+        <section css={sectionStyle}>
           <h2>{childTitle}</h2>
           <ListItem
             group="精密ゲノム編集"
@@ -87,7 +92,7 @@ const DataDetail = ({
               text="研究グループに戻る"
             />
           </div>
-        </DetailItem>
+        </section>
       </LowerPageLayout>
     </Layout>
   )
