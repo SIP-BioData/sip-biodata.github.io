@@ -1,9 +1,11 @@
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Button from '@/components/Elements/Button'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import MdxLayout from '@/components/Layout/MdxLayout'
 import GroupDetailList from '@/components/Elements/GroupDetailList'
 import Image from 'next/image'
+import { css } from '@emotion/css'
 
 export const title = '研究グループ'
 export const childTitle = '精密ゲノム編集'
@@ -42,20 +44,51 @@ C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認
 
 ---
 
+## データ一覧
+
+<GroupDetailList
+  group="精密ゲノム編集"
+  url=""
+  data="花卉ゲノム・転写産物解析データ"
+  target="花卉"
+  provider="小野道之"
+  accessLevel="グループ内共有"
+/>
+
+---
+
 export default ({ children }) => (
   <Layout title={title}>
     <LowerPageLayout>
       <Breadcrumbs title={title} childTitle={childTitle} />
       <MdxLayout>
         {children}
-        <GroupDetailList
-          group="精密ゲノム編集"
-          url=""
-          data="花卉ゲノム・転写産物解析データ"
-          target="花卉"
-          provider="小野道之"
-          accessLevel="グループ内共有"
-        />
+        <div
+          className={css`
+            display: flex;
+            justify-content: center;
+          `}
+        >
+          <Button
+            iconLeft={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  id="arrow-up-circle-outline"
+                  d="M8.8,3.2H7.2V9.6L4.4,6.8,3.264,7.936,8,12.672l4.736-4.736L11.6,6.8,8.8,9.6V3.2M8,16A8,8,0,1,0,0,8a8,8,0,0,0,8,8m0-1.6A6.4,6.4,0,1,1,14.4,8,6.4,6.4,0,0,1,8,14.4Z"
+                  transform="translate(16) rotate(90)"
+                  fill="#fff"
+                />
+              </svg>
+            }
+            slug="/data"
+            text="データリストに戻る"
+          />
+        </div>
       </MdxLayout>
     </LowerPageLayout>
   </Layout>
