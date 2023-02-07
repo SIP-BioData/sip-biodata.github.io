@@ -12,7 +12,7 @@ type Props = {
 const style = css`
   width: 100%;
   border: var(--border-gray);
-  
+
   th {
     background-color: #f7f7f7;
     border: var(--border-gray);
@@ -23,7 +23,7 @@ const style = css`
     padding: var(--list-padding);
     border: var(--border-gray);
   }
-  
+
   td:nth-child(2) {
     width: 342px;
     color: var(--col-bl);

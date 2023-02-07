@@ -24,7 +24,7 @@ const style = css`
     line-height: calc(38 / 20);
     margin: 0 0 34px;
   }
-  
+
   img {
     display: block;
   }
@@ -36,15 +36,15 @@ const style = css`
   }
 `
 
-
 const GroupDetailItem = ({ subtitle, text, item, url, icon }: Props) => {
-return (
-  <div css={style}>
-    <h3>{subtitle}</h3>
-    <>{text}</>
-    <>{item}</>
-    <a href="">{url}</a><span>{icon}</span>
-  </div>
+  return (
+    <div css={style}>
+      <h3>{subtitle}</h3>
+      <>{text}</>
+      <>{item}</>
+      <a href="">{url}</a>
+      <span>{icon}</span>
+    </div>
   )
 }
 
