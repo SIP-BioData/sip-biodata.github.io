@@ -39,7 +39,7 @@ const innerStyle = css`
   }
 `
 
-const HomeItem = ({ iconLeft, slug, text, iconRight }: Props) => {
+const Button = ({ iconLeft, slug, text, iconRight }: Props) => {
   return (
     <button css={style}>
       <Link css={innerStyle} href={slug}>
@@ -51,4 +51,4 @@ const HomeItem = ({ iconLeft, slug, text, iconRight }: Props) => {
   )
 }
 
-export default HomeItem
+export default Button
