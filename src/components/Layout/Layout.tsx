@@ -9,7 +9,7 @@ type Props = {
   title?: string
 }
 
-const DefaultLayout = ({
+const Layout = ({
   children,
   title = 'SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル',
 }: Props) => {
@@ -26,4 +26,4 @@ const DefaultLayout = ({
   )
 }
 
-export default DefaultLayout
+export default Layout

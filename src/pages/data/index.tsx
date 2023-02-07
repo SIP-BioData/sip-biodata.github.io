@@ -8,7 +8,7 @@ import Pagenation from '@/components/Elements/Pagination'
 import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
 
 type Props = {
   title?: string
@@ -38,7 +38,7 @@ const flexStyleAll = css`
 
 const DataIndex = ({ title = 'データリスト' }: Props) => {
   return (
-    <DefaultLayout title={title}>
+    <Layout title={title}>
       <LowerPageLayout>
         <Breadcrumbs childTitle={title} />
         <section css={style}>
@@ -87,7 +87,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
           />
         </section>
       </LowerPageLayout>
-    </DefaultLayout>
+    </Layout>
   )
 }
 

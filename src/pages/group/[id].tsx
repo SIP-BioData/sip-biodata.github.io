@@ -6,7 +6,7 @@ import DetailItem from '@/components/Elements/DetailItem'
 import GroupDetailItem from '@/components/Elements/GroupDetailItem'
 import GroupDetailList from '@/components/Elements/GroupDetailList'
 import LowerPageLayout from '@/components/Elements/LowerPageLayout'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
 
 import groupImg01 from '../../../public/groupImg01.png'
 import groupImg02 from '../../../public/groupImg02.png'
@@ -24,7 +24,7 @@ const GroupDetail = ({
   const { id } = router.query
 
   return (
-    <DefaultLayout title={title}>
+    <Layout title={title}>
       {/*研究グループ詳細*/}
       {/*<p>ID: {id}</p>*/}
       <LowerPageLayout>
@@ -98,9 +98,9 @@ v12.4c0,1,0.8,1.8,1.8,1.8h12.4c1,0,1.8-0.8,1.8-1.8V8h-1.8V14.2z"
               }
           />
         </DetailItem>
-        
+
       </LowerPageLayout>
-    </DefaultLayout>
+    </Layout>
   )
 }
 

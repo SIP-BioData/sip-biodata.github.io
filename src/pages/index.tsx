@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Button from '@/components/Elements/Button'
 import HomeItem from '@/components/Elements/HomeItem'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
 
 import aboutImg from '../../public/aboutImg.png'
 import bgImg from '../../public/bgImg.png'
@@ -80,7 +80,7 @@ const quotationStyle = css`
 
 const Home = () => {
   return (
-    <DefaultLayout title="home">
+    <Layout title="home">
       <div>
         <Image css={mainImgStyle} src={mainImg} alt="" width={500} />
       </div>
@@ -254,7 +254,7 @@ const Home = () => {
           />
         }
       />
-    </DefaultLayout>
+    </Layout>
   )
 }
 

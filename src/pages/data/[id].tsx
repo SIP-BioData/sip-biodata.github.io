@@ -6,7 +6,7 @@ import Button from '@/components/Elements/Button'
 import DetailItem from '@/components/Elements/DetailItem'
 import ListItem from '@/components/Elements/ListItem'
 import LowerPageLayout from '@/components/Elements/LowerPageLayout'
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import Layout from '@/components/Layout/Layout'
 
 type Props = {
   title?: string
@@ -27,7 +27,7 @@ const DataDetail = ({
   const { id } = router.query
 
   return (
-    <DefaultLayout title="データ詳細">
+    <Layout title="データ詳細">
       {/*データ詳細*/}
       {/*<p>ID: {id}</p>*/}
       <LowerPageLayout>
@@ -89,7 +89,7 @@ const DataDetail = ({
           </div>
         </DetailItem>
       </LowerPageLayout>
-    </DefaultLayout>
+    </Layout>
   )
 }
 
