@@ -31,6 +31,7 @@ const textStyle = css`
 const linkStyle = css`
   font-size: 18px;
   color: var(--col-bl);
+  word-break: break-all;
 `
 
 const lineStyle = css`
