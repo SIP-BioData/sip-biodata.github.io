@@ -28,7 +28,7 @@ const naviStyle = css`
   background-color: var(--col-wh);
   padding: 22px 36px;
   border-radius: 36px;
-  line-heignt: 70px;
+  line-height: 70px;
   box-shadow: var(--shadow);
   position: absolute;
   top: 25px;
