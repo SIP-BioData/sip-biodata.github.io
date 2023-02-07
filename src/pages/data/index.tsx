@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 // import Image from "next/image";
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import GroupItem from '@/components/Elements/GroupItem'
-import LowerPageLayout from '@/components/Elements/LowerPageLayout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import Pagenation from '@/components/Elements/Pagination'
 import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'

@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import DetailItem from '@/components/Elements/DetailItem'
 import GroupDetailItem from '@/components/Elements/GroupDetailItem'
 import GroupDetailList from '@/components/Elements/GroupDetailList'
-import LowerPageLayout from '@/components/Elements/LowerPageLayout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import Layout from '@/components/Layout/Layout'
 
 import groupImg01 from '../../../public/groupImg01.png'

@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import Button from '@/components/Elements/Button'
 import DetailItem from '@/components/Elements/DetailItem'
 import ListItem from '@/components/Elements/ListItem'
-import LowerPageLayout from '@/components/Elements/LowerPageLayout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import Layout from '@/components/Layout/Layout'
 
 type Props = {
