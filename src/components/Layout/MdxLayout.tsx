@@ -14,23 +14,30 @@ const containerStyle = css`
 `
 
 const h1Style = css`
-  color: var(--col-bk);
+  font-size: 38px;
+  margin-bottom: 56px;
 `
 
 const h2Style = css`
-  color: var(--col-bk);
-`
-
-const h3Style = css`
-  color: var(--col-bk);
+  font-size: 26px;
+  margin-bottom: 38px;
 `
 
 const textStyle = css`
-  color: var(--col-bk);
+  font-size: 18px;
+  margin-bottom: 30px;
 `
 
 const linkStyle = css`
-  color: var(--col-bk);
+  font-size: 18px;
+  color: var(--col-bl);
+`
+
+const lineStyle = css`
+  margin: 40px 0;
+  height: 0;
+  border: 0;
+  border-top: var(--border-base);
 `
 
 const Heading1 = (props: { children?: ReactNode }) => (
@@ -39,10 +46,6 @@ const Heading1 = (props: { children?: ReactNode }) => (
 
 const Heading2 = (props: { children?: ReactNode }) => (
   <h2 css={h2Style}>{props.children}</h2>
-)
-
-const Heading3 = (props: { children?: ReactNode }) => (
-  <h3 css={h3Style}>{props.children}</h3>
 )
 
 const Text = (props: { children?: ReactNode }) => (
@@ -58,6 +61,9 @@ const Link = (props: { children?: ReactNode }) => (
       width="16"
       height="16"
       viewBox="0 0 16 16"
+      style={{
+        marginLeft: '12px',
+      }}
     >
       <path
         className="st0"
@@ -68,12 +74,11 @@ v12.4c0,1,0.8,1.8,1.8,1.8h12.4c1,0,1.8-0.8,1.8-1.8V8h-1.8V14.2z"
   </a>
 )
 
-const HorizontalLine = () => <hr />
+const HorizontalLine = () => <hr css={lineStyle} />
 
 const components: MDXComponents = {
   h1: Heading1,
   h2: Heading2,
-  h3: Heading3,
   p: Text,
   a: Link,
   hr: HorizontalLine,
