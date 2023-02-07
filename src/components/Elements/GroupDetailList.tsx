@@ -9,7 +9,12 @@ type Props = {
   accessLevel: string
 }
 
-const style = css`
+const h2Style = css`
+  font-size: 26px;
+  margin-bottom: 38px;
+`
+
+const tableStyle = css`
   width: 100%;
   border: var(--border-gray);
 
@@ -39,28 +44,31 @@ const GroupDetailList = ({
   accessLevel,
 }: Props) => {
   return (
-    <table css={style}>
-      <thead>
-        <tr>
-          <th>研究グループ</th>
-          <th>データ</th>
-          <th>対象</th>
-          <th>提供者</th>
-          <th>アクセスレベル</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{group}</td>
-          <td>
-            <a href={url}>{data}</a>
-          </td>
-          <td>{target}</td>
-          <td>{provider}</td>
-          <td>{accessLevel}</td>
-        </tr>
-      </tbody>
-    </table>
+    <>
+      <h2 css={h2Style}>データ一覧</h2>
+      <table css={tableStyle}>
+        <thead>
+          <tr>
+            <th>研究グループ</th>
+            <th>データ</th>
+            <th>対象</th>
+            <th>提供者</th>
+            <th>アクセスレベル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{group}</td>
+            <td>
+              <a href={url}>{data}</a>
+            </td>
+            <td>{target}</td>
+            <td>{provider}</td>
+            <td>{accessLevel}</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   )
 }
 
