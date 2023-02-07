@@ -52,6 +52,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
             <SelectBox />
           </div>
           <GroupItem
+            id="1A-1"
             group="精密ゲノム編集"
             data="蛋白質構造データ"
             target="-"
@@ -72,6 +73,7 @@ const DataIndex = ({ title = 'データリスト' }: Props) => {
             reference="特許出願（特願2020-512343）"
           />
           <GroupItem
+            id="1A-2"
             group="農業環境エンジニアリングシステム"
             data="農業環境エンジニアリングシステムメタデータ"
             target="ダイズ/コマツナ"
