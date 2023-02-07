@@ -14,8 +14,8 @@ const selectStyle = css`
     top: 20px;
     width: 6px;
     height: 6px;
-    border-top: var(--border-form);
-    border-left: var(--border-form);
+    border-top: var(--border-base);
+    border-left: var(--border-base);
     transform: translateY(-50%) rotate(-135deg);
     pointer-events: none;
   }
@@ -23,7 +23,7 @@ const selectStyle = css`
   select {
     width: 160px;
     padding: 14px;
-    border: var(--border-form);
+    border: var(--border-base);
     border-radius: 5px;
     appearance: none;
   }

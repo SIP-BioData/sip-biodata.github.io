@@ -10,7 +10,7 @@ type Props = {
 const style = css`
   margin: 100px 0;
 
-  h3 {
+  h2 {
     font-size: 38px;
     text-align: center;
   }
@@ -41,7 +41,7 @@ const style = css`
 const HomeItem = ({ title, text, item }: Props) => {
   return (
     <div css={style}>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <p>{text}</p>
       <>{item}</>
     </div>

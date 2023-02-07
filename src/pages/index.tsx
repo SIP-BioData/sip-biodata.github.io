@@ -29,6 +29,10 @@ const readStyle = css`
   z-index: 100;
 `
 
+const linkStyle = css`
+  text-decoration: underline;
+`
+
 const bgLayoutStyle = css`
   position: relative;
 `
@@ -87,7 +91,9 @@ const Home = () => {
         title="データ連携ポータルについて"
         text={
           <>
-            <Link href="#">戦略的イノベーション創造プログラム</Link>{' '}
+            <Link css={linkStyle} href="#">
+              戦略的イノベーション創造プログラム
+            </Link>{' '}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -101,7 +107,9 @@ const Home = () => {
               />
             </svg>
             （SIP）
-            <Link href="#">第2期「スマートバイオ産業・農業基盤技術」</Link>{' '}
+            <Link css={linkStyle} href="#">
+              第2期「スマートバイオ産業・農業基盤技術」
+            </Link>{' '}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -128,7 +136,9 @@ const Home = () => {
             text={
               <>
                 SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
-                <a href="">Integbioデータベースカタログ</a>{' '}
+                <a css={linkStyle} href="">
+                  Integbioデータベースカタログ
+                </a>{' '}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -210,7 +220,6 @@ const Home = () => {
                     src={aboutImg}
                     alt="スマートバイオ産業・農業基盤技術についての画像"
                     max-width={830}
-                    layout={'responsive'}
                   />
                 </div>
                 <div css={quotationStyle}>

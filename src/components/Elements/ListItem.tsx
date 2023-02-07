@@ -16,19 +16,19 @@ type Props = {
 }
 
 const style = css`
-  border: var(--border-list);
+  border: var(--border-gray);
   margin-top: 55px;
 
   td:first-child {
     width: 262px;
     padding: var(--list-padding);
     background-color: #f7f7f7;
-    border: var(--border-list);
+    border: var(--border-gray);
   }
 
   td:last-child {
     padding: var(--list-padding);
-    border: var(--border-list);
+    border: var(--border-gray);
   }
 `
 

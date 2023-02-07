@@ -45,8 +45,8 @@
   --col-bk: #000118;
   --col-wh: #fff;
   --col-bl: #0068d0;
-  --border-form: 1px solid #9b9b9b;
-  --border-list: 1px solid #707070;
+  --border-base: 1px solid #9b9b9b;
+  --border-gray: 1px solid #707070;
   --list-padding: 16px 20px;
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -78,6 +78,7 @@ p {
 }
 
 a {
+  font-size: 18px;
   color: inherit;
   text-decoration: none;
 }

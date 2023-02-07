@@ -6,7 +6,7 @@ import serchImg from '../../../public/iconSearch.svg'
 const style = css`
   display: flex;
   align-items: center;
-  border: var(--border-form);
+  border: var(--border-base);
   border-radius: 4px;
   padding: 16px 14px;
 
