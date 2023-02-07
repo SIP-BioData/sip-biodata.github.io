@@ -1,0 +1,31 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import Image from 'next/image'
+
+export const title = '研究グループ'
+export const childTitle = '精密ゲノム編集'
+
+# タイトルレベル１
+
+## タイトルレベル２
+
+### タイトルレベル３
+
+テストです。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t02](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t02)
+
+---
+
+<Image src="/groupImg01.png" alt="テストイメージ" width={540} height={395} />
+
+export default ({ children }) => (
+  <Layout title={title}>
+    <LowerPageLayout>
+      <Breadcrumbs title={title} childTitle={childTitle} />
+      <MdxLayout>{children}</MdxLayout>
+    </LowerPageLayout>
+  </Layout>
+)
