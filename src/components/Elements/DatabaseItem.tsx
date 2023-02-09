@@ -11,6 +11,13 @@ type Props = {
   columns: Item
 }
 
+type LinkItemProps = {
+  children: ReactNode
+  item: Item
+  target: string
+  route: string
+}
+
 const style = css`
   border: var(--border-gray);
   margin-top: 32px;
@@ -48,15 +55,8 @@ const style = css`
 `
 
 const linkStyle = css`
-  color: #0068d0;
+  color: var(--col-bl);
 `
-
-type LinkItemProps = {
-  children: ReactNode
-  item: Item
-  target: string
-  route: string
-}
 
 const LinkItem = (itemProps: LinkItemProps) => {
   return (
