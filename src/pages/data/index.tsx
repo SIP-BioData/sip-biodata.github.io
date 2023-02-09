@@ -19,6 +19,7 @@ type Item = {
 type Props = {
   title?: string
   sipDatabase: Item[]
+  integbioDatabase: Item[]
 }
 
 const style = css`
@@ -44,19 +45,39 @@ const flexStyleAll = css`
 `
 
 const DataIndex = (props: Props) => {
-  const [keyword, setKeyword] = useState('')
-  const [database, setDatabase] = useState<Array<Item>>([])
+  const [count, setCount] = useState(0)
+  const [databaseSip, setDatabaseSip] = useState<Array<Item>>([])
+  const [databaseIntegbio, setDatabaseIntegbio] = useState<Array<Item>>([])
 
   useEffect(() => {
-    setDatabase(props.sipDatabase)
-  }, [props.sipDatabase])
+    setDatabaseSip(props.sipDatabase)
+    setDatabaseIntegbio(props.integbioDatabase)
+  }, [props.sipDatabase, props.integbioDatabase])
+
+  useEffect(() => {
+    setCount(databaseSip.length + databaseIntegbio.length)
+  }, [databaseSip, databaseIntegbio])
 
   const onChangeKeyword = (value: string) => {
-    const filteredDatabase = database.filter((item) =>
-      Object.values(item).find((v) => (v != null ? v.includes(value) : false))
-    )
-    setDatabase(filteredDatabase)
-    setKeyword(value)
+    const filteredDatabaseSip =
+      value !== ''
+        ? databaseSip.filter((item) =>
+            Object.values(item).find((v) =>
+              v != null ? v.includes(value) : false
+            )
+          )
+        : props.sipDatabase
+    setDatabaseSip(filteredDatabaseSip)
+
+    const filteredDatabaseIntegbio =
+      value !== ''
+        ? databaseIntegbio.filter((item) =>
+            Object.values(item).find((v) =>
+              v != null ? v.includes(value) : false
+            )
+          )
+        : props.integbioDatabase
+    setDatabaseIntegbio(filteredDatabaseIntegbio)
   }
 
   return (
@@ -64,18 +85,23 @@ const DataIndex = (props: Props) => {
       <LowerPageLayout>
         <Breadcrumbs childTitle={props.title} />
         <section css={style}>
-          <SearchForm value={keyword} onChangeKeyword={onChangeKeyword} />
+          <SearchForm onChangeKeyword={onChangeKeyword} />
           <h2>{props.title}</h2>
           <div css={flexStyleAll}>
             <section css={flexStyleLeft}>
-              <Records num={2000} />
+              <Records num={count} />
               <Pagination first_num={1} last_num={33} />
             </section>
             <SelectBox />
           </div>
-          {database.map((item, index) => (
-            <DatabaseItem key={index} item={item} />
-          ))}
+          {databaseSip &&
+            databaseSip.map((item, index) => (
+              <DatabaseItem key={index} item={item} />
+            ))}
+          {databaseIntegbio &&
+            databaseIntegbio.map((item, index) => (
+              <DatabaseItem key={index} item={item} />
+            ))}
         </section>
       </LowerPageLayout>
     </Layout>
@@ -85,14 +111,21 @@ const DataIndex = (props: Props) => {
 export default DataIndex
 
 export const getStaticProps = async () => {
-  const filePath = path.join(process.cwd(), './data/sip_database.json')
+  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
+  const dataSip = await fsPromises.readFile(filePathSip)
+  const objectDataSip = JSON.parse(dataSip.toString())
 
-  const data = await fsPromises.readFile(filePath)
-  const objectData = JSON.parse(data.toString())
+  const filePathIntegbio = path.join(
+    process.cwd(),
+    './data/integbio_database.json'
+  )
+  const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
+  const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
 
   return {
     props: {
-      sipDatabase: objectData,
+      sipDatabase: objectDataSip,
+      integbioDatabase: objectDataIntegbio,
     },
   }
 }

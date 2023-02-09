@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
+import { SetStateAction, useEffect, useState } from 'react'
 
 import searchImg from '../../../public/iconSearch.svg'
 
 type Props = {
-  value?: string
   onChangeKeyword: (v: string) => void
 }
 
@@ -17,6 +17,7 @@ const style = css`
 
   form {
     width: 100%;
+
     input {
       width: 100%;
       border: none;
@@ -28,20 +29,48 @@ const style = css`
   }
 `
 const SearchForm = (props: Props) => {
-  const handleSearch = (e: { target: { value: string } }) => {
-    props.onChangeKeyword(e.target.value)
+  const [value, setValue] = useState('')
+
+  const onChange = () => {
+    props.onChangeKeyword(value)
   }
+
+  const handleSearch = (key: string) => {
+    switch (key) {
+      case 'Enter':
+        onChange()
+        break
+      default:
+        break
+    }
+  }
+
+  const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
+    setValue(e.target.value)
+  }
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+  }
+
+  useEffect(() => {
+    if (value === '') {
+      onChange()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   return (
     <div css={style}>
       <Image src={searchImg} alt="検索" />
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="search"
           name="search"
           placeholder="キーワードで検索"
-          value={props.value}
-          onChange={handleSearch}
+          value={value}
+          onChange={handleChange}
+          onKeyDown={(e) => handleSearch(e.key)}
         />
       </form>
     </div>
