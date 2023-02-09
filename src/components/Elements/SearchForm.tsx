@@ -1,7 +1,12 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
 
-import serchImg from '../../../public/iconSearch.svg'
+import searchImg from '../../../public/iconSearch.svg'
+
+type Props = {
+  value?: string
+  onChangeKeyword: (v: string) => void
+}
 
 const style = css`
   display: flex;
@@ -11,22 +16,33 @@ const style = css`
   padding: 16px 14px;
 
   form {
+    width: 100%;
     input {
-      padding: 0;
+      width: 100%;
       border: none;
       outline: none;
       background: none;
-      margin-left: 16px;
+      padding-left: 16px;
       font-size: 16px;
     }
   }
 `
-const SearchForm = () => {
+const SearchForm = (props: Props) => {
+  const handleSearch = (e: { target: { value: string } }) => {
+    props.onChangeKeyword(e.target.value)
+  }
+
   return (
     <div css={style}>
-      <Image src={serchImg} alt="検索" />
-      <form action="" method="get">
-        <input type="search" name="search" placeholder="キーワードで検索" />
+      <Image src={searchImg} alt="検索" />
+      <form>
+        <input
+          type="search"
+          name="search"
+          placeholder="キーワードで検索"
+          value={props.value}
+          onChange={handleSearch}
+        />
       </form>
     </div>
   )
