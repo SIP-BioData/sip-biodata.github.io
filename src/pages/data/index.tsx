@@ -48,38 +48,34 @@ const flexStyleAll = css`
 
 const DataIndex = (props: Props) => {
   const [count, setCount] = useState(0)
-  const [databaseSip, setDatabaseSip] = useState<Array<Item>>([])
-  const [databaseIntegbio, setDatabaseIntegbio] = useState<Array<Item>>([])
+  const [database, setDatabase] = useState<Array<Item>>([])
+  const perPage = 20
+  const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
+  const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
 
   useEffect(() => {
-    setDatabaseSip(props.sipDatabase)
-    setDatabaseIntegbio(props.integbioDatabase)
+    handlePaginate(1)
+    setCount(mergedDatabase.length)
   }, [props.sipDatabase, props.integbioDatabase])
 
-  useEffect(() => {
-    setCount(databaseSip.length + databaseIntegbio.length)
-  }, [databaseSip, databaseIntegbio])
-
   const onChangeKeyword = (value: string) => {
-    const filteredDatabaseSip =
+    const filteredDatabase =
       value !== ''
-        ? databaseSip.filter((item) =>
+        ? database.filter((item) =>
             Object.values(item).find((v) =>
               v != null ? v.includes(value) : false
             )
           )
-        : props.sipDatabase
-    setDatabaseSip(filteredDatabaseSip)
+        : mergedDatabase
+    setDatabase(filteredDatabase)
+    setCount(filteredDatabase.length)
+  }
 
-    const filteredDatabaseIntegbio =
-      value !== ''
-        ? databaseIntegbio.filter((item) =>
-            Object.values(item).find((v) =>
-              v != null ? v.includes(value) : false
-            )
-          )
-        : props.integbioDatabase
-    setDatabaseIntegbio(filteredDatabaseIntegbio)
+  const handlePaginate = (page: number) => {
+    const currentPageItems = mergedDatabase.filter(
+      (_, index) => index >= (page - 1) * perPage && index < page * perPage
+    )
+    setDatabase(currentPageItems)
   }
 
   return (
@@ -92,25 +88,17 @@ const DataIndex = (props: Props) => {
           <div css={flexStyleAll}>
             <section css={flexStyleLeft}>
               <Records num={count} />
-              <Pagination first_num={1} last_num={33} />
+              <Pagination
+                sum={count}
+                perPage={perPage}
+                onChange={handlePaginate}
+              />
             </section>
             <SelectBox />
           </div>
-          {databaseSip &&
-            databaseSip.map((item, index) => (
-              <DatabaseItem
-                key={index}
-                item={item}
-                columns={props.sipDatabaseColumn[0]}
-              />
-            ))}
-          {databaseIntegbio &&
-            databaseIntegbio.map((item, index) => (
-              <DatabaseItem
-                key={index}
-                item={item}
-                columns={props.integbioDatabaseColumn[0]}
-              />
+          {database &&
+            database.map((item, index) => (
+              <DatabaseItem key={index} item={item} columns={columns[0]} />
             ))}
         </section>
       </LowerPageLayout>

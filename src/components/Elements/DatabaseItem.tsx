@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
-import { Fragment, useState } from 'react'
+import Link from 'next/link'
+import { Fragment, ReactNode, useState } from 'react'
 
 type Item = {
   [key: string]: string
@@ -46,22 +47,38 @@ const style = css`
   }
 `
 
-// const linkStyle = css`
-//   color: #0068d0;
-// `
+const linkStyle = css`
+  color: #0068d0;
+`
+
+type LinkItemProps = {
+  children: ReactNode
+  item: Item
+  target: string
+  route: string
+}
+
+const LinkItem = (itemProps: LinkItemProps) => {
+  return (
+    <Link
+      css={linkStyle}
+      href={`/${itemProps.route}/[id]`}
+      as={`/${itemProps.route}/${itemProps.item[itemProps.target]}`}
+    >
+      {itemProps.children}
+    </Link>
+  )
+}
 
 const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
-
-  const excludeKeys = ['id', 'group_id']
-  excludeKeys.map((v) => delete props.item[v])
-
+  const displayItems = (({ id, group_id, ...rest }) => rest)(props.item)
   const defaultKeys = ['group_name', 'name', 'supplier', 'publication_status']
 
   return (
     <section css={style}>
       <dl>
-        {Object.entries(props.item)
+        {Object.entries(displayItems)
           .filter(([k]) => defaultKeys.includes(k))
           .map(([key, value], index) => (
             <Fragment key={index}>
@@ -70,11 +87,23 @@ const DatabaseItem = (props: Props) => {
                   (k) => props.columns[k] === key
                 )}
               </dt>
-              <dd>{value}</dd>
+              <dd>
+                {key === 'name' ? (
+                  <LinkItem item={props.item} target="id" route="data">
+                    {value}
+                  </LinkItem>
+                ) : key === 'group_name' ? (
+                  <LinkItem item={props.item} target="group_id" route="group">
+                    {value}
+                  </LinkItem>
+                ) : (
+                  value
+                )}
+              </dd>
             </Fragment>
           ))}
         {isDisplayAll &&
-          Object.entries(props.item)
+          Object.entries(displayItems)
             .filter(([k]) => !defaultKeys.includes(k))
             .map(([key, value], index) => (
               <Fragment key={index}>
