@@ -25,6 +25,7 @@ const style = css`
     font-weight: 600;
     padding: 0 12px 16px 0;
     margin-bottom: 16px;
+    border-bottom: 1px solid #eaeaea;
   }
 
   dd {
@@ -32,6 +33,7 @@ const style = css`
     padding-bottom: 16px;
     margin-bottom: 16px;
     word-break: break-word;
+    border-bottom: 1px solid #eaeaea;
   }
 
   button {
@@ -42,10 +44,6 @@ const style = css`
     margin-top: 16px;
     color: var(--col-bl);
   }
-`
-
-const borderStyle = css`
-  border-bottom: 1px solid #eaeaea;
 `
 
 // const linkStyle = css`
@@ -67,12 +65,12 @@ const DatabaseItem = (props: Props) => {
           .filter(([k]) => defaultKeys.includes(k))
           .map(([key, value], index) => (
             <Fragment key={index}>
-              <dt css={borderStyle}>
+              <dt>
                 {Object.keys(props.columns).find(
                   (k) => props.columns[k] === key
                 )}
               </dt>
-              <dd css={borderStyle}>{value}</dd>
+              <dd>{value}</dd>
             </Fragment>
           ))}
         {isDisplayAll &&
@@ -80,12 +78,12 @@ const DatabaseItem = (props: Props) => {
             .filter(([k]) => !defaultKeys.includes(k))
             .map(([key, value], index) => (
               <Fragment key={index}>
-                <dt css={borderStyle}>
+                <dt>
                   {Object.keys(props.columns).find(
                     (k) => props.columns[k] === key
                   )}
                 </dt>
-                <dd css={borderStyle}>{value}</dd>
+                <dd>{value}</dd>
               </Fragment>
             ))}
       </dl>
