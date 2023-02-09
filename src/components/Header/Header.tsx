@@ -27,15 +27,12 @@ const naviStyle = css`
   width: var(--inn1000);
   background-color: var(--col-wh);
   padding: 22px 36px;
-  border-radius: 36px;
-  line-height: 70px;
+  border-radius: 3em;
   box-shadow: var(--shadow);
   position: absolute;
   top: 25px;
   left: 50%;
   transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
   z-index: 100;
   h1 {
     font-size: 18px;

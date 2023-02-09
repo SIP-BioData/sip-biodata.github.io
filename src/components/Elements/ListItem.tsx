@@ -19,14 +19,14 @@ const style = css`
   border: var(--border-gray);
   margin-top: 55px;
 
-  td:first-child {
+  td:first-of-type {
     width: 262px;
     padding: var(--list-padding);
     background-color: #f7f7f7;
     border: var(--border-gray);
   }
 
-  td:last-child {
+  td:last-of-type {
     padding: var(--list-padding);
     border: var(--border-gray);
   }

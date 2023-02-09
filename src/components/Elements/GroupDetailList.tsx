@@ -24,7 +24,7 @@ const tableStyle = css`
     border: var(--border-gray);
   }
 
-  td:nth-child(2) {
+  td:nth-of-type(2) {
     width: 342px;
     color: var(--col-bl);
   }
