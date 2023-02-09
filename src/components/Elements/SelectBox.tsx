@@ -35,7 +35,6 @@ const SelectBox = () => {
       <label>並び順：</label>
       <div css={selectStyle}>
         <select name="data" id="data-select">
-          <option value="">関連性</option>
           <option value="">その１</option>
           <option value="">その２</option>
         </select>
