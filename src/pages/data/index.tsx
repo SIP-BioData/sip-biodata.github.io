@@ -1,6 +1,4 @@
 import { css } from '@emotion/react'
-import fsPromises from 'fs/promises'
-import path from 'path'
 import { useEffect, useState } from 'react'
 
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
@@ -11,6 +9,9 @@ import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
 
 type Item = {
   [key: string]: string
@@ -56,7 +57,7 @@ const DataIndex = (props: Props) => {
   useEffect(() => {
     handlePaginate(1)
     setCount(mergedDatabase.length)
-  }, [props.sipDatabase, props.integbioDatabase])
+  }, [props])
 
   const onChangeKeyword = (value: string) => {
     const filteredDatabase =
@@ -107,39 +108,3 @@ const DataIndex = (props: Props) => {
 }
 
 export default DataIndex
-
-export const getStaticProps = async () => {
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
-
-  const filePathIntegbio = path.join(
-    process.cwd(),
-    './data/integbio_database.json'
-  )
-  const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
-  const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
-
-  const filePathSipColumn = path.join(
-    process.cwd(),
-    './data/sip_database_column.json'
-  )
-  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
-  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
-
-  const filePathIntegbioColumn = path.join(
-    process.cwd(),
-    './data/integbio_database_column.json'
-  )
-  const dataIntegbioColumn = await fsPromises.readFile(filePathIntegbioColumn)
-  const objectDataIntegbioColumn = JSON.parse(dataIntegbioColumn.toString())
-
-  return {
-    props: {
-      sipDatabase: objectDataSip,
-      integbioDatabase: objectDataIntegbio,
-      sipDatabaseColumn: objectDataSipColumn,
-      integbioDatabaseColumn: objectDataIntegbioColumn,
-    },
-  }
-}
