@@ -7,6 +7,7 @@ type Item = {
 
 type Props = {
   item: Item
+  columns: Item
 }
 
 const style = css`
@@ -22,12 +23,15 @@ const style = css`
   dt {
     flex: 1 1 30%;
     font-weight: 600;
+    padding: 0 12px 16px 0;
     margin-bottom: 16px;
   }
 
   dd {
     flex: 1 1 70%;
+    padding-bottom: 16px;
     margin-bottom: 16px;
+    word-break: break-word;
   }
 
   button {
@@ -41,44 +45,55 @@ const style = css`
 `
 
 const borderStyle = css`
-  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 `
 
-const linkStyle = css`
-  color: #0068d0;
-`
-
-const displayAllStyle = css`
-  display: none;
-`
+// const linkStyle = css`
+//   color: #0068d0;
+// `
 
 const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
 
+  const excludeKeys = ['id', 'group_id']
+  excludeKeys.map((v) => delete props.item[v])
+
+  const defaultKeys = ['group_name', 'name', 'supplier', 'publication_status']
+
   return (
     <section css={style}>
       <dl>
-        {Object.entries(props.item).map(([key, value], index) => (
-          <Fragment key={index}>
-            <dt>{key}</dt>
-            <dd>{value}</dd>
-          </Fragment>
-        ))}
+        {Object.entries(props.item)
+          .filter(([k]) => defaultKeys.includes(k))
+          .map(([key, value], index) => (
+            <Fragment key={index}>
+              <dt css={borderStyle}>
+                {Object.keys(props.columns).find(
+                  (k) => props.columns[k] === key
+                )}
+              </dt>
+              <dd css={borderStyle}>{value}</dd>
+            </Fragment>
+          ))}
+        {isDisplayAll &&
+          Object.entries(props.item)
+            .filter(([k]) => !defaultKeys.includes(k))
+            .map(([key, value], index) => (
+              <Fragment key={index}>
+                <dt css={borderStyle}>
+                  {Object.keys(props.columns).find(
+                    (k) => props.columns[k] === key
+                  )}
+                </dt>
+                <dd css={borderStyle}>{value}</dd>
+              </Fragment>
+            ))}
       </dl>
-      {isDisplayAll && (
-        <>
-          <dl css={borderStyle}>
-            <dt>格納されるデータの内容</dt>
-            <dd>xxx</dd>
-          </dl>
-          <button onClick={() => setIsDisplayAll(false)}>
-            表示内容を減らす
-          </button>
-        </>
-      )}
-      <div css={isDisplayAll ? displayAllStyle : undefined}>
+      {isDisplayAll ? (
+        <button onClick={() => setIsDisplayAll(false)}>表示内容を減らす</button>
+      ) : (
         <button onClick={() => setIsDisplayAll(true)}>もっと見る</button>
-      </div>
+      )}
     </section>
   )
 }

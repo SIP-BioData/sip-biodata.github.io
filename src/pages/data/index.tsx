@@ -20,6 +20,8 @@ type Props = {
   title?: string
   sipDatabase: Item[]
   integbioDatabase: Item[]
+  sipDatabaseColumn: Item[]
+  integbioDatabaseColumn: Item[]
 }
 
 const style = css`
@@ -96,11 +98,19 @@ const DataIndex = (props: Props) => {
           </div>
           {databaseSip &&
             databaseSip.map((item, index) => (
-              <DatabaseItem key={index} item={item} />
+              <DatabaseItem
+                key={index}
+                item={item}
+                columns={props.sipDatabaseColumn[0]}
+              />
             ))}
           {databaseIntegbio &&
             databaseIntegbio.map((item, index) => (
-              <DatabaseItem key={index} item={item} />
+              <DatabaseItem
+                key={index}
+                item={item}
+                columns={props.integbioDatabaseColumn[0]}
+              />
             ))}
         </section>
       </LowerPageLayout>
@@ -122,10 +132,26 @@ export const getStaticProps = async () => {
   const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
   const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
 
+  const filePathSipColumn = path.join(
+    process.cwd(),
+    './data/sip_database_column.json'
+  )
+  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
+  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+
+  const filePathIntegbioColumn = path.join(
+    process.cwd(),
+    './data/integbio_database_column.json'
+  )
+  const dataIntegbioColumn = await fsPromises.readFile(filePathIntegbioColumn)
+  const objectDataIntegbioColumn = JSON.parse(dataIntegbioColumn.toString())
+
   return {
     props: {
       sipDatabase: objectDataSip,
       integbioDatabase: objectDataIntegbio,
+      sipDatabaseColumn: objectDataSipColumn,
+      integbioDatabaseColumn: objectDataIntegbioColumn,
     },
   }
 }
