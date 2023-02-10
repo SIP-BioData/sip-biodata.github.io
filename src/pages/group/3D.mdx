@@ -9,23 +9,23 @@ import { getDatabaseStaticProps } from '@/lib/static'
 
 export const getStaticProps = getDatabaseStaticProps
 
-export const groupId = '1A'
+export const groupId = '3D'
 export const title = '研究グループ'
-export const childTitle = 'データ駆動型育種'
+export const childTitle = 'スマートバイオプロセス'
 
-# 研究グループ：データ駆動型育種
+# 研究グループ：スマートバイオプロセス
 
-大量の育種データを取得・蓄積・解析するための基盤を構築しました。現在、蓄積したゲノム情報とデジタル化した形質情報に基づき、遺伝子型と形質の関連モデルを構築しています(下図)。 本モデルを用いれば、遺伝子型から形質を高精度で予測できるため、選抜効率を大幅に向上できます。
+廃水処理予測診断技術の確立により日本国内のバイオプロセス産業全体のコスト低減と国際競争力強化に貢献します。
 
-[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t01](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t01)
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme05.html](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme05.html)
 
 ---
 
 <Image
-  src="/group1A_01.png"
-  alt="データ駆動型育種のイメージ"
-  width={540}
-  height={395}
+  src="/group3D_01.png"
+  alt="スマートバイオプロセスのイメージ"
+  width={834}
+  height={490}
   priority
 />
 
@@ -41,9 +41,9 @@ export default (props) => {
       <LowerPageLayout>
         <Breadcrumbs title={title} childTitle={childTitle} />
         <MdxLayout>
-            {props.children}
-            <GroupDetailList list={data} />
-            <BackToDataLink />
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
         </MdxLayout>
       </LowerPageLayout>
     </Layout>

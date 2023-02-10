@@ -1,0 +1,54 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '2B'
+export const title = '研究グループ'
+export const childTitle = '食によるヘルスケア産業創出'
+
+# 研究グループ：食によるヘルスケア産業創出
+
+健常者の食・健康情報、腸内マイクロバイオームを統合したデータベースを構築し、公開します。さらに、心身の不調と食習慣の相関を解明することで、「軽度不調」の評価指標・評価システムを開発しています。健康機能性表示食品・食材の開発、データヘルス・健康経営支援市場等への参入が可能となります。 <br />
+また、創薬や検査・診断ビジネスを展開している企業が、本データベースを各種疾患の比較標準データとして活用することも期待されます。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html](https://www.naro.go.https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html)
+
+[https://sip2b-aron.jp/work/sample-work2/](https://sip2b-aron.jp/work/sample-work2/)
+
+---
+
+<Image
+  src="/group2B_01.png"
+  alt="食によるヘルスケア産業創出のイメージ"
+  width={705}
+  height={309}
+  priority
+/>
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}
