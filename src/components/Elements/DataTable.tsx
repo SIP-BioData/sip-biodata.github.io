@@ -68,23 +68,23 @@ const DataTable = (props: Props) => {
           Object.entries(displayItems)
             .filter(([, v]) => v)
             .map(([key, value], index) => (
-            <tr key={index}>
-              <th css={thStyle}>
-                {Object.keys(props.columns).find(
-                  (k) => props.columns[k] === key
-                )}
-              </th>
-              <td css={cellStyle}>
-                {key === 'group_name' ? (
-                  <LinkItem item={props.item} target="group_id" route="group">
-                    {value}
-                  </LinkItem>
-                ) : (
-                  value
-                )}
-              </td>
-            </tr>
-          ))}
+              <tr key={index}>
+                <th css={thStyle}>
+                  {Object.keys(props.columns).find(
+                    (k) => props.columns[k] === key
+                  )}
+                </th>
+                <td css={cellStyle}>
+                  {key === 'group_name' ? (
+                    <LinkItem item={props.item} target="group_id" route="group">
+                      {value}
+                    </LinkItem>
+                  ) : (
+                    value
+                  )}
+                </td>
+              </tr>
+            ))}
       </tbody>
     </table>
   )
