@@ -55,6 +55,7 @@ const DataIndex = (props: Props) => {
   const searchWords = getSearchWordsFromQuery(router.query)
   const params = buildParams(router)
   const [count, setCount] = useState(0)
+  const [keywords, setKeywords] = useState<Array<string>>([])
   const [database, setDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -93,11 +94,14 @@ const DataIndex = (props: Props) => {
     if (searchWords.length > 0) {
       setDatabase(searchWordsQuery)
       setCount(searchWordsQuery.length)
+      setKeywords(searchWords)
     }
   }, [router.query, router.isReady])
 
   const handleResetFilter = () => {
-    updateRoute(router, {}, {})
+    if (router.isReady) {
+      updateRoute(router, {}, {})
+    }
   }
 
   const handleUpdateRoute = debounce((searchWords) => {
@@ -136,7 +140,7 @@ const DataIndex = (props: Props) => {
       <LowerPageLayout>
         <Breadcrumbs childTitle="データリスト" />
         <section css={style}>
-          <SearchForm onChangeKeyword={onChangeKeyword} />
+          <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <h2>データリスト</h2>
           <div css={flexStyleAll}>
             <Records num={count} />
