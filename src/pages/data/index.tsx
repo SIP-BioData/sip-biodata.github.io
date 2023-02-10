@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo, useState } from 'react'
 
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import DatabaseItem from '@/components/Elements/DatabaseItem'
@@ -10,6 +11,12 @@ import SelectBox from '@/components/Elements/SelectBox'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import { getDatabaseStaticProps } from '@/lib/static'
+import {
+  buildParams,
+  debounce,
+  getSearchWordsFromQuery,
+  updateRoute,
+} from '@/lib/utils'
 
 export const getStaticProps = getDatabaseStaticProps
 
@@ -44,6 +51,9 @@ const flexStyleAll = css`
 `
 
 const DataIndex = (props: Props) => {
+  const router = useRouter()
+  const searchWords = getSearchWordsFromQuery(router.query)
+  const params = buildParams(router)
   const [count, setCount] = useState(0)
   const [database, setDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
@@ -53,7 +63,20 @@ const DataIndex = (props: Props) => {
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
+  const searchWordsQuery = useMemo(
+    () =>
+      database.filter((item) =>
+        Object.values(item).find((v) =>
+          v != null ? searchWords.some((str) => v.includes(str)) : false
+        )
+      ),
+    [searchWords]
+  )
+
   useEffect(() => {
+    if (router.query) {
+      return
+    }
     setDatabase(mergedDatabase)
     setCount(mergedDatabase.length)
     setCurrentPage(1)
@@ -62,6 +85,24 @@ const DataIndex = (props: Props) => {
   useEffect(() => {
     handlePaginate(1)
   }, [database])
+
+  useEffect(() => {
+    if (!router.isReady) {
+      return
+    }
+    if (searchWords.length > 0) {
+      setDatabase(searchWordsQuery)
+      setCount(searchWordsQuery.length)
+    }
+  }, [router.query, router.isReady])
+
+  const handleResetFilter = () => {
+    updateRoute(router, {}, {})
+  }
+
+  const handleUpdateRoute = debounce((searchWords) => {
+    updateRoute(router, params, { 'search[]': searchWords })
+  })
 
   const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
@@ -75,6 +116,11 @@ const DataIndex = (props: Props) => {
     setDatabase(filteredDatabase)
     setCount(filteredDatabase.length)
     setCurrentPage(1)
+    if (keywordList.length > 0) {
+      handleUpdateRoute(keywordList)
+    } else {
+      handleResetFilter()
+    }
   }
 
   const handlePaginate = (page: number) => {
