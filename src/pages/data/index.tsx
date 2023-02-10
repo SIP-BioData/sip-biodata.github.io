@@ -18,7 +18,6 @@ type Item = {
 }
 
 type Props = {
-  title?: string
   sipDatabase: Item[]
   integbioDatabase: Item[]
   sipDatabaseColumn: Item[]
@@ -81,12 +80,12 @@ const DataIndex = (props: Props) => {
   }
 
   return (
-    <Layout title={props.title}>
+    <Layout title="データリスト">
       <LowerPageLayout>
-        <Breadcrumbs childTitle={props.title} />
+        <Breadcrumbs childTitle="データリスト" />
         <section css={style}>
           <SearchForm onChangeKeyword={onChangeKeyword} />
-          <h2>{props.title}</h2>
+          <h2>データリスト</h2>
           <div css={flexStyleAll}>
             <section css={flexStyleLeft}>
               <Records num={count} />
