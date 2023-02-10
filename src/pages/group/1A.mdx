@@ -5,7 +5,11 @@ import MdxLayout from '@/components/Layout/MdxLayout'
 import GroupDetailList from '@/components/Elements/GroupDetailList'
 import BackToDataLink from '@/components/Navigation/BackToDataLink'
 import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
 
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '1A'
 export const title = '研究グループ'
 export const childTitle = '精密ゲノム編集'
 
@@ -26,6 +30,7 @@ C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認
   alt="ゲノム編集のイメージ"
   width={540}
   height={395}
+  priority
 />
 
 ---
@@ -39,31 +44,26 @@ C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認
   alt="ウイルス粒子接種のイメージ"
   width={540}
   height={218}
+  priority
 />
 
 ---
 
 ## データ一覧
 
-<GroupDetailList
-  group="精密ゲノム編集"
-  url=""
-  data="花卉ゲノム・転写産物解析データ"
-  target="花卉"
-  provider="小野道之"
-  accessLevel="グループ内共有"
-/>
-
----
-
-export default ({ children }) => (
-  <Layout title={title}>
-    <LowerPageLayout>
-      <Breadcrumbs title={title} childTitle={childTitle} />
-      <MdxLayout>
-        {children}
-        <BackToDataLink />
-      </MdxLayout>
-    </LowerPageLayout>
-  </Layout>
-)
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+            {props.children}
+            <GroupDetailList list={data} />
+            <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}

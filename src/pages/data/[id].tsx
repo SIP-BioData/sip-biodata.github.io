@@ -1,16 +1,26 @@
 import { css } from '@emotion/react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import Button from '@/components/Elements/Button'
-import ListItem from '@/components/Elements/ListItem'
+import DataTable from '@/components/Elements/DataTable'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+type Item = {
+  [key: string]: string
+}
 
 type Props = {
   title?: string
-  path?: string
-  childTitle?: string
+  sipDatabase: Item[]
+  integbioDatabase: Item[]
+  sipDatabaseColumn: Item[]
+  integbioDatabaseColumn: Item[]
 }
 
 const sectionStyle = css`
@@ -24,34 +34,26 @@ const buttonStyle = css`
   text-align: center;
 `
 
-const DataDetail = ({
-  title = 'データリスト',
-  childTitle = '花卉ゲノム・転写産物解析データ／ 精密ゲノム編集',
-}: Props) => {
+const DataDetail = (props: Props) => {
   const router = useRouter()
   const { id } = router.query
+  const [data, setData] = useState<Item | null>(null)
+  const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
+  const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
+  const columnsObject = Object.assign(columns[0], columns[1])
+
+  useEffect(() => {
+    const currentData = mergedDatabase.find((v) => v.id === id) || null
+    setData(currentData)
+  }, [props, id])
 
   return (
     <Layout title="データ詳細">
-      {/*データ詳細*/}
-      {/*<p>ID: {id}</p>*/}
       <LowerPageLayout>
-        <Breadcrumbs title={title} path="data" childTitle={childTitle} />
+        <Breadcrumbs title={props.title} path="data" childTitle="xxx" />
         <section css={sectionStyle}>
-          <h2>{childTitle}</h2>
-          <ListItem
-            group="精密ゲノム編集"
-            data="花卉ゲノム・転写産物解析データ"
-            content="シクラメン（品集 Wine Red）の全ゲノム配列データ"
-            storage="RDFポータル"
-            dataForm="RDF"
-            provider="小野道之"
-            admin="筑波大学"
-            publicPrivate="原則的にはプロジェクト終了時に公開。しかし、協力する企業等の意向も反映する。"
-            accessLevel="グループ内共有データ。データ利用制限としてはグループ内共有データとする。本プロジェクトの目的によるグループ内の利用に関しては、情報共有の上、特に制限を設けない。"
-            database="-"
-            reference="-"
-          />
+          {data && <h2>{`${data.name} / ${data.group_name}`}</h2>}
+          <DataTable item={data} columns={columnsObject} />
           <div css={buttonStyle}>
             <Button
               iconLeft={
@@ -99,3 +101,10 @@ const DataDetail = ({
 }
 
 export default DataDetail
+
+export async function getStaticPaths() {
+  return {
+    paths: ['/data/[id]'],
+    fallback: true,
+  }
+}

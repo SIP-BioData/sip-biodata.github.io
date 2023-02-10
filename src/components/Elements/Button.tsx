@@ -30,10 +30,10 @@ const innerStyle = css`
   font-size: 18px;
 
   span {
-    &:first-child {
+    &:first-of-type {
       margin-right: 10px;
     }
-    &:last-child {
+    &:last-of-type {
       margin-left: 10px;
     }
   }

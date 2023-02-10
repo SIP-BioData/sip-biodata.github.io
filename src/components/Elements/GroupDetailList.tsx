@@ -1,17 +1,17 @@
 import { css } from '@emotion/react'
 
+type Item = {
+  [key: string]: string
+}
+
 type Props = {
-  group: string
-  url: string
-  data: string
-  target: string
-  provider: string
-  accessLevel: string
+  list: Item[]
 }
 
 const tableStyle = css`
   width: 100%;
   border: var(--border-gray);
+  margin-bottom: 40px;
 
   th {
     background-color: #f7f7f7;
@@ -23,42 +23,28 @@ const tableStyle = css`
     padding: var(--list-padding);
     border: var(--border-gray);
   }
-
-  td:nth-child(2) {
-    width: 342px;
-    color: var(--col-bl);
-  }
 `
 
-const GroupDetailList = ({
-  group,
-  url,
-  data,
-  target,
-  provider,
-  accessLevel,
-}: Props) => {
+const GroupDetailList = (props: Props) => {
   return (
     <table css={tableStyle}>
       <thead>
         <tr>
           <th>研究グループ</th>
           <th>データ</th>
-          <th>対象</th>
           <th>提供者</th>
-          <th>アクセスレベル</th>
+          <th>公開（予定）・非公開</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{group}</td>
-          <td>
-            <a href={url}>{data}</a>
-          </td>
-          <td>{target}</td>
-          <td>{provider}</td>
-          <td>{accessLevel}</td>
-        </tr>
+        {props.list.map((item, index) => (
+          <tr key={index}>
+            <td>{item.group_name}</td>
+            <td>{item.name}</td>
+            <td>{item.supplier}</td>
+            <td>{item.publication_status}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )
