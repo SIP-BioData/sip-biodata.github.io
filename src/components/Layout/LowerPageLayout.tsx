@@ -12,7 +12,7 @@ const style = css`
 `
 
 const LowerPageLayout = ({ children }: Props) => {
-  return <article css={style}>{children}</article>
+  return <div css={style}>{children}</div>
 }
 
 export default LowerPageLayout

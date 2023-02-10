@@ -14,22 +14,18 @@ const containerStyle = css`
 `
 
 const h1Style = css`
-  font-size: 38px;
   margin-bottom: 56px;
 `
 
 const h2Style = css`
-  font-size: 26px;
   margin-bottom: 38px;
 `
 
 const textStyle = css`
-  font-size: 18px;
   margin-bottom: 30px;
 `
 
 const linkStyle = css`
-  font-size: 18px;
   color: var(--col-bl);
   word-break: break-all;
 `

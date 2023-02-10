@@ -35,10 +35,10 @@ const style = css`
   background-color: var(--col-wh);
   margin: 26px 0 100px;
   padding: 60px;
+`
 
-  h2 {
-    margin-top: 48px;
-  }
+const titleStyle = css`
+  margin-top: 48px;
 `
 
 const flexStyleAll = css`
@@ -141,7 +141,7 @@ const DataIndex = (props: Props) => {
         <Breadcrumbs childTitle="データリスト" />
         <section css={style}>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
-          <h2>データリスト</h2>
+          <h1 css={titleStyle}>データリスト</h1>
           <div css={flexStyleAll}>
             <Records num={count} />
             <Pagination
