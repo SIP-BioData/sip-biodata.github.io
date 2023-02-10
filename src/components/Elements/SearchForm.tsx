@@ -5,6 +5,7 @@ import { SetStateAction, useEffect, useState } from 'react'
 import searchImg from '../../../public/iconSearch.svg'
 
 type Props = {
+  keywords: string[]
   onChangeKeyword: (v: string[]) => void
 }
 
@@ -63,7 +64,12 @@ const SearchForm = (props: Props) => {
   }
 
   useEffect(() => {
-    if (value === '' || keywordList.length === 0) {
+    const value = props.keywords.join(' ')
+    setValue(value)
+  }, [props.keywords])
+
+  useEffect(() => {
+    if (value === '' && keywordList.length === 0) {
       onChange()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
