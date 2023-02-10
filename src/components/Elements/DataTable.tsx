@@ -35,6 +35,7 @@ const thStyle = css`
 const cellStyle = css`
   padding: var(--list-padding);
   border: var(--border-gray);
+  word-break: break-word;
 `
 
 const linkStyle = css`
