@@ -65,7 +65,9 @@ const DataTable = (props: Props) => {
     <table css={tableStyle}>
       <tbody>
         {displayItems &&
-          Object.entries(displayItems).map(([key, value], index) => (
+          Object.entries(displayItems)
+            .filter(([, v]) => v)
+            .map(([key, value], index) => (
             <tr key={index}>
               <th css={thStyle}>
                 {Object.keys(props.columns).find(

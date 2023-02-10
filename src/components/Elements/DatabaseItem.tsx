@@ -79,7 +79,7 @@ const DatabaseItem = (props: Props) => {
     <section css={style}>
       <dl>
         {Object.entries(displayItems)
-          .filter(([k]) => defaultKeys.includes(k))
+          .filter(([k, v]) => v && defaultKeys.includes(k))
           .map(([key, value], index) => (
             <Fragment key={index}>
               <dt>
@@ -104,7 +104,7 @@ const DatabaseItem = (props: Props) => {
           ))}
         {isDisplayAll &&
           Object.entries(displayItems)
-            .filter(([k]) => !defaultKeys.includes(k))
+            .filter(([k, v]) => v && !defaultKeys.includes(k))
             .map(([key, value], index) => (
               <Fragment key={index}>
                 <dt>
