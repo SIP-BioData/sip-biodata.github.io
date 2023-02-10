@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 type Props = {
   sum: number
   perPage: number
+  current: number
   onChange: (page: number) => void
 }
 
@@ -13,31 +14,30 @@ const containerStyle = css`
   justify-content: space-between;
   width: 100%;
   max-width: 430px;
-  border: var(--border-base);
-  border-radius: 5px;
   margin-left: 28px;
 `
 
 const listStyle = css`
   flex: 1 1 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `
 
 const itemStyle = css`
   width: 40px;
   text-align: center;
   border: var(--border-base);
-  margin: 0 16px;
+  margin: 0 8px;
   padding: 6px 0;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
 `
 
 const currentStyle = css`
   color: var(--col-wh);
-  background-color: var(--col-bl);
+  font-weight: bold;
+  background-color: #9b9b9b;
   cursor: default;
 `
 
@@ -53,8 +53,8 @@ const buttonStyle = css`
 `
 
 const Pagination = (props: Props) => {
-  const isFirstRender = useRef(true)
-  const [currentPage, setPage] = useState(1)
+  const isFirstRender = useRef<boolean>(true)
+  const [currentPage, setPage] = useState<number>(1)
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -63,6 +63,10 @@ const Pagination = (props: Props) => {
     }
     props.onChange(currentPage)
   }, [isFirstRender, currentPage])
+
+  useEffect(() => {
+    setPage(props.current)
+  }, [props.current])
 
   const totalPage: number = Math.ceil(props.sum / props.perPage)
 

@@ -34,22 +34,20 @@ const style = css`
   }
 `
 
-const flexStyleLeft = css`
-  display: flex;
-  align-items: center;
-`
-
 const flexStyleAll = css`
   margin-top: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 `
 
 const DataIndex = (props: Props) => {
   const [count, setCount] = useState(0)
   const [database, setDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const perPage = 20
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
@@ -58,6 +56,7 @@ const DataIndex = (props: Props) => {
   useEffect(() => {
     setDatabase(mergedDatabase)
     setCount(mergedDatabase.length)
+    setCurrentPage(1)
   }, [props])
 
   useEffect(() => {
@@ -75,12 +74,14 @@ const DataIndex = (props: Props) => {
         : mergedDatabase
     setDatabase(filteredDatabase)
     setCount(filteredDatabase.length)
+    setCurrentPage(1)
   }
 
   const handlePaginate = (page: number) => {
     const currentPageItems = database.filter(
       (_, index) => index >= (page - 1) * perPage && index < page * perPage
     )
+    setCurrentPage(page)
     setDataPerPage(currentPageItems)
   }
 
@@ -92,14 +93,13 @@ const DataIndex = (props: Props) => {
           <SearchForm onChangeKeyword={onChangeKeyword} />
           <h2>データリスト</h2>
           <div css={flexStyleAll}>
-            <section css={flexStyleLeft}>
-              <Records num={count} />
-              <Pagination
-                sum={count}
-                perPage={perPage}
-                onChange={handlePaginate}
-              />
-            </section>
+            <Records num={count} />
+            <Pagination
+              sum={count}
+              perPage={perPage}
+              current={currentPage}
+              onChange={handlePaginate}
+            />
             <SelectBox />
           </div>
           {dataPerPage.length > 0 &&
