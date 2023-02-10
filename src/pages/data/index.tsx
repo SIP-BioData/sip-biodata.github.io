@@ -60,12 +60,12 @@ const DataIndex = (props: Props) => {
     setCount(mergedDatabase.length)
   }, [props])
 
-  const onChangeKeyword = (value: string) => {
+  const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
-      value !== ''
-        ? database.filter((item) =>
+      keywordList.length > 0
+        ? mergedDatabase.filter((item) =>
             Object.values(item).find((v) =>
-              v != null ? v.includes(value) : false
+              v != null ? keywordList.some((str) => v.includes(str)) : false
             )
           )
         : mergedDatabase
