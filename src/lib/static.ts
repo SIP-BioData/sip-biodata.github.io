@@ -58,6 +58,6 @@ export const getDataStaticPaths = async () => {
 
   return {
     paths: [...pathsSip, ...pathsIntegbio],
-    fallback: true,
+    fallback: false,
   }
 }
