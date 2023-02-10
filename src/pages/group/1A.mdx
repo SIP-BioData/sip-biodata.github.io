@@ -51,11 +51,11 @@ C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認
 
 ## データ一覧
 
-<!-- prettier-ignore -->
 export default (props) => {
   const data = props.sipDatabase.filter((v) => v.group_id === groupId)
   return (
     <Layout title={title}>
+      {/* prettier-ignore */}
       <LowerPageLayout>
         <Breadcrumbs title={title} childTitle={childTitle} />
         <MdxLayout>
