@@ -5,7 +5,7 @@ import { SetStateAction, useEffect, useState } from 'react'
 import searchImg from '../../../public/iconSearch.svg'
 
 type Props = {
-  onChangeKeyword: (v: string) => void
+  onChangeKeyword: (v: string[]) => void
 }
 
 const style = css`
@@ -30,9 +30,10 @@ const style = css`
 `
 const SearchForm = (props: Props) => {
   const [value, setValue] = useState('')
+  const [keywordList, setKeywordList] = useState<Array<string>>([])
 
   const onChange = () => {
-    props.onChangeKeyword(value)
+    props.onChangeKeyword(keywordList)
   }
 
   const handleSearch = (key: string) => {
@@ -47,6 +48,14 @@ const SearchForm = (props: Props) => {
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
     setValue(e.target.value)
+    if (typeof e.target.value === 'string') {
+      const keywords = e.target.value
+        .replace(/　/g, ' ') // eslint-disable-line no-irregular-whitespace
+        .trim()
+        .split(/\s+/u)
+        .filter((v) => v !== '')
+      setKeywordList(keywords)
+    }
   }
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -54,11 +63,11 @@ const SearchForm = (props: Props) => {
   }
 
   useEffect(() => {
-    if (value === '') {
+    if (value === '' || keywordList.length === 0) {
       onChange()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
+  }, [value, keywordList])
 
   return (
     <div css={style}>
