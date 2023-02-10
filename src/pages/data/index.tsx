@@ -18,7 +18,6 @@ type Item = {
 }
 
 type Props = {
-  title?: string
   sipDatabase: Item[]
   integbioDatabase: Item[]
   sipDatabaseColumn: Item[]
@@ -50,15 +49,20 @@ const flexStyleAll = css`
 const DataIndex = (props: Props) => {
   const [count, setCount] = useState(0)
   const [database, setDatabase] = useState<Array<Item>>([])
+  const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const perPage = 20
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
   useEffect(() => {
-    handlePaginate(1)
+    setDatabase(mergedDatabase)
     setCount(mergedDatabase.length)
   }, [props])
+
+  useEffect(() => {
+    handlePaginate(1)
+  }, [database])
 
   const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
@@ -74,19 +78,19 @@ const DataIndex = (props: Props) => {
   }
 
   const handlePaginate = (page: number) => {
-    const currentPageItems = mergedDatabase.filter(
+    const currentPageItems = database.filter(
       (_, index) => index >= (page - 1) * perPage && index < page * perPage
     )
-    setDatabase(currentPageItems)
+    setDataPerPage(currentPageItems)
   }
 
   return (
-    <Layout title={props.title}>
+    <Layout title="データリスト">
       <LowerPageLayout>
-        <Breadcrumbs childTitle={props.title} />
+        <Breadcrumbs childTitle="データリスト" />
         <section css={style}>
           <SearchForm onChangeKeyword={onChangeKeyword} />
-          <h2>{props.title}</h2>
+          <h2>データリスト</h2>
           <div css={flexStyleAll}>
             <section css={flexStyleLeft}>
               <Records num={count} />
@@ -98,8 +102,8 @@ const DataIndex = (props: Props) => {
             </section>
             <SelectBox />
           </div>
-          {database &&
-            database.map((item, index) => (
+          {dataPerPage.length > 0 &&
+            dataPerPage.map((item, index) => (
               <DatabaseItem key={index} item={item} columns={columnsObject} />
             ))}
         </section>
