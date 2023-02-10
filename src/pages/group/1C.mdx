@@ -1,0 +1,51 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '1C'
+export const title = '研究グループ'
+export const childTitle = '農業環境エンジニアリング'
+
+# 研究グループ：農業環境エンジニアリング
+
+環境共存型農業を実現するため、バイオデジタル化技術により新しい評価軸となる農業環境エンジニアリングシステムを構築します。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html)
+
+---
+
+<Image
+  src="/group1C_01.png"
+  alt="農業環境エンジニアリングのイメージ"
+  width={540}
+  height={359}
+  priority
+/>
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}

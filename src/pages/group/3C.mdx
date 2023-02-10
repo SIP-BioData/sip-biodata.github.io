@@ -1,0 +1,51 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '3C'
+export const title = '研究グループ'
+export const childTitle = '昆虫生産系ものづくり'
+
+# 研究グループ：昆虫生産系ものづくり
+
+カイコのタンパク合成力(生物界最高)を越えたスーパー”カイコ”による、カイコだけが作れるタンパクで新薬品・新繊維を誕生させます。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme05.html](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme05.html)
+
+---
+
+<Image
+  src="/group3C_01.png"
+  alt="昆虫生産系ものづくりのイメージ"
+  width={800}
+  height={456}
+  priority
+/>
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}

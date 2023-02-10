@@ -1,0 +1,89 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '3B'
+export const title = '研究グループ'
+export const childTitle = '高機能バイオマテリアル設計・生産技術'
+
+# 研究グループ：高機能バイオマテリアル設計・生産技術
+
+脂肪族に偏っているバイオ由来の材料開発を芳香族に拡張するため、バイオ由来芳香族マテリアルを用いた革新的高機能材料の設計・生産技術、それを支えるバイオモノマーの分子設計技術や効率的生産技術を開発しています。 史上最高の耐熱性を有する高性能バイオプラスチックや電気化学的安定性に優れた二次電池電解質の開発に成功しています(下図)。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2105.html#t02](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2105.html#t02)
+
+---
+
+## 高機能バイオマテリアル設計・生産技術開発
+
+ポリベンズイミダゾール（PBI）wp減量として、史上最高の耐熱性を有する超高性能バイオプラスチックの開発に成功
+
+<Image
+  src="/arrowGroup.png"
+  alt="↓"
+  width={20}
+  height={20}
+  priority
+/>
+
+Liイオン電池や電気モータの巻き線被覆材として有望
+
+<Image
+  src="/group3B_01.png"
+  alt="高機能バイオマテリアル設計・生産技術開発のイメージ"
+  width={540}
+  height={241}
+  priority
+/>
+
+---
+
+PBI系イオンゲルをLiイオン電池の電解質に用いると充放電サイクル後に界面抵抗値が大幅に低減することを解明
+
+<Image
+  src="/arrowGroup.png"
+  alt="↓"
+  width={20}
+  height={20}
+  priority
+/>
+
+EV自動車用二次電池の材料として有望
+
+<Image
+  src="/group3B_02.png"
+  alt="高機能バイオマテリアル設計・生産技術開発のイメージ"
+  width={540}
+  height={359}
+  priority
+/>
+
+PBI系イオンゲル電解質を用いた半電池によるLED点灯　
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}

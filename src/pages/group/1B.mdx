@@ -1,0 +1,69 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '1B'
+export const title = '研究グループ'
+export const childTitle = '精密ゲノム編集'
+
+# 研究グループ：精密ゲノム編集
+
+遺伝子を設計通りに精密に書き換えられるゲノム編集技術を開発しています。すでに、1 塩基のみを目印としてターゲットを認識する技術、 DNA フリーのゲノム編集技術を開発しています(下図)。 また、Web サイト「バイオステーション」を通じて、ゲノム編集等のバイオテクノロジーに関する最新情報を発信しています。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t02](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t02)
+
+---
+
+## ゲノム編集を精密化する成果
+
+C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認識できる Cas9 改変体を開発<br />G(グアニン)についても 1 塩基で認識可能な Cas9 を開発済のため、A(アデニン)と T(チアミン)についても同様の Cas9 を開発すること
+
+<Image
+  src="/group1B_01.png"
+  alt="ゲノム編集のイメージ"
+  width={540}
+  height={395}
+  priority
+/>
+
+---
+
+## ウイルスベクターを用いた DNA フリーのゲノム編集技術を開発
+
+接種したウイルスによりゲノム編集酵素を生産することで、植物に外来の DNA を組み込むことなくゲノム編集を実現
+
+<Image
+  src="/group1B_02.png"
+  alt="ウイルス粒子接種のイメージ"
+  width={540}
+  height={218}
+  priority
+/>
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}
