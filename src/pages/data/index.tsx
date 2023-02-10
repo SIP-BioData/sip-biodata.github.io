@@ -102,7 +102,7 @@ const DataIndex = (props: Props) => {
             </section>
             <SelectBox />
           </div>
-          {database &&
+          {dataPerPage.length > 0 &&
             dataPerPage.map((item, index) => (
               <DatabaseItem key={index} item={item} columns={columnsObject} />
             ))}
