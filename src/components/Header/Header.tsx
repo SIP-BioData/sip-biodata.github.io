@@ -1,11 +1,18 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import logoImg from '../../../public/logo.png'
+import {ReactNode} from 'react'
 
 const headerStyle = css`
-  position: relative;
+  position: absolute;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 120px auto 120px;
+  column-gap: 16px;
+  align-items: start;
 `
 
 const logoStyle = css`
@@ -14,29 +21,24 @@ const logoStyle = css`
   padding: 42px 22px;
   border-radius: 0 0 10px 0;
   box-shadow: var(--shadow);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
 `
 
 const naviStyle = css`
+  justify-self: center;
+  align-self: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: var(--inn1000);
+  flex-wrap: wrap;
+  max-width: var(--inn1000);
   background-color: var(--col-wh);
   padding: 22px 36px;
   border-radius: 3em;
   box-shadow: var(--shadow);
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  h1 {
-    font-size: 18px;
-  }
+`
+
+const titleStyle = css`
+  font-size: 18px;
 `
 
 const menuStyle = css`
@@ -56,18 +58,33 @@ const linkStyle = css`
   }
 `
 
+type HeadingProps = {
+  path: string
+  children: ReactNode
+}
+
+const HeadingTitle = (props: HeadingProps) => {
+  const Tag = props.path === '/' ? 'h1' : 'div'
+  return (
+    <Tag css={titleStyle}>
+      {props.children}
+    </Tag>
+  )
+}
+
 const Header = () => {
+  const router = useRouter()
   return (
     <header css={headerStyle}>
       <div css={logoStyle}>
         <Image src={logoImg} alt="SIP" />
       </div>
       <nav css={naviStyle}>
-        <h1>
+        <HeadingTitle path={router.asPath}>
           <Link href="/">
             SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル
           </Link>
-        </h1>
+        </HeadingTitle>
         <ul css={menuStyle}>
           <li>
             <Link href="/data">データリスト</Link>

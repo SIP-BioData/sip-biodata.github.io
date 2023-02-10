@@ -54,10 +54,10 @@ const DataDetail = (props: Props) => {
         <Breadcrumbs title={props.title} path="data" childTitle="xxx" />
         <section css={sectionStyle}>
           {data && (
-            <h2>
+            <h1>
               <span>{data.name}</span>
               {data.group_name && <span>{`/ ${data.group_name}`}</span>}
-            </h2>
+            </h1>
           )}
           <DataTable item={data} columns={columnsObject} />
           <div css={buttonStyle}>
