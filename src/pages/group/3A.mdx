@@ -1,0 +1,51 @@
+import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Layout from '@/components/Layout/Layout'
+import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import MdxLayout from '@/components/Layout/MdxLayout'
+import GroupDetailList from '@/components/Elements/GroupDetailList'
+import BackToDataLink from '@/components/Navigation/BackToDataLink'
+import Image from 'next/image'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+export const groupId = '3A'
+export const title = '研究グループ'
+export const childTitle = 'アグリバイオ・化学システム'
+
+# 研究グループ：アグリバイオ・化学システム
+
+稲わらやもみ殻などの非可食農業残渣に含まれるメジャー・マイナー成分から多様な化学品を製造することにより、化学工業の基幹物質であるC6糖を30円/kgで供給する事業モデルを構築しています(下図)。 ラボ又はベンチ規模での製造に成功したほか、C6糖製造の小規模実証プラントによる試験を開始しています。
+
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2105.html#t01](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2105.html#t01)
+
+---
+
+<Image
+  src="/group3A_01.png"
+  alt="アグリバイオ・化学システムのイメージ"
+  width={705}
+  height={371}
+  priority
+/>
+
+---
+
+## データ一覧
+
+export default (props) => {
+  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  return (
+    <Layout title={title}>
+      {/* prettier-ignore */}
+      <LowerPageLayout>
+        <Breadcrumbs title={title} childTitle={childTitle} />
+        <MdxLayout>
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
+        </MdxLayout>
+      </LowerPageLayout>
+    </Layout>
+  )
+}

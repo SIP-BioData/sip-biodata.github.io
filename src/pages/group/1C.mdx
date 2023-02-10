@@ -9,23 +9,23 @@ import { getDatabaseStaticProps } from '@/lib/static'
 
 export const getStaticProps = getDatabaseStaticProps
 
-export const groupId = '1A'
+export const groupId = '1C'
 export const title = '研究グループ'
-export const childTitle = 'データ駆動型育種'
+export const childTitle = '農業環境エンジニアリング'
 
-# 研究グループ：データ駆動型育種
+# 研究グループ：農業環境エンジニアリング
 
-大量の育種データを取得・蓄積・解析するための基盤を構築しました。現在、蓄積したゲノム情報とデジタル化した形質情報に基づき、遺伝子型と形質の関連モデルを構築しています(下図)。 本モデルを用いれば、遺伝子型から形質を高精度で予測できるため、選抜効率を大幅に向上できます。
+環境共存型農業を実現するため、バイオデジタル化技術により新しい評価軸となる農業環境エンジニアリングシステムを構築します。
 
-[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t01](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme2102.html#t01)
+[https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html](https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/theme01.html)
 
 ---
 
 <Image
-  src="/group1A_01.png"
-  alt="データ駆動型育種のイメージ"
+  src="/group1C_01.png"
+  alt="農業環境エンジニアリングのイメージ"
   width={540}
-  height={395}
+  height={359}
   priority
 />
 
@@ -41,9 +41,9 @@ export default (props) => {
       <LowerPageLayout>
         <Breadcrumbs title={title} childTitle={childTitle} />
         <MdxLayout>
-            {props.children}
-            <GroupDetailList list={data} />
-            <BackToDataLink />
+          {props.children}
+          <GroupDetailList list={data} />
+          <BackToDataLink />
         </MdxLayout>
       </LowerPageLayout>
     </Layout>
