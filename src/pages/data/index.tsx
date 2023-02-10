@@ -53,6 +53,7 @@ const DataIndex = (props: Props) => {
   const perPage = 20
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
+  const columnsObject = Object.assign(columns[0], columns[1])
 
   useEffect(() => {
     handlePaginate(1)
@@ -99,7 +100,7 @@ const DataIndex = (props: Props) => {
           </div>
           {database &&
             database.map((item, index) => (
-              <DatabaseItem key={index} item={item} columns={columns[0]} />
+              <DatabaseItem key={index} item={item} columns={columnsObject} />
             ))}
         </section>
       </LowerPageLayout>

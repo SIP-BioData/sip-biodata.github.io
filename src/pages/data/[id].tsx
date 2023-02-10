@@ -40,6 +40,7 @@ const DataDetail = (props: Props) => {
   const [data, setData] = useState<Item | null>(null)
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
+  const columnsObject = Object.assign(columns[0], columns[1])
 
   useEffect(() => {
     const currentData = mergedDatabase.find((v) => v.id === id) || null
@@ -52,7 +53,7 @@ const DataDetail = (props: Props) => {
         <Breadcrumbs title={props.title} path="data" childTitle="xxx" />
         <section css={sectionStyle}>
           {data && <h2>{`${data.name} / ${data.group_name}`}</h2>}
-          <DataTable item={data} columns={columns[0]} />
+          <DataTable item={data} columns={columnsObject} />
           <div css={buttonStyle}>
             <Button
               iconLeft={
