@@ -39,6 +39,7 @@ const naviStyle = css`
 
 const titleStyle = css`
   font-size: 18px;
+  font-weight: 400;
 `
 
 const menuStyle = css`
