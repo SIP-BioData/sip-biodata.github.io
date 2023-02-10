@@ -17,6 +17,19 @@ const tableStyle = css`
     background-color: #f7f7f7;
     border: var(--border-gray);
     padding: 12px 0;
+
+    &:first-child {
+      width: 20%;
+    }
+    &:nth-child(2) {
+      width: 30%;
+    }
+    &:nth-child(3) {
+      width: 10%;
+    }
+    &:nth-child(4) {
+      width: 40%;
+    }
   }
 
   td {
