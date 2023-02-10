@@ -1,21 +1,13 @@
 import { css } from '@emotion/react'
-import { ReactNode } from 'react'
 
 import Button from '@/components/Elements/Button'
-
-type Props = {
-  iconLeft?: ReactNode
-  slug: string
-  text: string
-  iconRight?: ReactNode
-}
 
 const buttonContainerStyle = css`
   display: flex;
   justify-content: center;
 `
 
-const BackToDataLink = ({ iconLeft, slug, text, iconRight }: Props) => {
+const BackToDataLink = () => {
   return (
     <div css={buttonContainerStyle}>
       <Button

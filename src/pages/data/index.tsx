@@ -1,17 +1,28 @@
 import { css } from '@emotion/react'
+import { useEffect, useState } from 'react'
 
-// import Image from "next/image";
 import Breadcrumbs from '@/components/Elements/Breadcrumbs'
-import GroupItem from '@/components/Elements/GroupItem'
-import Pagenation from '@/components/Elements/Pagination'
+import DatabaseItem from '@/components/Elements/DatabaseItem'
+import Pagination from '@/components/Elements/Pagination'
 import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import { getDatabaseStaticProps } from '@/lib/static'
+
+export const getStaticProps = getDatabaseStaticProps
+
+type Item = {
+  [key: string]: string
+}
 
 type Props = {
   title?: string
+  sipDatabase: Item[]
+  integbioDatabase: Item[]
+  sipDatabaseColumn: Item[]
+  integbioDatabaseColumn: Item[]
 }
 
 const style = css`
@@ -36,57 +47,61 @@ const flexStyleAll = css`
   justify-content: space-between;
 `
 
-const DataIndex = ({ title = 'データリスト' }: Props) => {
+const DataIndex = (props: Props) => {
+  const [count, setCount] = useState(0)
+  const [database, setDatabase] = useState<Array<Item>>([])
+  const perPage = 20
+  const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
+  const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
+  const columnsObject = Object.assign(columns[0], columns[1])
+
+  useEffect(() => {
+    handlePaginate(1)
+    setCount(mergedDatabase.length)
+  }, [props])
+
+  const onChangeKeyword = (keywordList: string[]) => {
+    const filteredDatabase =
+      keywordList.length > 0
+        ? mergedDatabase.filter((item) =>
+            Object.values(item).find((v) =>
+              v != null ? keywordList.some((str) => v.includes(str)) : false
+            )
+          )
+        : mergedDatabase
+    setDatabase(filteredDatabase)
+    setCount(filteredDatabase.length)
+  }
+
+  const handlePaginate = (page: number) => {
+    const currentPageItems = mergedDatabase.filter(
+      (_, index) => index >= (page - 1) * perPage && index < page * perPage
+    )
+    setDatabase(currentPageItems)
+  }
+
   return (
-    <Layout title={title}>
+    <Layout title={props.title}>
       <LowerPageLayout>
-        <Breadcrumbs childTitle={title} />
+        <Breadcrumbs childTitle={props.title} />
         <section css={style}>
-          <SearchForm />
-          <h2>{title}</h2>
+          <SearchForm onChangeKeyword={onChangeKeyword} />
+          <h2>{props.title}</h2>
           <div css={flexStyleAll}>
             <section css={flexStyleLeft}>
-              <Records num={2000} />
-              <Pagenation first_num={1} last_num={33} />
+              <Records num={count} />
+              <Pagination
+                sum={count}
+                perPage={perPage}
+                onChange={handlePaginate}
+              />
             </section>
             <SelectBox />
           </div>
-          <GroupItem
-            id="1A-1"
-            group="精密ゲノム編集"
-            data="蛋白質構造データ"
-            target="-"
-            provider="濡木理"
-            accessLevel="公開可能データ"
-            content="BlCas9-RNA-DNA 複合体の結晶構造解析データ"
-            storage="PDB"
-            dataForm="RDF"
-            admin="東京大学"
-            publicPrivate="論文掲載後"
-            database={
-              <>
-                ウンシュウゲノムDB
-                <br />
-                カンキツ品種多型TASUKE
-              </>
-            }
-            reference="特許出願（特願2020-512343）"
-          />
-          <GroupItem
-            id="1A-2"
-            group="農業環境エンジニアリングシステム"
-            data="農業環境エンジニアリングシステムメタデータ"
-            target="ダイズ/コマツナ"
-            provider="桝屋啓志"
-            accessLevel="公開（CC BY）"
-            content="{}"
-            storage="{}"
-            dataForm="{}"
-            admin="{}"
-            publicPrivate="{}"
-            database="{}"
-            reference="{}"
-          />
+          {database &&
+            database.map((item, index) => (
+              <DatabaseItem key={index} item={item} columns={columnsObject} />
+            ))}
         </section>
       </LowerPageLayout>
     </Layout>
