@@ -49,15 +49,20 @@ const flexStyleAll = css`
 const DataIndex = (props: Props) => {
   const [count, setCount] = useState(0)
   const [database, setDatabase] = useState<Array<Item>>([])
+  const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const perPage = 20
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
   useEffect(() => {
-    handlePaginate(1)
+    setDatabase(mergedDatabase)
     setCount(mergedDatabase.length)
   }, [props])
+
+  useEffect(() => {
+    handlePaginate(1)
+  }, [database])
 
   const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
@@ -73,10 +78,10 @@ const DataIndex = (props: Props) => {
   }
 
   const handlePaginate = (page: number) => {
-    const currentPageItems = mergedDatabase.filter(
+    const currentPageItems = database.filter(
       (_, index) => index >= (page - 1) * perPage && index < page * perPage
     )
-    setDatabase(currentPageItems)
+    setDataPerPage(currentPageItems)
   }
 
   return (
@@ -98,7 +103,7 @@ const DataIndex = (props: Props) => {
             <SelectBox />
           </div>
           {database &&
-            database.map((item, index) => (
+            dataPerPage.map((item, index) => (
               <DatabaseItem key={index} item={item} columns={columnsObject} />
             ))}
         </section>
