@@ -7,9 +7,10 @@ import Button from '@/components/Elements/Button'
 import DataTable from '@/components/Elements/DataTable'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
-import { getDatabaseStaticProps } from '@/lib/static'
+import { getDatabaseStaticProps, getDataStaticPaths } from '@/lib/static'
 
 export const getStaticProps = getDatabaseStaticProps
+export const getStaticPaths = getDataStaticPaths
 
 type Item = {
   [key: string]: string
@@ -52,7 +53,12 @@ const DataDetail = (props: Props) => {
       <LowerPageLayout>
         <Breadcrumbs title={props.title} path="data" childTitle="xxx" />
         <section css={sectionStyle}>
-          {data && <h2>{`${data.name} / ${data.group_name}`}</h2>}
+          {data && (
+            <h2>
+              <span>{data.name}</span>
+              {data.group_name && <span>{`/ ${data.group_name}`}</span>}
+            </h2>
+          )}
           <DataTable item={data} columns={columnsObject} />
           <div css={buttonStyle}>
             <Button
@@ -101,10 +107,3 @@ const DataDetail = (props: Props) => {
 }
 
 export default DataDetail
-
-export async function getStaticPaths() {
-  return {
-    paths: ['/data/[id]'],
-    fallback: true,
-  }
-}

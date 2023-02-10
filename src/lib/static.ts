@@ -36,3 +36,28 @@ export const getDatabaseStaticProps = async () => {
     },
   }
 }
+
+export const getDataStaticPaths = async () => {
+  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
+  const dataSip = await fsPromises.readFile(filePathSip)
+  const objectDataSip = JSON.parse(dataSip.toString())
+
+  const filePathIntegbio = path.join(
+    process.cwd(),
+    './data/integbio_database.json'
+  )
+  const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
+  const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
+
+  const pathsSip = objectDataSip.map(
+    (item: { id: string }) => `/data/${item.id}`
+  )
+  const pathsIntegbio = objectDataIntegbio.map(
+    (item: { id: string }) => `/data/${item.id}`
+  )
+
+  return {
+    paths: [...pathsSip, ...pathsIntegbio],
+    fallback: true,
+  }
+}
