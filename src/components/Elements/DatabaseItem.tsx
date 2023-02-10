@@ -62,7 +62,7 @@ const LinkItem = (itemProps: LinkItemProps) => {
   return (
     <Link
       css={linkStyle}
-      href={`/${itemProps.route}/[id]`}
+      href={`/${itemProps.route}/[${itemProps.target}]`}
       as={`/${itemProps.route}/${itemProps.item[itemProps.target]}`}
     >
       {itemProps.children}
