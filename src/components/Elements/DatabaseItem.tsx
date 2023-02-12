@@ -59,6 +59,20 @@ const linkStyle = css`
   color: var(--col-bl);
 `
 
+const externalLinkStyle = css`
+  color: var(--col-bl);
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--col-bl);
+    mask: var(--link-icon-url) no-repeat;
+    vertical-align: middle;
+    margin-left: 12px;
+  }
+`
+
 const LinkItem = (itemProps: LinkItemProps) => {
   return (
     <Link
@@ -101,6 +115,15 @@ const DatabaseItem = (props: Props) => {
                   <LinkItem item={props.item} target="group_id" route="group">
                     {value}
                   </LinkItem>
+                ) : /^http.?:\/\//.test(value) ? (
+                  <a
+                    href={value}
+                    target="_blank"
+                    rel="noreferrer"
+                    css={externalLinkStyle}
+                  >
+                    {value}
+                  </a>
                 ) : (
                   value
                 )}
@@ -117,7 +140,20 @@ const DatabaseItem = (props: Props) => {
                     (k) => props.columns[k] === key
                   )}
                 </dt>
-                <dd>{value}</dd>
+                <dd>
+                  {/^http.?:\/\//.test(value) ? (
+                    <a
+                      href={value}
+                      target="_blank"
+                      rel="noreferrer"
+                      css={externalLinkStyle}
+                    >
+                      {value}
+                    </a>
+                  ) : (
+                    value
+                  )}
+                </dd>
               </Fragment>
             ))}
       </dl>

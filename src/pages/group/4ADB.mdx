@@ -10,8 +10,15 @@ import { getDatabaseStaticProps } from '@/lib/static'
 export const getStaticProps = getDatabaseStaticProps
 
 export const groupId = '4ADB'
-export const title = '研究グループ'
-export const childTitle = 'バリューチェーンデータ基盤構築'
+export const groupName = 'バリューチェーンデータ基盤構築'
+export const breadcrumbs = [
+  {
+    label: '研究グループ',
+  },
+  {
+    label: groupName,
+  },
+]
 
 # 研究グループ：バリューチェーンデータ基盤構築
 
@@ -28,7 +35,7 @@ export const childTitle = 'バリューチェーンデータ基盤構築'
 オープン・クローズシステムとは？<br />
 バイオの世界では様々なデータがオープンに利用できますが、企業や研究グループ内だけのクローズな環境で利用したいデータとオープンデータを組み合わせて利用するためには、利用者別のデータアクセス制御やセキュアな環境が必要となります。その様な環境を本 SIP データをモデルに構築しています。
 
-[https://sip-db.dbcls.jp/ ](https://sip-db.dbcls.jp/)
+[https://sip-db.dbcls.jp/](https://sip-db.dbcls.jp/)
 
 ---
 
@@ -37,10 +44,10 @@ export const childTitle = 'バリューチェーンデータ基盤構築'
 export default (props) => {
   const data = props.sipDatabase.filter((v) => v.group_id === groupId)
   return (
-    <Layout title={title}>
+    <Layout title={groupName}>
       {/* prettier-ignore */}
       <LowerPageLayout>
-        <Breadcrumbs title={title} childTitle={childTitle} />
+        <Breadcrumbs items={breadcrumbs} />
         <MdxLayout>
           {props.children}
           <GroupDetailList list={data} />
