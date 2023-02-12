@@ -2,9 +2,9 @@ import { css } from '@emotion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ReactNode } from 'react'
 
 import logoImg from '../../../public/logo.png'
-import {ReactNode} from 'react'
 
 const headerStyle = css`
   position: absolute;
@@ -66,11 +66,7 @@ type HeadingProps = {
 
 const HeadingTitle = (props: HeadingProps) => {
   const Tag = props.path === '/' ? 'h1' : 'div'
-  return (
-    <Tag css={titleStyle}>
-      {props.children}
-    </Tag>
-  )
+  return <Tag css={titleStyle}>{props.children}</Tag>
 }
 
 const Header = () => {
