@@ -8,7 +8,7 @@ type Props = {
 const style = css`
   max-width: var(--conts-inn);
   margin: 0 auto;
-  padding: 140px 0 0;
+  padding: 140px 16px 0;
 `
 
 const LowerPageLayout = ({ children }: Props) => {
