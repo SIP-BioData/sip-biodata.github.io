@@ -42,6 +42,20 @@ const linkStyle = css`
   color: var(--col-bl);
 `
 
+const externalLinkStyle = css`
+  color: var(--col-bl);
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--col-bl);
+    mask: var(--link-icon-url) no-repeat;
+    vertical-align: middle;
+    margin-left: 12px;
+  }
+`
+
 const LinkItem = (itemProps: LinkItemProps) => {
   return (
     itemProps.item && (
@@ -79,6 +93,15 @@ const DataTable = (props: Props) => {
                     <LinkItem item={props.item} target="group_id" route="group">
                       {value}
                     </LinkItem>
+                  ) : /^http.?:\/\//.test(value) ? (
+                    <a
+                      href={value}
+                      target="_blank"
+                      rel="noreferrer"
+                      css={externalLinkStyle}
+                    >
+                      {value}
+                    </a>
                   ) : (
                     value
                   )}
