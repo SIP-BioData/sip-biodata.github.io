@@ -10,8 +10,15 @@ import { getDatabaseStaticProps } from '@/lib/static'
 export const getStaticProps = getDatabaseStaticProps
 
 export const groupId = '1A'
-export const title = '研究グループ'
-export const childTitle = 'データ駆動型育種'
+export const groupName = 'データ駆動型育種'
+export const breadcrumbs = [
+  {
+    label: '研究グループ',
+  },
+  {
+    label: groupName,
+  },
+]
 
 # 研究グループ：データ駆動型育種
 
@@ -36,10 +43,10 @@ export const childTitle = 'データ駆動型育種'
 export default (props) => {
   const data = props.sipDatabase.filter((v) => v.group_id === groupId)
   return (
-    <Layout title={title}>
+    <Layout title={groupName}>
       {/* prettier-ignore */}
       <LowerPageLayout>
-        <Breadcrumbs title={title} childTitle={childTitle} />
+        <Breadcrumbs items={breadcrumbs} />
         <MdxLayout>
             {props.children}
             <GroupDetailList list={data} />

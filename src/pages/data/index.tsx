@@ -31,6 +31,12 @@ type Props = {
   integbioDatabaseColumn: Item[]
 }
 
+const breadcrumbs = [
+  {
+    label: 'データリスト',
+  },
+]
+
 const style = css`
   background-color: var(--col-wh);
   margin: 26px 0 100px;
@@ -138,7 +144,7 @@ const DataIndex = (props: Props) => {
   return (
     <Layout title="データリスト">
       <LowerPageLayout>
-        <Breadcrumbs childTitle="データリスト" />
+        <Breadcrumbs items={breadcrumbs} />
         <section css={style}>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <h1 css={titleStyle}>データリスト</h1>

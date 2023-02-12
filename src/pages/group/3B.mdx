@@ -10,8 +10,15 @@ import { getDatabaseStaticProps } from '@/lib/static'
 export const getStaticProps = getDatabaseStaticProps
 
 export const groupId = '3B'
-export const title = '研究グループ'
-export const childTitle = '高機能バイオマテリアル設計・生産技術'
+export const groupName = '高機能バイオマテリアル設計・生産技術'
+export const breadcrumbs = [
+  {
+    label: '研究グループ',
+  },
+  {
+    label: groupName,
+  },
+]
 
 # 研究グループ：高機能バイオマテリアル設計・生産技術
 
@@ -62,10 +69,10 @@ PBI 系イオンゲル電解質を用いた半電池による LED 点灯
 export default (props) => {
   const data = props.sipDatabase.filter((v) => v.group_id === groupId)
   return (
-    <Layout title={title}>
+    <Layout title={groupName}>
       {/* prettier-ignore */}
       <LowerPageLayout>
-        <Breadcrumbs title={title} childTitle={childTitle} />
+        <Breadcrumbs items={breadcrumbs} />
         <MdxLayout>
           {props.children}
           <GroupDetailList list={data} />

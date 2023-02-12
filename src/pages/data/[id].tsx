@@ -43,15 +43,25 @@ const DataDetail = (props: Props) => {
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
+  const breadcrumbs = [
+    {
+      label: 'データリスト',
+      path: '/data',
+    },
+    {
+      label: data ? `${data.name}` : 'データ詳細',
+    },
+  ]
+
   useEffect(() => {
     const currentData = mergedDatabase.find((v) => v.id === id) || null
     setData(currentData)
   }, [props, id])
 
   return (
-    <Layout title="データ詳細">
+    <Layout title={data ? `${data.name}` : 'データ詳細'}>
       <LowerPageLayout>
-        <Breadcrumbs title={props.title} path="data" childTitle="xxx" />
+        <Breadcrumbs items={breadcrumbs} />
         <section css={sectionStyle}>
           {data && (
             <h1>
