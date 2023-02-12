@@ -154,7 +154,12 @@ const DataIndex = (props: Props) => {
           </div>
           {dataPerPage.length > 0 &&
             dataPerPage.map((item, index) => (
-              <DatabaseItem key={index} item={item} columns={columnsObject} />
+              <DatabaseItem
+                key={index}
+                item={item}
+                columns={columnsObject}
+                resetStateItem={dataPerPage}
+              />
             ))}
         </section>
       </LowerPageLayout>

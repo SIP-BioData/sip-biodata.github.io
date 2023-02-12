@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import Link from 'next/link'
-import { Fragment, ReactNode, useState } from 'react'
+import { Fragment, ReactNode, useEffect, useState } from 'react'
 
 type Item = {
   [key: string]: string
@@ -9,6 +9,7 @@ type Item = {
 type Props = {
   item: Item
   columns: Item
+  resetStateItem: string | number | (string | number | Item)[]
 }
 
 type LinkItemProps = {
@@ -74,6 +75,10 @@ const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
   const displayItems = (({ id, group_id, ...rest }) => rest)(props.item)
   const defaultKeys = ['group_name', 'name', 'supplier', 'publication_status']
+
+  useEffect(() => {
+    setIsDisplayAll(false)
+  }, [props.resetStateItem])
 
   return (
     <section css={style}>
