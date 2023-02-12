@@ -31,8 +31,8 @@ const linkStyle = css`
   &::after {
     content: '';
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     background-color: var(--col-bl);
     mask: var(--link-icon-url) no-repeat;
     margin-left: 12px;
