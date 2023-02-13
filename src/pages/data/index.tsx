@@ -14,15 +14,13 @@ import { getDatabaseStaticProps } from '@/lib/static'
 import {
   buildParams,
   debounce,
+  getFilteredItems,
   getSearchWordsFromQuery,
+  getSortedItems,
   updateRoute,
 } from '@/lib/utils'
 
 export const getStaticProps = getDatabaseStaticProps
-
-type Item = {
-  [key: string]: string
-}
 
 type Props = {
   sipDatabase: Item[]
@@ -56,6 +54,13 @@ const flexStyleAll = css`
   gap: 12px;
 `
 
+const itemsForSort = [
+  {
+    label: 'データ名',
+    value: 'name',
+  },
+]
+
 const DataIndex = (props: Props) => {
   const router = useRouter()
   const searchWords = getSearchWordsFromQuery(router.query)
@@ -71,12 +76,7 @@ const DataIndex = (props: Props) => {
   const columnsObject = Object.assign(columns[0], columns[1])
 
   const searchWordsQuery = useMemo(
-    () =>
-      database.filter((item) =>
-        Object.values(item).find((v) =>
-          v != null ? searchWords.some((str) => v.includes(str)) : false
-        )
-      ),
+    () => getFilteredItems(database, searchWords),
     [searchWords]
   )
 
@@ -117,11 +117,7 @@ const DataIndex = (props: Props) => {
   const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
       keywordList.length > 0
-        ? mergedDatabase.filter((item) =>
-            Object.values(item).find((v) =>
-              v != null ? keywordList.some((str) => v.includes(str)) : false
-            )
-          )
+        ? getFilteredItems(mergedDatabase, keywordList)
         : mergedDatabase
     setDatabase(filteredDatabase)
     setCount(filteredDatabase.length)
@@ -141,6 +137,20 @@ const DataIndex = (props: Props) => {
     setDataPerPage(currentPageItems)
   }
 
+  const handleSort = (item: string) => {
+    if (item !== '') {
+      const sortedDatabase = getSortedItems(database, item)
+      setDatabase(sortedDatabase)
+    } else {
+      const filteredDatabase =
+        keywords.length > 0
+          ? getFilteredItems(mergedDatabase, keywords)
+          : mergedDatabase
+      setDatabase(filteredDatabase)
+    }
+    handlePaginate(1)
+  }
+
   return (
     <Layout title="データリスト">
       <LowerPageLayout>
@@ -156,7 +166,7 @@ const DataIndex = (props: Props) => {
               current={currentPage}
               onChange={handlePaginate}
             />
-            <SelectBox />
+            <SelectBox items={itemsForSort} onChangeItem={handleSort} />
           </div>
           {dataPerPage.length > 0 &&
             dataPerPage.map((item, index) => (

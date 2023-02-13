@@ -90,3 +90,25 @@ export const debounce = <T extends (...args: any[]) => unknown>(
     timeoutId = setTimeout(() => callback(...args), delay)
   }
 }
+
+export const getSortedItems = (items: any[], key: string) => {
+  return items.sort((a, b) => {
+    const itemA = a[key].toUpperCase()
+    const itemB = b[key].toUpperCase()
+    if (itemA < itemB) {
+      return -1
+    }
+    if (itemA > itemB) {
+      return 1
+    }
+    return 0
+  })
+}
+
+export const getFilteredItems = (items: Item[], keywords: string[]) => {
+  return items.filter((item) =>
+    Object.values(item).find((v: string) =>
+      v != null ? keywords.some((str) => v.includes(str)) : false
+    )
+  )
+}

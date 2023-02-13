@@ -12,10 +12,6 @@ import { getDatabaseStaticProps, getDataStaticPaths } from '@/lib/static'
 export const getStaticProps = getDatabaseStaticProps
 export const getStaticPaths = getDataStaticPaths
 
-type Item = {
-  [key: string]: string
-}
-
 type Props = {
   title?: string
   sipDatabase: Item[]

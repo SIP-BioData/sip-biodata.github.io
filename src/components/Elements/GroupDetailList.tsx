@@ -1,9 +1,5 @@
 import { css } from '@emotion/react'
 
-type Item = {
-  [key: string]: string
-}
-
 type Props = {
   list: Item[]
 }

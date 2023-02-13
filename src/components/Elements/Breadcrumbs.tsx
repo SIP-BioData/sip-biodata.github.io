@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import Link from 'next/link'
 
-type Item = {
+type OptionItem = {
   label: string
   path?: string
 }
 
 type Props = {
-  items: Item[]
+  items: OptionItem[]
 }
 
 const style = css`
