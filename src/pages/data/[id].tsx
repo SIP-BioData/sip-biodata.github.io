@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import Breadcrumbs from '@/components/Elements/Breadcrumbs'
+import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
 import Button from '@/components/Elements/Button'
 import DataTable from '@/components/Elements/DataTable'
 import Layout from '@/components/Layout/Layout'

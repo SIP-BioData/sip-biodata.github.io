@@ -2,14 +2,14 @@ import { css } from '@emotion/react'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 
-import Breadcrumbs from '@/components/Elements/Breadcrumbs'
 import DatabaseItem from '@/components/Elements/DatabaseItem'
-import Pagination from '@/components/Elements/Pagination'
 import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
+import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
+import Pagination from '@/components/Navigation/Pagination'
 import { getDatabaseStaticProps } from '@/lib/static'
 import {
   buildParams,
