@@ -97,7 +97,7 @@ const quotationStyle = css`
 
 const Home = () => {
   return (
-    <Layout title="home">
+    <Layout>
       <div>
         <Image css={mainImgStyle} src={mainImg} alt="" width={500} />
       </div>
