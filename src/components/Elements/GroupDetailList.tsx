@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import Link from 'next/link'
 
 type Props = {
   list: Item[]
@@ -34,6 +35,10 @@ const tableStyle = css`
   }
 `
 
+const linkStyle = css`
+  color: var(--col-bl);
+`
+
 const GroupDetailList = (props: Props) => {
   return (
     <table css={tableStyle}>
@@ -49,7 +54,11 @@ const GroupDetailList = (props: Props) => {
         {props.list.map((item, index) => (
           <tr key={index}>
             <td>{item.group_name}</td>
-            <td>{item.name}</td>
+            <td>
+              <Link css={linkStyle} href="/data/[id]" as={`/data/${item.id}`}>
+                {item.name}
+              </Link>
+            </td>
             <td>{item.supplier}</td>
             <td>{item.publication_status}</td>
           </tr>
