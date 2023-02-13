@@ -11,6 +11,12 @@ type Props = {
   children: ReactNode
 }
 
+type LinkItemProps = {
+  path: string
+  invert?: boolean
+  children: ReactNode
+}
+
 const buttonStyle = css`
   display: inline-flex;
   align-items: center;
@@ -30,9 +36,23 @@ const invertedColorStyle = css`
   background-color: var(--col-wh);
 `
 
+const LinkItem = ({ invert = false, ...itemProps }: LinkItemProps) => {
+  const Tag = /^http.?:\/\//.test(itemProps.path) ? 'a' : Link
+  return (
+    <Tag
+      css={invert ? invertedColorStyle : buttonStyle}
+      href={itemProps.path}
+      target={Tag === 'a' ? '_blank' : undefined}
+      rel={Tag === 'a' ? 'noreferrer' : undefined}
+    >
+      {itemProps.children}
+    </Tag>
+  )
+}
+
 const Button = ({ invert = false, ...props }: Props) => {
   return (
-    <Link css={invert ? invertedColorStyle : buttonStyle} href={props.path}>
+    <LinkItem path={props.path} invert={invert}>
       {props.leftIcon && (
         <Image
           src={props.leftIcon.src}
@@ -50,7 +70,7 @@ const Button = ({ invert = false, ...props }: Props) => {
           alt=""
         />
       )}
-    </Link>
+    </LinkItem>
   )
 }
 
