@@ -2,10 +2,6 @@ import { css } from '@emotion/react'
 import Link from 'next/link'
 import { Fragment, ReactNode, useEffect, useState } from 'react'
 
-type Item = {
-  [key: string]: string
-}
-
 type Props = {
   item: Item
   columns: Item
