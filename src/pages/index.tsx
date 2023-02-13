@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
 
-import LinkButton from '@/components/Elements/LinkButton'
 import HomeItem from '@/components/Elements/HomeItem'
+import LinkButton from '@/components/Elements/LinkButton'
 import Layout from '@/components/Layout/Layout'
 
 import aboutImg from '../../public/aboutImg.png'
