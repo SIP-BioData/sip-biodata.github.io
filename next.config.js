@@ -2,6 +2,9 @@
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
 }
 
 const withMDX = require('@next/mdx')({
