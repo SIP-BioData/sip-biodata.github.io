@@ -62,9 +62,14 @@ const DataDetail = (props: Props) => {
             <LinkButton path="/data" leftIcon={arrowBack}>
               データリストに戻る
             </LinkButton>
-            <LinkButton path="/group" leftIcon={arrowBack}>
-              研究グループに戻る
-            </LinkButton>
+            {props.data.group_id && (
+              <LinkButton
+                path={`/group/${props.data.group_id}`}
+                leftIcon={arrowBack}
+              >
+                研究グループ：{props.data.group_name}
+              </LinkButton>
+            )}
           </div>
         </section>
       </LowerPageLayout>

@@ -27,7 +27,7 @@ const buttonStyle = css`
   color: var(--col-wh);
   border-radius: 40px;
   background-color: var(--col-bk);
-  padding: 10px;
+  padding: 10px 20px;
 `
 
 const invertedColorStyle = css`
