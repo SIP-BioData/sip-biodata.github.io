@@ -50,7 +50,7 @@ const LinkItem = ({ invert = false, ...itemProps }: LinkItemProps) => {
   )
 }
 
-const Button = ({ invert = false, ...props }: Props) => {
+const LinkButton = ({ invert = false, ...props }: Props) => {
   return (
     <LinkItem path={props.path} invert={invert}>
       {props.leftIcon && (
@@ -74,4 +74,4 @@ const Button = ({ invert = false, ...props }: Props) => {
   )
 }
 
-export default Button
+export default LinkButton

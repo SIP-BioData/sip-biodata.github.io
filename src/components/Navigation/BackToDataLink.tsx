@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import Button from '@/components/Elements/Button'
+import LinkButton from '@/components/Elements/LinkButton'
 
 import arrowBack from '../../../public/arrowBack.svg'
 
@@ -12,9 +12,9 @@ const buttonContainerStyle = css`
 const BackToDataLink = () => {
   return (
     <div css={buttonContainerStyle}>
-      <Button path="/data" leftIcon={arrowBack}>
+      <LinkButton path="/data" leftIcon={arrowBack}>
         データリストに戻る
-      </Button>
+      </LinkButton>
     </div>
   )
 }

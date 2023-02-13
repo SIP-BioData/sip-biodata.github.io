@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import Button from '@/components/Elements/Button'
+import LinkButton from '@/components/Elements/LinkButton'
 import DataTable from '@/components/Elements/DataTable'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
@@ -73,12 +73,12 @@ const DataDetail = (props: Props) => {
           )}
           <DataTable item={data} columns={columnsObject} />
           <div css={buttonContainerStyle}>
-            <Button path="/data" leftIcon={arrowBack}>
+            <LinkButton path="/data" leftIcon={arrowBack}>
               データリストに戻る
-            </Button>
-            <Button path="/group" leftIcon={arrowBack}>
+            </LinkButton>
+            <LinkButton path="/group" leftIcon={arrowBack}>
               研究グループに戻る
-            </Button>
+            </LinkButton>
           </div>
         </section>
       </LowerPageLayout>
