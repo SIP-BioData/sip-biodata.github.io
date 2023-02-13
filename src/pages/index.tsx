@@ -1,14 +1,15 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
-import Link from 'next/link'
 
-import Button from '@/components/Elements/Button'
+import LinkButton from '@/components/Elements/LinkButton'
 import HomeItem from '@/components/Elements/HomeItem'
 import Layout from '@/components/Layout/Layout'
 
 import aboutImg from '../../public/aboutImg.png'
+import arrowForwardBk from '../../public/arrowForwardBk.svg'
 import bgImg from '../../public/bgImg.png'
 import mainImg from '../../public/bgMain.png'
+import linkEX from '../../public/linkEX.svg'
 
 const mainImgStyle = css`
   width: 100vw;
@@ -31,6 +32,29 @@ const readStyle = css`
 
 const linkStyle = css`
   text-decoration: underline;
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--col-bk);
+    mask: var(--link-icon-url) no-repeat;
+    vertical-align: middle;
+    margin: 0 8px;
+  }
+`
+
+const invertedColorLinkStyle = css`
+  ${linkStyle};
+  &::after {
+    background-color: var(--col-wh);
+  }
+`
+
+const buttonContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const bgLayoutStyle = css`
@@ -51,13 +75,6 @@ const itemStyle = css`
   transform: translate(-50%, -50%);
   z-index: 100;
   color: var(--col-wh);
-`
-
-const btnStyle = css`
-  background-color: var(--col-wh);
-  a {
-    color: var(--col-bk);
-  }
 `
 
 const imgStyle = css`
@@ -87,173 +104,96 @@ const Home = () => {
       <p css={readStyle}>
         「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。
       </p>
-      <HomeItem
-        title="データ連携ポータルについて"
-        text={
-          <>
-            <Link css={linkStyle} href="#">
-              戦略的イノベーション創造プログラム
-            </Link>{' '}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M10.8,14.8H9.2V8.4L6.4,11.2,5.264,10.064,10,5.328l4.736,4.736L13.6,11.2,10.8,8.4v6.4M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0,1.6A6.4,6.4,0,1,0,16.4,10,6.4,6.4,0,0,0,10,3.6Z"
-                transform="translate(18 18) rotate(180)"
-                fill="#000118"
-              />
-            </svg>
-            （SIP）
-            <Link css={linkStyle} href="#">
-              第2期「スマートバイオ産業・農業基盤技術」
-            </Link>{' '}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M10.8,14.8H9.2V8.4L6.4,11.2,5.264,10.064,10,5.328l4.736,4.736L13.6,11.2,10.8,8.4v6.4M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0,1.6A6.4,6.4,0,1,0,16.4,10,6.4,6.4,0,0,0,10,3.6Z"
-                transform="translate(18 18) rotate(180)"
-                fill="#000118"
-              />
-            </svg>
-            の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。未公開のデータであっても、それがどのようなデータか、どのような研究から生み出されたものかを公表することにより、将来的な利活用に結び付けたいと考えています。
-          </>
-        }
-      />
-      <section css={bgLayoutStyle}>
+      <HomeItem>
+        <h2>データ連携ポータルについて</h2>
+        <p>
+          <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
+            戦略的イノベーション創造プログラム
+          </a>
+          （SIP）
+          <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
+            第2期「スマートバイオ産業・農業基盤技術」
+          </a>
+          の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。未公開のデータであっても、それがどのようなデータか、どのような研究から生み出されたものかを公表することにより、将来的な利活用に結び付けたいと考えています。
+        </p>
+      </HomeItem>
+      <div css={bgLayoutStyle}>
         <div>
           <Image css={bgStyle} src={bgImg} alt="" height={546} />
         </div>
-        <section css={itemStyle}>
-          <HomeItem
-            title="データリストについて"
-            text={
-              <>
-                SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
-                <a css={linkStyle} href="">
-                  Integbioデータベースカタログ
-                </a>{' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M12.778,3V4.778h3.191L7.231,13.516l1.253,1.253,8.738-8.738V9.222H19V3M17.222,17.222H4.778V4.778H11V3H4.778A1.777,1.777,0,0,0,3,4.778V17.222A1.778,1.778,0,0,0,4.778,19H17.222A1.778,1.778,0,0,0,19,17.222V11H17.222Z"
-                    transform="translate(-3 -3)"
-                    fill="#fff"
-                  />
-                </svg>{' '}
-                に掲載されているデータベースのメタデータが一覧できます。リスト内の情報を検索することにより、SIPデータとSIP以外で公開されているデータから、興味あるデータを絞り込んで表示することが可能です。
-              </>
-            }
-            item={
-              <Button
-                css={btnStyle}
-                slug="data"
-                text="詳しく見る"
-                iconRight={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M10.8,14.8H9.2V8.4L6.4,11.2,5.264,10.064,10,5.328l4.736,4.736L13.6,11.2,10.8,8.4v6.4M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0,1.6A6.4,6.4,0,1,0,16.4,10,6.4,6.4,0,0,0,10,3.6Z"
-                      transform="translate(18 18) rotate(180)"
-                      fill="#000118"
-                    />
-                  </svg>
-                }
-              />
-            }
-          />
-        </section>
-      </section>
-      <section>
-        <HomeItem
-          title="SIP BioDB Searchについて"
-          text="酵素反応データを中心として複数のデータを繋いだ検索用ウェブツールです。化合物名・酵素名・ GO(Gene Ontology)・生物種・EC(Enzyme Commission)番号をキーとして検索すると、関連する反応・化合物・酵素・生物種情報が表示されます。"
-          item={
-            <Button
-              slug=""
-              text="ツールを使う"
-              iconRight={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M12.778,3V4.778h3.191L7.231,13.516l1.253,1.253,8.738-8.738V9.222H19V3M17.222,17.222H4.778V4.778H11V3H4.778A1.777,1.777,0,0,0,3,4.778V17.222A1.778,1.778,0,0,0,4.778,19H17.222A1.778,1.778,0,0,0,19,17.222V11H17.222Z"
-                    transform="translate(-3 -3)"
-                    fill="#fff"
-                  />
-                </svg>
-              }
-            />
-          }
-        />
-      </section>
-      <section css={bgLayoutStyle}>
+        <div css={itemStyle}>
+          <HomeItem>
+            <h2>データリストについて</h2>
+            <p>
+              SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
+              <a
+                css={invertedColorLinkStyle}
+                href="#"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Integbioデータベースカタログ
+              </a>
+              に掲載されているデータベースのメタデータが一覧できます。リスト内の情報を検索することにより、SIPデータとSIP以外で公開されているデータから、興味あるデータを絞り込んで表示することが可能です。
+            </p>
+            <div css={buttonContainerStyle}>
+              <LinkButton path="/data" rightIcon={arrowForwardBk} invert={true}>
+                詳しく見る
+              </LinkButton>
+            </div>
+          </HomeItem>
+        </div>
+      </div>
+      <HomeItem>
+        <h2>SIP BioDB Searchについて</h2>
+        <p>
+          酵素反応データを中心として複数のデータを繋いだ検索用ウェブツールです。化合物名・酵素名・
+          GO(Gene Ontology)・生物種・EC(Enzyme
+          Commission)番号をキーとして検索すると、関連する反応・化合物・酵素・生物種情報が表示されます。
+        </p>
+        <div css={buttonContainerStyle}>
+          <LinkButton path="https://" rightIcon={linkEX}>
+            ツールを使う
+          </LinkButton>
+        </div>
+      </HomeItem>
+      <div css={bgLayoutStyle}>
         <div>
           <Image css={bgStyle} src={bgImg} alt="" height={1410} />
         </div>
-        <section css={itemStyle}>
-          <HomeItem
-            title="スマートバイオ産業・農業基盤技術について"
-            text="我が国のバイオエコノミーの拡大と関連産業の競争力強化等のため、府省連携により、バイオとデジタルの融合によるイノベーションの基盤を構築し、「食」による健康増進社会の実現や革新的なバイオ素材・製品産業の振興・創出を図ります。
-          また、「食」を生産する農業にあっては、生産から加工・流通・販売・消費・輸出までデータを相互活用するスマートフードチェーンの構築や様々なデータにより駆動する革新的なスマート農業技術・システムの開発、データ駆動型育種を推進するための技術開発等を実施します。基礎研究から実用化・事業化まで一気通貫の取組を通じ、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化を目指します。"
-            item={
-              <div css={imgStyle}>
-                <div css={imginnStyle}>
-                  <Image
-                    src={aboutImg}
-                    alt="スマートバイオ産業・農業基盤技術についての画像"
-                    max-width={830}
-                  />
-                </div>
-                <div css={quotationStyle}>
-                  https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/index.htmより引用
-                </div>
-              </div>
-            }
-          />
-        </section>
-      </section>
-      <HomeItem
-        title="戦略的イノベーション創造プログラムについて"
-        text="戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。"
-        item={
-          <Button
-            slug=""
-            text="サイトをみる"
-            iconRight={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M12.778,3V4.778h3.191L7.231,13.516l1.253,1.253,8.738-8.738V9.222H19V3M17.222,17.222H4.778V4.778H11V3H4.778A1.777,1.777,0,0,0,3,4.778V17.222A1.778,1.778,0,0,0,4.778,19H17.222A1.778,1.778,0,0,0,19,17.222V11H17.222Z"
-                  transform="translate(-3 -3)"
-                  fill="#fff"
+        <div css={itemStyle}>
+          <HomeItem>
+            <h2>スマートバイオ産業・農業基盤技術について</h2>
+            <p>
+              我が国のバイオエコノミーの拡大と関連産業の競争力強化等のため、府省連携により、バイオとデジタルの融合によるイノベーションの基盤を構築し、「食」による健康増進社会の実現や革新的なバイオ素材・製品産業の振興・創出を図ります。
+              また、「食」を生産する農業にあっては、生産から加工・流通・販売・消費・輸出までデータを相互活用するスマートフードチェーンの構築や様々なデータにより駆動する革新的なスマート農業技術・システムの開発、データ駆動型育種を推進するための技術開発等を実施します。基礎研究から実用化・事業化まで一気通貫の取組を通じ、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化を目指します。
+            </p>
+            <div css={imgStyle}>
+              <div css={imginnStyle}>
+                <Image
+                  src={aboutImg}
+                  alt="スマートバイオ産業・農業基盤技術についての画像"
+                  max-width={830}
                 />
-              </svg>
-            }
-          />
-        }
-      />
+              </div>
+              <div css={quotationStyle}>
+                https://www.naro.go.jp/laboratory/brain/sip/sip2/theme/index.htmより引用
+              </div>
+            </div>
+          </HomeItem>
+        </div>
+      </div>
+      <HomeItem>
+        <h2>戦略的イノベーション創造プログラムについて</h2>
+        <p>
+          戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。
+        </p>
+        <div css={buttonContainerStyle}>
+          <LinkButton path="https://" rightIcon={linkEX}>
+            サイトをみる
+          </LinkButton>
+        </div>
+      </HomeItem>
     </Layout>
   )
 }

@@ -2,12 +2,14 @@ import { css } from '@emotion/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import Button from '@/components/Elements/Button'
+import LinkButton from '@/components/Elements/LinkButton'
 import DataTable from '@/components/Elements/DataTable'
 import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
 import { getDatabaseStaticProps, getDataStaticPaths } from '@/lib/static'
+
+import arrowBack from '../../../public/arrowBack.svg'
 
 export const getStaticProps = getDatabaseStaticProps
 export const getStaticPaths = getDataStaticPaths
@@ -26,9 +28,13 @@ const sectionStyle = css`
   padding: 60px;
 `
 
-const buttonStyle = css`
-  margin: 50px auto 0;
-  text-align: center;
+const buttonContainerStyle = css`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 50px;
 `
 
 const DataDetail = (props: Props) => {
@@ -66,45 +72,13 @@ const DataDetail = (props: Props) => {
             </h1>
           )}
           <DataTable item={data} columns={columnsObject} />
-          <div css={buttonStyle}>
-            <Button
-              iconLeft={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    id="arrow-up-circle-outline"
-                    d="M8.8,3.2H7.2V9.6L4.4,6.8,3.264,7.936,8,12.672l4.736-4.736L11.6,6.8,8.8,9.6V3.2M8,16A8,8,0,1,0,0,8a8,8,0,0,0,8,8m0-1.6A6.4,6.4,0,1,1,14.4,8,6.4,6.4,0,0,1,8,14.4Z"
-                    transform="translate(16) rotate(90)"
-                    fill="#fff"
-                  />
-                </svg>
-              }
-              slug="/data"
-              text="データリストに戻る"
-            />
-            <Button
-              iconLeft={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    id="arrow-up-circle-outline"
-                    d="M8.8,3.2H7.2V9.6L4.4,6.8,3.264,7.936,8,12.672l4.736-4.736L11.6,6.8,8.8,9.6V3.2M8,16A8,8,0,1,0,0,8a8,8,0,0,0,8,8m0-1.6A6.4,6.4,0,1,1,14.4,8,6.4,6.4,0,0,1,8,14.4Z"
-                    transform="translate(16) rotate(90)"
-                    fill="#fff"
-                  />
-                </svg>
-              }
-              slug="/group"
-              text="研究グループに戻る"
-            />
+          <div css={buttonContainerStyle}>
+            <LinkButton path="/data" leftIcon={arrowBack}>
+              データリストに戻る
+            </LinkButton>
+            <LinkButton path="/group" leftIcon={arrowBack}>
+              研究グループに戻る
+            </LinkButton>
           </div>
         </section>
       </LowerPageLayout>
