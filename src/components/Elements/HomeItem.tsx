@@ -2,9 +2,7 @@ import { css } from '@emotion/react'
 import { ReactNode } from 'react'
 
 type Props = {
-  title: string
-  text: ReactNode
-  item?: ReactNode
+  children: ReactNode
 }
 
 const style = css`
@@ -19,33 +17,11 @@ const style = css`
     max-width: var(--w875);
     width: 100%;
     margin: 76px auto 50px;
-    line-height: calc(38 / 20);
-  }
-
-  button {
-    display: block;
-    width: 240px;
-    line-height: 48px;
-    margin: 50px auto 0;
-    appearance: none;
-    border: 0;
-    border-radius: 24px;
-    background: var(--col-bk);
-    a {
-      color: #fff;
-      &::after {
-      }
-    }
+    line-height: 1.9;
   }
 `
-const HomeItem = ({ title, text, item }: Props) => {
-  return (
-    <div css={style}>
-      <h2>{title}</h2>
-      <p>{text}</p>
-      <>{item}</>
-    </div>
-  )
+const HomeItem = (props: Props) => {
+  return <section css={style}>{props.children}</section>
 }
 
 export default HomeItem

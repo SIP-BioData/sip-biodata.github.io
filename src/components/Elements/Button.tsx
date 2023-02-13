@@ -1,53 +1,56 @@
 import { css } from '@emotion/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
 type Props = {
-  iconLeft?: ReactNode
-  slug: string
-  text: string
-  iconRight?: ReactNode
+  path: string
+  leftIcon?: HTMLImageElement
+  rightIcon?: HTMLImageElement
+  invert?: boolean
+  children: ReactNode
 }
 
-const style = css`
-  margin: 0 15px;
-  display: inline-block;
-  width: 240px;
-  line-height: 48px;
-  appearance: none;
-  border: 0;
-  border-radius: 40px;
-  background: var(--col-bk);
-  a {
-    color: #fff;
-  }
-`
-
-const innerStyle = css`
-  display: flex;
+const buttonStyle = css`
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  min-width: 240px;
   font-size: 18px;
-
-  span {
-    &:first-of-type {
-      margin-right: 10px;
-    }
-    &:last-of-type {
-      margin-left: 10px;
-    }
-  }
+  color: var(--col-wh);
+  border-radius: 40px;
+  background-color: var(--col-bk);
+  padding: 10px;
 `
 
-const Button = ({ iconLeft, slug, text, iconRight }: Props) => {
+const invertedColorStyle = css`
+  ${buttonStyle};
+  color: var(--col-bk);
+  background-color: var(--col-wh);
+`
+
+const Button = ({ invert = false, ...props }: Props) => {
   return (
-    <button css={style}>
-      <Link css={innerStyle} href={slug}>
-        <span>{iconLeft}</span>
-        <span>{text}</span>
-        <span>{iconRight}</span>
-      </Link>
-    </button>
+    <Link css={invert ? invertedColorStyle : buttonStyle} href={props.path}>
+      {props.leftIcon && (
+        <Image
+          src={props.leftIcon.src}
+          width={props.leftIcon.width}
+          height={props.leftIcon.height}
+          alt=""
+        />
+      )}
+      {props.children}
+      {props.rightIcon && (
+        <Image
+          src={props.rightIcon.src}
+          width={props.rightIcon.width}
+          height={props.rightIcon.height}
+          alt=""
+        />
+      )}
+    </Link>
   )
 }
 
