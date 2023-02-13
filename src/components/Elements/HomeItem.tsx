@@ -6,10 +6,12 @@ type Props = {
 }
 
 const style = css`
-  margin: 100px 0;
+  padding: 100px 24px;
+  word-break: break-all;
 
   h2 {
     font-size: 38px;
+    font-weight: 500;
     text-align: center;
   }
 

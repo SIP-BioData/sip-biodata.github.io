@@ -7,22 +7,26 @@ import logoPic from '../../../public/logo.png'
 const footerStyle = css`
   background: var(--col-bk);
   color: var(--col-wh);
-  padding: 40px 0;
+  padding: 40px 20px;
 `
 const footerLogoStyle = css`
   max-width: var(--inn1000);
   margin: 0 auto;
   display: flex;
   align-items: flex-end;
-  h1 {
-    font-size: 20px;
-    margin-left: 22px;
+  @media (max-width: 680px) {
+    align-items: flex-start;
   }
+`
+
+const titleStyle = css`
+  font-size: 18px;
+  margin-left: 22px;
 `
 
 const menuStyle = css`
   max-width: var(--inn1000);
-  margin: 56px auto 0;
+  margin: 48px auto 0;
   display: flex;
   li {
     margin-right: 36px;
@@ -46,7 +50,9 @@ const Footer = () => {
     <footer css={footerStyle}>
       <div css={footerLogoStyle}>
         <Image src={logoPic} alt="SIP" />
-        <h1>SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル</h1>
+        <div css={titleStyle}>
+          SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル
+        </div>
       </div>
       <ul css={menuStyle}>
         <li>
