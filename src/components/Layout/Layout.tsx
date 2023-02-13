@@ -17,7 +17,10 @@ const Layout = ({
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content="「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。" />
+        <meta
+          name="description"
+          content="「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。"
+        />
       </Head>
       <Header />
       <main>{children}</main>
