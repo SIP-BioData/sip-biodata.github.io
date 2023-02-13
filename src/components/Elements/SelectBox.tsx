@@ -1,4 +1,15 @@
 import { css } from '@emotion/react'
+import { SetStateAction, useEffect, useRef, useState } from 'react'
+
+type Item = {
+  label: string
+  value: string
+}
+
+type Props = {
+  items: Item[]
+  onChangeItem: (item: string) => void
+}
 
 const style = css`
   display: flex;
@@ -29,17 +40,36 @@ const selectStyle = css`
   }
 `
 
-const SelectBox = () => {
+const SelectBox = (props: Props) => {
+  const isFirstRender = useRef<boolean>(true)
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    props.onChangeItem(value)
+  }, [isFirstRender, value])
+
+  const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
+    setValue(e.target.value)
+  }
+
   return (
-    <section css={style}>
+    <div css={style}>
       <label>並び順：</label>
       <div css={selectStyle}>
-        <select name="data" id="data-select">
-          <option value="">その１</option>
-          <option value="">その２</option>
+        <select defaultValue="" onChange={handleChange}>
+          <option value="">---</option>
+          {props.items.map((item, index) => (
+            <option key={index} value={item.value}>
+              {item.label}
+            </option>
+          ))}
         </select>
       </div>
-    </section>
+    </div>
   )
 }
 
