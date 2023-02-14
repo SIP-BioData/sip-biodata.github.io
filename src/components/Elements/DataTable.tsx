@@ -57,8 +57,7 @@ const LinkItem = (itemProps: LinkItemProps) => {
     itemProps.item && (
       <Link
         css={linkStyle}
-        href={`/${itemProps.route}/[id]`}
-        as={`/${itemProps.route}/${itemProps.item[itemProps.target]}`}
+        href={`/${itemProps.route}/${itemProps.item[itemProps.target]}`}
       >
         {itemProps.children}
       </Link>
@@ -68,7 +67,7 @@ const LinkItem = (itemProps: LinkItemProps) => {
 
 const DataTable = (props: Props) => {
   const displayItems = props.item
-    ? (({ id, group_id, ...rest }) => rest)(props.item)
+    ? (({ sip_id, sip_group_id, ...rest }) => rest)(props.item)
     : null
 
   return (
@@ -85,8 +84,12 @@ const DataTable = (props: Props) => {
                   )}
                 </th>
                 <td css={cellStyle}>
-                  {key === 'group_name' ? (
-                    <LinkItem item={props.item} target="group_id" route="group">
+                  {key === 'sip_group_name' ? (
+                    <LinkItem
+                      item={props.item}
+                      target="sip_group_id"
+                      route="group"
+                    >
                       {value}
                     </LinkItem>
                   ) : /^http.?:\/\//.test(value) ? (

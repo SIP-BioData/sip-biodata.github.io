@@ -40,20 +40,20 @@ const DataDetail = (props: Props) => {
       path: '/data',
     },
     {
-      label: props.data ? `${props.data.name}` : 'データ詳細',
+      label: props.data ? `${props.data.sip_name}` : 'データ詳細',
     },
   ]
 
   return (
-    <Layout title={props.data ? `${props.data.name}` : 'データ詳細'}>
+    <Layout title={props.data ? `${props.data.sip_name}` : 'データ詳細'}>
       <LowerPageLayout>
         <Breadcrumbs items={breadcrumbs} />
         <section css={sectionStyle}>
           {props.data && (
             <h1>
-              <span>{props.data.name}</span>
-              {props.data.group_name && (
-                <span>{`/ ${props.data.group_name}`}</span>
+              <span>{props.data.sip_name}</span>
+              {props.data.sip_group_name && (
+                <span>{`/ ${props.data.sip_group_name}`}</span>
               )}
             </h1>
           )}
@@ -62,12 +62,12 @@ const DataDetail = (props: Props) => {
             <LinkButton path="/data" leftIcon={arrowBack}>
               データリストに戻る
             </LinkButton>
-            {props.data.group_id && (
+            {props.data.sip_group_id && (
               <LinkButton
-                path={`/group/${props.data.group_id}`}
+                path={`/group/${props.data.sip_group_id}`}
                 leftIcon={arrowBack}
               >
-                研究グループ：{props.data.group_name}
+                研究グループ：{props.data.sip_group_name}
               </LinkButton>
             )}
           </div>
