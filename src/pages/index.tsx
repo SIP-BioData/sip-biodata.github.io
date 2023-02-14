@@ -13,6 +13,7 @@ const firstViewStyle = css`
   padding: 300px 24px 230px;
   background-image: url('/bgMain.png');
   background-size: cover;
+  background-position: center;
 `
 
 const readStyle = css`
