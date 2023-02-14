@@ -39,7 +39,7 @@ export const breadcrumbs = [
 ## データ一覧
 
 export default (props) => {
-  const data = props.sipDatabase.filter((v) => v.group_id === groupId)
+  const data = props.sipDatabase.filter((v) => v.sip_group_id === groupId)
   return (
     <Layout title={groupName}>
       {/* prettier-ignore */}

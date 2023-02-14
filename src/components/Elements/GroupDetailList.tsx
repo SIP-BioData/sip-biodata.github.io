@@ -15,16 +15,10 @@ const tableStyle = css`
     border: var(--border-gray);
     padding: 12px 0;
 
-    &:first-child {
+    &:first-of-type {
       width: 20%;
     }
-    &:nth-child(2) {
-      width: 30%;
-    }
-    &:nth-child(3) {
-      width: 10%;
-    }
-    &:nth-child(4) {
+    &:last-of-type {
       width: 40%;
     }
   }
@@ -53,14 +47,18 @@ const GroupDetailList = (props: Props) => {
       <tbody>
         {props.list.map((item, index) => (
           <tr key={index}>
-            <td>{item.group_name}</td>
+            <td>{item.sip_group_name}</td>
             <td>
-              <Link css={linkStyle} href="/data/[id]" as={`/data/${item.id}`}>
-                {item.name}
+              <Link
+                css={linkStyle}
+                href="/data/[id]"
+                as={`/data/${item.sip_id}`}
+              >
+                {item.sip_name}
               </Link>
             </td>
-            <td>{item.supplier}</td>
-            <td>{item.publication_status}</td>
+            <td>{item.sip_supplier}</td>
+            <td>{item.sip_publication_status}</td>
           </tr>
         ))}
       </tbody>

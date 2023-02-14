@@ -83,8 +83,15 @@ const LinkItem = (itemProps: LinkItemProps) => {
 
 const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
-  const displayItems = (({ id, group_id, ...rest }) => rest)(props.item)
-  const defaultKeys = ['group_name', 'name', 'supplier', 'publication_status']
+  const displayItems = (({ sip_id, sip_group_id, integbio_id, ...rest }) =>
+    rest)(props.item)
+  const defaultKeys = [
+    'sip_group_name',
+    'sip_name',
+    'sip_supplier',
+    'sip_publication_status',
+    'integbio_name',
+  ]
 
   useEffect(() => {
     setIsDisplayAll(false)
@@ -103,14 +110,27 @@ const DatabaseItem = (props: Props) => {
                 )}
               </dt>
               <dd>
-                {key === 'name' ? (
-                  <LinkItem item={props.item} target="id" route="data">
+                {key === 'sip_name' ? (
+                  <LinkItem item={props.item} target="sip_id" route="data">
                     {value}
                   </LinkItem>
-                ) : key === 'group_name' ? (
-                  <LinkItem item={props.item} target="group_id" route="group">
+                ) : key === 'sip_group_name' ? (
+                  <LinkItem
+                    item={props.item}
+                    target="sip_group_id"
+                    route="group"
+                  >
                     {value}
                   </LinkItem>
+                ) : key === 'integbio_name' ? (
+                  <a
+                    href={`https://integbio.jp/dbcatalog/record/${props.item.integbio_id.toLowerCase()}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    css={externalLinkStyle}
+                  >
+                    {value}
+                  </a>
                 ) : /^http.?:\/\//.test(value) ? (
                   <a
                     href={value}
