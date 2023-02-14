@@ -81,17 +81,21 @@ const LinkItem = (itemProps: LinkItemProps) => {
   )
 }
 
+const defaultKeys = [
+  'sip_group_name',
+  'sip_name',
+  'sip_format',
+  'sip_administrator',
+  'sip_publication_status',
+  'integbio_record_administrator',
+  'integbio_name',
+  'integbio_asset_manager_name',
+]
+
 const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
   const displayItems = (({ sip_id, sip_group_id, integbio_id, ...rest }) =>
     rest)(props.item)
-  const defaultKeys = [
-    'sip_group_name',
-    'sip_name',
-    'sip_supplier',
-    'sip_publication_status',
-    'integbio_name',
-  ]
 
   useEffect(() => {
     setIsDisplayAll(false)

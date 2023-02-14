@@ -3,24 +3,24 @@ import Link from 'next/link'
 
 type Props = {
   list: Item[]
+  columns: Item
 }
 
-const tableStyle = css`
+const tableContainerStyle = css`
+  overflow-x: auto;
   width: 100%;
-  border: var(--border-gray);
   margin-bottom: 40px;
+  -webkit-overflow-scrolling: touch;
+`
+
+const tableStyle = css`
+  font-size: 14px;
+  border: var(--border-gray);
 
   th {
     background-color: #f7f7f7;
     border: var(--border-gray);
-    padding: 12px 0;
-
-    &:first-of-type {
-      width: 20%;
-    }
-    &:last-of-type {
-      width: 40%;
-    }
+    padding: 12px 20px;
   }
 
   td {
@@ -29,40 +29,89 @@ const tableStyle = css`
   }
 `
 
+const noWrapStyle = css`
+  white-space: nowrap;
+`
+
+const wrapStyle = css`
+  white-space: unset;
+`
+
+const wrapStyleWide = css`
+  ${wrapStyle};
+  min-width: 500px;
+`
+
+const wrapStyleThin = css`
+  ${wrapStyle};
+  min-width: 280px;
+`
+
 const linkStyle = css`
+  font-size: 14px;
   color: var(--col-bl);
 `
 
+const displayKeys = [
+  'sip_group_name',
+  'sip_name',
+  'sip_format',
+  'sip_administrator',
+  'sip_publication_status',
+]
+
 const GroupDetailList = (props: Props) => {
+  const itemsWithDisplayKeys = props.list.map((item) =>
+    Object.fromEntries(
+      Object.entries(item).filter(([k]) => displayKeys.includes(k))
+    )
+  )
   return (
-    <table css={tableStyle}>
-      <thead>
-        <tr>
-          <th>研究グループ</th>
-          <th>データ</th>
-          <th>提供者</th>
-          <th>公開（予定）・非公開</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.list.map((item, index) => (
-          <tr key={index}>
-            <td>{item.sip_group_name}</td>
-            <td>
-              <Link
-                css={linkStyle}
-                href="/data/[id]"
-                as={`/data/${item.sip_id}`}
-              >
-                {item.sip_name}
-              </Link>
-            </td>
-            <td>{item.sip_supplier}</td>
-            <td>{item.sip_publication_status}</td>
+    <div css={tableContainerStyle}>
+      <table css={tableStyle}>
+        <thead>
+          <tr>
+            {displayKeys.map((item, index) => (
+              <th key={`heading-${index}`} css={noWrapStyle}>
+                {Object.keys(props.columns).find(
+                  (k) => props.columns[k] === item
+                )}
+              </th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {itemsWithDisplayKeys.map((item, index) => (
+            <tr key={`row-${index}`}>
+              {displayKeys.map((k, i) =>
+                k === 'sip_name' ? (
+                  <td key={`cell-${i}`} css={wrapStyleThin}>
+                    <Link
+                      css={linkStyle}
+                      href="/data/[id]"
+                      as={`/data/${props.list[index].sip_id}`}
+                    >
+                      {item[k]}
+                    </Link>
+                  </td>
+                ) : (
+                  <td
+                    key={`cell-${i}`}
+                    css={
+                      k === 'sip_publication_status'
+                        ? wrapStyleWide
+                        : noWrapStyle
+                    }
+                  >
+                    {item[k]}
+                  </td>
+                )
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

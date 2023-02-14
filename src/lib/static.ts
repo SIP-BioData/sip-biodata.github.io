@@ -37,6 +37,26 @@ export const getDatabaseStaticProps = async () => {
   }
 }
 
+export const getSipDatabaseStaticProps = async () => {
+  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
+  const dataSip = await fsPromises.readFile(filePathSip)
+  const objectDataSip = JSON.parse(dataSip.toString())
+
+  const filePathSipColumn = path.join(
+    process.cwd(),
+    './data/sip_database_column.json'
+  )
+  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
+  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+
+  return {
+    props: {
+      database: objectDataSip,
+      columns: objectDataSipColumn[0],
+    },
+  }
+}
+
 export const getDataStaticProps = async (context: {
   params: { id: string }
 }) => {

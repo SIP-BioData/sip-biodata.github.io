@@ -5,9 +5,9 @@ import MdxLayout from '@/components/Layout/MdxLayout'
 import GroupDetailList from '@/components/Elements/GroupDetailList'
 import BackToDataLink from '@/components/Navigation/BackToDataLink'
 import Image from 'next/image'
-import { getDatabaseStaticProps } from '@/lib/static'
+import { getSipDatabaseStaticProps } from '@/lib/static'
 
-export const getStaticProps = getDatabaseStaticProps
+export const getStaticProps = getSipDatabaseStaticProps
 
 export const groupId = '3C'
 export const groupName = '昆虫生産系ものづくり'
@@ -41,7 +41,7 @@ export const breadcrumbs = [
 ## データ一覧
 
 export default (props) => {
-  const data = props.sipDatabase.filter((v) => v.sip_group_id === groupId)
+  const data = props.database.filter((v) => v.sip_group_id === groupId)
   return (
     <Layout title={groupName}>
       {/* prettier-ignore */}
@@ -49,7 +49,7 @@ export default (props) => {
         <Breadcrumbs items={breadcrumbs} />
         <MdxLayout>
           {props.children}
-          <GroupDetailList list={data} />
+          <GroupDetailList list={data} columns={props.columns} />
           <BackToDataLink />
         </MdxLayout>
       </LowerPageLayout>
