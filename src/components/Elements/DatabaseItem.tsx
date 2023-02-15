@@ -39,6 +39,7 @@ const style = css`
     margin-bottom: 16px;
     word-break: break-word;
     border-bottom: 1px solid #eaeaea;
+    white-space: pre-wrap;
   }
 
   button {

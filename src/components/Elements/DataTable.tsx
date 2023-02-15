@@ -32,6 +32,7 @@ const cellStyle = css`
   padding: var(--list-padding);
   border: var(--border-gray);
   word-break: break-word;
+  white-space: pre-wrap;
 `
 
 const linkStyle = css`
