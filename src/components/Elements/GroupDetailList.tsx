@@ -26,6 +26,7 @@ const tableStyle = css`
   td {
     padding: var(--list-padding);
     border: var(--border-gray);
+    white-space: pre-wrap;
   }
 `
 
