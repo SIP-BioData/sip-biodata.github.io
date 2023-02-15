@@ -1,14 +1,16 @@
 import { css } from '@emotion/react'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
 
-type Item = {
+type SelectItem = {
   label: string
   value: string
+  order?: string
 }
 
 type Props = {
-  items: Item[]
-  onChangeItem: (item: string) => void
+  items: SelectItem[]
+  current: string | null
+  onChangeItem: (item: string | null) => void
 }
 
 const style = css`
@@ -42,7 +44,8 @@ const selectStyle = css`
 
 const SelectBox = (props: Props) => {
   const isFirstRender = useRef<boolean>(true)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string | null>(null)
+  const items = [{ label: '---', value: '' }, ...props.items]
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -52,7 +55,13 @@ const SelectBox = (props: Props) => {
     props.onChangeItem(value)
   }, [isFirstRender, value])
 
-  const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
+  useEffect(() => {
+    setValue(props.current)
+  }, [props.current])
+
+  const handleChange = (e: {
+    target: { value: SetStateAction<string | null> }
+  }) => {
     setValue(e.target.value)
   }
 
@@ -60,10 +69,12 @@ const SelectBox = (props: Props) => {
     <div css={style}>
       <label>並び順：</label>
       <div css={selectStyle}>
-        <select defaultValue="" onChange={handleChange}>
-          <option value="">---</option>
-          {props.items.map((item, index) => (
-            <option key={index} value={item.value}>
+        <select value={value || ''} onChange={handleChange}>
+          {items.map((item, index) => (
+            <option
+              key={index}
+              value={item.order ? `${item.value}:${item.order}` : item.value}
+            >
               {item.label}
             </option>
           ))}

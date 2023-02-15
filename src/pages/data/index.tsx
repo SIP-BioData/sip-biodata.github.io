@@ -56,8 +56,24 @@ const flexStyleAll = css`
 
 const itemsForSort = [
   {
-    label: 'データ名',
-    value: 'name',
+    label: 'データ／DB：昇順',
+    value: 'sip_name|integbio_name',
+    order: 'asc',
+  },
+  {
+    label: 'データ／DB：降順',
+    value: 'sip_name|integbio_name',
+    order: 'desc',
+  },
+  {
+    label: 'データ管理者／運用機関名：昇順',
+    value: 'sip_administrator|integbio_asset_manager_name',
+    order: 'asc',
+  },
+  {
+    label: 'データ管理者／運用機関名：降順',
+    value: 'sip_administrator|integbio_asset_manager_name',
+    order: 'desc',
   },
 ]
 
@@ -70,6 +86,7 @@ const DataIndex = (props: Props) => {
   const [database, setDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const [sortValue, setSortValue] = useState<string | null>(null)
   const perPage = 20
   const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
@@ -91,6 +108,7 @@ const DataIndex = (props: Props) => {
 
   useEffect(() => {
     handlePaginate(1)
+    setSortValue(null)
   }, [database])
 
   useEffect(() => {
@@ -137,9 +155,10 @@ const DataIndex = (props: Props) => {
     setDataPerPage(currentPageItems)
   }
 
-  const handleSort = (item: string) => {
-    if (item !== '') {
-      const sortedDatabase = getSortedItems(database, item)
+  const handleSort = (item: string | null) => {
+    if (item) {
+      const [value, order] = item.split(':')
+      const sortedDatabase = getSortedItems(database, value, order)
       setDatabase(sortedDatabase)
     } else {
       const filteredDatabase =
@@ -148,6 +167,7 @@ const DataIndex = (props: Props) => {
           : mergedDatabase
       setDatabase(filteredDatabase)
     }
+    setSortValue(item)
     handlePaginate(1)
   }
 
@@ -166,7 +186,11 @@ const DataIndex = (props: Props) => {
               current={currentPage}
               onChange={handlePaginate}
             />
-            <SelectBox items={itemsForSort} onChangeItem={handleSort} />
+            <SelectBox
+              items={itemsForSort}
+              current={sortValue}
+              onChangeItem={handleSort}
+            />
           </div>
           {dataPerPage.length > 0 &&
             dataPerPage.map((item, index) => (

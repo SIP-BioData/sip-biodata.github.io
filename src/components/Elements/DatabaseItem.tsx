@@ -87,9 +87,10 @@ const defaultKeys = [
   'sip_format',
   'sip_administrator',
   'sip_publication_status',
-  'integbio_record_administrator',
   'integbio_name',
   'integbio_asset_manager_name',
+  'integbio_target_tag',
+  'integbio_type_tag',
 ]
 
 const DatabaseItem = (props: Props) => {
@@ -109,9 +110,11 @@ const DatabaseItem = (props: Props) => {
           .map(([key, value], index) => (
             <Fragment key={index}>
               <dt>
-                {Object.keys(props.columns).find(
-                  (k) => props.columns[k] === key
-                )}
+                {key === 'integbio_name'
+                  ? 'DB'
+                  : Object.keys(props.columns).find(
+                      (k) => props.columns[k] === key
+                    )}
               </dt>
               <dd>
                 {key === 'sip_name' ? (
