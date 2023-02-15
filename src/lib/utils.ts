@@ -91,15 +91,16 @@ export const debounce = <T extends (...args: any[]) => unknown>(
   }
 }
 
-export const getSortedItems = (items: any[], key: string) => {
+export const getSortedItems = (items: any[], value: string, order: string) => {
+  const keyArray = value.split('|')
   return items.sort((a, b) => {
-    const itemA = a[key].toUpperCase()
-    const itemB = b[key].toUpperCase()
+    const itemA = a[keyArray[0]] ?? a[keyArray[1]]
+    const itemB = b[keyArray[0]] ?? b[keyArray[1]]
     if (itemA < itemB) {
-      return -1
+      return order === 'asc' ? -1 : order === 'desc' ? 1 : 0
     }
     if (itemA > itemB) {
-      return 1
+      return order === 'asc' ? 1 : order === 'desc' ? -1 : 0
     }
     return 0
   })
