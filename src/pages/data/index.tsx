@@ -35,7 +35,7 @@ const breadcrumbs = [
   },
 ]
 
-const style = css`
+const containerStyle = css`
   background-color: var(--col-wh);
   margin: 26px 0 100px;
   padding: 60px;
@@ -175,7 +175,7 @@ const DataIndex = (props: Props) => {
     <Layout title="データリスト">
       <LowerPageLayout>
         <Breadcrumbs items={breadcrumbs} />
-        <section css={style}>
+        <div css={containerStyle}>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <h1 css={titleStyle}>データリスト</h1>
           <div css={flexStyleAll}>
@@ -201,7 +201,7 @@ const DataIndex = (props: Props) => {
                 resetStateItem={dataPerPage}
               />
             ))}
-        </section>
+        </div>
       </LowerPageLayout>
     </Layout>
   )

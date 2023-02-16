@@ -18,7 +18,7 @@ type Props = {
   columns: Item
 }
 
-const sectionStyle = css`
+const containerStyle = css`
   background: var(--col-wh);
   margin: 26px 0 100px;
   padding: 60px;
@@ -48,7 +48,7 @@ const DataDetail = (props: Props) => {
     <Layout title={props.data ? `${props.data.sip_name}` : 'データ詳細'}>
       <LowerPageLayout>
         <Breadcrumbs items={breadcrumbs} />
-        <section css={sectionStyle}>
+        <div css={containerStyle}>
           {props.data && (
             <h1>
               <span>{props.data.sip_name}</span>
@@ -71,7 +71,7 @@ const DataDetail = (props: Props) => {
               </LinkButton>
             )}
           </div>
-        </section>
+        </div>
       </LowerPageLayout>
     </Layout>
   )
