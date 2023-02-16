@@ -13,13 +13,25 @@ const style = css`
     font-size: 38px;
     font-weight: 500;
     text-align: center;
+    margin-bottom: 76px;
   }
 
   p {
     max-width: var(--w875);
     width: 100%;
-    margin: 76px auto 50px;
+    margin: 0 auto 18px;
     line-height: 1.9;
+  }
+
+  ul {
+    max-width: var(--w875);
+    width: 100%;
+    list-style: disc;
+    margin: 0 auto 18px;
+
+    li {
+      margin: 0 0 10px 1.5em;
+    }
   }
 `
 const HomeItem = (props: Props) => {

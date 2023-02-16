@@ -19,6 +19,11 @@ export const getDatabaseStaticProps = async () => {
   )
   const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
   const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
+  const objectDataIntegbioConcatGroupName = objectDataIntegbio.map(
+    (item: any) => {
+      return { integbio_group_name: 'Integbio Database Catalog', ...item }
+    }
+  )
 
   const filePathIntegbioColumn = path.join(
     process.cwd(),
@@ -30,7 +35,7 @@ export const getDatabaseStaticProps = async () => {
   return {
     props: {
       sipDatabase: objectDataSip,
-      integbioDatabase: objectDataIntegbio,
+      integbioDatabase: objectDataIntegbioConcatGroupName,
       sipDatabaseColumn: objectDataSipColumn,
       integbioDatabaseColumn: objectDataIntegbioColumn,
     },
