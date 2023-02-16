@@ -91,11 +91,28 @@ export const debounce = <T extends (...args: any[]) => unknown>(
   }
 }
 
+export const halfWidthString = (str: string) => {
+  const re = /[Ａ-Ｚａ-ｚ０-９]/g
+  if (!re.test(str)) {
+    return str
+  } else {
+    return str.replace(re, function (s) {
+      if (!re.test(s)) {
+        return s
+      } else {
+        return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
+      }
+    })
+  }
+}
+
 export const getSortedItems = (items: any[], value: string, order: string) => {
   const keyArray = value.split('|')
   return items.sort((a, b) => {
-    const itemA = a[keyArray[0]] ?? a[keyArray[1]]
-    const itemB = b[keyArray[0]] ?? b[keyArray[1]]
+    const itemA =
+      halfWidthString(a[keyArray[0]]) ?? halfWidthString(a[keyArray[1]])
+    const itemB =
+      halfWidthString(b[keyArray[0]]) ?? halfWidthString(b[keyArray[1]])
     if (itemA < itemB) {
       return order === 'asc' ? -1 : order === 'desc' ? 1 : 0
     }
