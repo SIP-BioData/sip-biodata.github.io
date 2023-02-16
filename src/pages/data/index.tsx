@@ -145,6 +145,7 @@ const DataIndex = (props: Props) => {
     } else {
       handleResetFilter()
     }
+    setKeywords(keywordList)
   }
 
   const handlePaginate = (page: number) => {
