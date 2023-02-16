@@ -76,9 +76,9 @@ const components: MDXComponents = {
 
 const MdxLayout = ({ children }: Props) => {
   return (
-    <section css={containerStyle}>
+    <div css={containerStyle}>
       <MDXProvider components={components}>{children}</MDXProvider>
-    </section>
+    </div>
   )
 }
 

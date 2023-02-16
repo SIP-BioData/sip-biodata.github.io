@@ -17,7 +17,7 @@ type LinkItemProps = {
 const tableStyle = css`
   width: 100%;
   border: var(--border-gray);
-  margin-top: 55px;
+  margin-top: 56px;
 `
 
 const thStyle = css`
