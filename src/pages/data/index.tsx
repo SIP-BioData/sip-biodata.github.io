@@ -53,8 +53,22 @@ const containerStyle = css`
   padding: 60px;
 `
 
-const titleStyle = css`
+const marginStyle = css`
   margin-bottom: 48px;
+`
+
+const linkStyle = css`
+  text-decoration: underline;
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--col-bk);
+    mask: var(--link-icon-url) no-repeat;
+    vertical-align: middle;
+    margin: 0 8px;
+  }
 `
 
 const functionUiContainerStyle = css`
@@ -310,7 +324,19 @@ const DataIndex = (props: Props) => {
       <LowerPageLayout>
         <Breadcrumbs items={breadcrumbs} />
         <div css={containerStyle}>
-          <h1 css={titleStyle}>データリスト</h1>
+          <h1 css={marginStyle}>データリスト</h1>
+          <p css={marginStyle}>
+            SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
+            <a
+              css={linkStyle}
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Integbioデータベースカタログ
+            </a>
+            に掲載されているデータベースのメタデータが一覧できます。リスト内の情報を検索することにより、SIPデータとSIP以外で公開されているデータから、興味あるデータを絞り込んで表示することが可能です。
+          </p>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <div css={tabContainerStyle}>
             <ul css={tabStyle}>
