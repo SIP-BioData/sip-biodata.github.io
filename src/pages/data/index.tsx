@@ -158,7 +158,6 @@ const DataIndex = (props: Props) => {
     )
     setCurrentDatabase(currentDatabase)
     setCurrentPage(1)
-    setSortValue(null)
   }, [database, databaseType])
 
   useEffect(() => {
@@ -203,6 +202,7 @@ const DataIndex = (props: Props) => {
     setDatabase(filteredDatabase)
     setCount(filteredDatabase.length)
     setCurrentPage(1)
+    setSortValue(null)
     if (keywordList.length > 0) {
       handleUpdateSearchRoute(keywordList)
     } else {
@@ -239,6 +239,7 @@ const DataIndex = (props: Props) => {
   const handleChangeTab = (type: string) => {
     setDatabaseType(type)
     setCurrentPage(1)
+    setSortValue(null)
     handleUpdateDatabaseRoute(type)
   }
 
