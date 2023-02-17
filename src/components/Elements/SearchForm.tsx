@@ -33,6 +33,17 @@ const SearchForm = (props: Props) => {
   const [value, setValue] = useState('')
   const [keywordList, setKeywordList] = useState<Array<string>>([])
 
+  useEffect(() => {
+    if (value === '' && keywordList.length === 0) {
+      onChange()
+    }
+  }, [value, keywordList])
+
+  useEffect(() => {
+    const value = props.keywords.join(' ')
+    setValue(value)
+  }, [props.keywords])
+
   const onChange = () => {
     props.onChangeKeyword(keywordList)
   }
@@ -62,18 +73,6 @@ const SearchForm = (props: Props) => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
   }
-
-  useEffect(() => {
-    const value = props.keywords.join(' ')
-    setValue(value)
-  }, [props.keywords])
-
-  useEffect(() => {
-    if (value === '' && keywordList.length === 0) {
-      onChange()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, keywordList])
 
   return (
     <div css={style}>
