@@ -65,7 +65,7 @@ const Tab = (props: Props) => {
   }
 
   return (
-    <ul css={tabStyle}>
+    <ul css={tabStyle} role="tablist">
       {props.items.map((item, index) => (
         <li
           key={index}
@@ -73,7 +73,14 @@ const Tab = (props: Props) => {
             item.value === props.current ? tabItemCurrentStyle : tabItemStyle
           }
         >
-          <button css={buttonStyle} onClick={() => handleClick(item.value)}>
+          <button
+            css={buttonStyle}
+            role="tab"
+            aria-selected={item.value === props.current}
+            aria-controls={`panel-${item.value}`}
+            id={`tab-${item.value}`}
+            onClick={() => handleClick(item.value)}
+          >
             {item.label}
           </button>
         </li>

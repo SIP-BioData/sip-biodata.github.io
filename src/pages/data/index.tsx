@@ -320,28 +320,34 @@ const DataIndex = (props: Props) => {
               onClickItem={handleChangeTab}
             />
           </div>
-          <div css={functionUiContainerStyle}>
-            <Pagination
-              sum={counts[databaseType as keyof CountType]}
-              perPage={perPage}
-              current={currentPage}
-              onChange={handlePaginate}
-            />
-            <SelectBox
-              items={itemsForSort}
-              current={sortValue}
-              onChangeItem={handleSort}
-            />
-          </div>
-          {dataPerPage.length > 0 &&
-            dataPerPage.map((item, index) => (
-              <DatabaseItem
-                key={index}
-                item={item}
-                columns={columnsObject}
-                resetStateItem={dataPerPage}
+          <div
+            id={`panel-${databaseType}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${databaseType}`}
+          >
+            <div css={functionUiContainerStyle}>
+              <Pagination
+                sum={counts[databaseType as keyof CountType]}
+                perPage={perPage}
+                current={currentPage}
+                onChange={handlePaginate}
               />
-            ))}
+              <SelectBox
+                items={itemsForSort}
+                current={sortValue}
+                onChangeItem={handleSort}
+              />
+            </div>
+            {dataPerPage.length > 0 &&
+              dataPerPage.map((item, index) => (
+                <DatabaseItem
+                  key={index}
+                  item={item}
+                  columns={columnsObject}
+                  resetStateItem={dataPerPage}
+                />
+              ))}
+          </div>
         </div>
       </LowerPageLayout>
     </Layout>
