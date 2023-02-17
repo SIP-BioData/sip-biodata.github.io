@@ -59,7 +59,12 @@ const Footer = () => {
           <Link href="/data">データリスト</Link>
         </li>
         <li>
-          <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
+          <a
+            css={linkStyle}
+            href="https://sip-db.dbcls.jp/rhea/#/"
+            target="_blank"
+            rel="noreferrer"
+          >
             SIP BioDB Search
           </a>
         </li>

@@ -30,6 +30,7 @@ body {
   font-weight: 400;
   color: var(--col-bk);
   background-color: #f8f8f8;
+  scroll-behavior: smooth;
 }
 
 p {

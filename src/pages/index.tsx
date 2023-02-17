@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import HomeItem from '@/components/Elements/HomeItem'
 import LinkButton from '@/components/Elements/LinkButton'
@@ -46,6 +47,10 @@ const invertedColorLinkStyle = css`
   }
 `
 
+const internalLinkStyle = css`
+  text-decoration: underline;
+`
+
 const buttonContainerStyle = css`
   display: flex;
   align-items: center;
@@ -87,13 +92,13 @@ const Home = () => {
       <HomeItem>
         <h2>データ連携ポータルについて</h2>
         <p>
-          <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
+          <Link css={internalLinkStyle} href="/#sip" scroll={false}>
             戦略的イノベーション創造プログラム
-          </a>
+          </Link>
           （SIP）
-          <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
+          <Link css={internalLinkStyle} href="/#sfs" scroll={false}>
             第2期「スマートバイオ産業・農業基盤技術」
-          </a>
+          </Link>
           の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。未公開のデータであっても、それがどのようなデータか、どのような研究から生み出されたものかを公表することにより、将来的な利活用に結び付けたいと考えています。
         </p>
       </HomeItem>
@@ -127,12 +132,12 @@ const Home = () => {
           Commission)番号をキーとして検索すると、関連する反応・化合物・酵素・生物種情報が表示されます。
         </p>
         <div css={buttonContainerStyle}>
-          <LinkButton path="https://" rightIcon={linkEX}>
+          <LinkButton path="https://sip-db.dbcls.jp/rhea/#/" rightIcon={linkEX}>
             ツールを使う
           </LinkButton>
         </div>
       </HomeItem>
-      <div css={itemWithBgImgStyle}>
+      <div css={itemWithBgImgStyle} id="sfs">
         <HomeItem>
           <h2>スマートバイオ産業・農業基盤技術について</h2>
           <p>
@@ -176,17 +181,19 @@ const Home = () => {
           </div>
         </HomeItem>
       </div>
-      <HomeItem>
-        <h2>戦略的イノベーション創造プログラムについて</h2>
-        <p>
-          戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。
-        </p>
-        <div css={buttonContainerStyle}>
-          <LinkButton path="https://" rightIcon={linkEX}>
-            サイトをみる
-          </LinkButton>
-        </div>
-      </HomeItem>
+      <div id="sip">
+        <HomeItem>
+          <h2>戦略的イノベーション創造プログラムについて</h2>
+          <p>
+            戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。
+          </p>
+          <div css={buttonContainerStyle}>
+            <LinkButton path="#" rightIcon={linkEX}>
+              サイトをみる
+            </LinkButton>
+          </div>
+        </HomeItem>
+      </div>
     </Layout>
   )
 }
