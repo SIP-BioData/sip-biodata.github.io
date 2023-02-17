@@ -13,7 +13,7 @@ const containerStyle = css`
   grid-template-columns: 65px auto 65px;
   align-items: center;
   width: 100%;
-  max-width: 430px;
+  max-width: 460px;
   margin-left: 28px;
 `
 
