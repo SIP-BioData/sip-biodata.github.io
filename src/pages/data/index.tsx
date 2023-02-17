@@ -46,13 +46,53 @@ const titleStyle = css`
   margin-bottom: 48px;
 `
 
-const flexStyleAll = css`
+const functionUiContainerStyle = css`
   margin-top: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
+`
+
+const tabContainerStyle = css`
+  margin-top: 44px;
+`
+
+const tabStyle = css`
+  display: flex;
+  align-items: end;
+  gap: 22px;
+  padding: 0 3px;
+  margin-bottom: -1px;
+  overflow: hidden;
+`
+
+const tabItemStyle = css`
+  flex: 1 1 50%;
+  box-shadow: var(--shadow-wide);
+  background-color: var(--col-bg-gray);
+  border-radius: 8px 8px 0 0;
+  padding: 8px 0;
+`
+
+const tabItemCurrentStyle = css`
+  ${tabItemStyle};
+  border-top: 8px solid var(--col-light-gray);
+  background-color: var(--col-wh);
+  padding-top: 0;
+`
+
+const buttonStyle = css`
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  appearance: none;
+  background: none;
+  cursor: pointer;
 `
 
 const itemsForSort = [
@@ -209,13 +249,19 @@ const DataIndex = (props: Props) => {
         <div css={containerStyle}>
           <h1 css={titleStyle}>データリスト</h1>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
-          <div>
-            <button onClick={() => handleChangeTab('sip')}>SIP</button>
-            <button onClick={() => handleChangeTab('integbio')}>
-              Integbio
-            </button>
+          <div css={tabContainerStyle}>
+            <ul css={tabStyle}>
+              <li css={databaseType === 'sip' ? tabItemCurrentStyle : tabItemStyle}>
+                <button css={buttonStyle} onClick={() => handleChangeTab('sip')}>SIP</button>
+              </li>
+              <li css={databaseType === 'integbio' ? tabItemCurrentStyle : tabItemStyle}>
+                <button css={buttonStyle} onClick={() => handleChangeTab('integbio')}>
+                  Integbio
+                </button>
+              </li>
+            </ul>
           </div>
-          <div css={flexStyleAll}>
+          <div css={functionUiContainerStyle}>
             <Records num={count} />
             <Pagination
               sum={count}

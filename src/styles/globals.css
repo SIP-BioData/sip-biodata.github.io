@@ -8,10 +8,13 @@
   --col-wh: #fff;
   --col-bl: #0068d0;
   --col-gr: #646464;
+  --col-light-gray: #9B9B9B;
+  --col-bg-gray: #F7F7F7;
   --border-base: 1px solid #9b9b9b;
   --border-gray: 1px solid #707070;
   --list-padding: 16px 20px;
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-wide: 0 3px 6px rgba(0, 0, 0, 0.1);
   --link-icon-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M12.778,3V4.778h3.191L7.231,13.516l1.253,1.253,8.738-8.738V9.222H19V3M17.222,17.222H4.778V4.778H11V3H4.778A1.777,1.777,0,0,0,3,4.778V17.222A1.778,1.778,0,0,0,4.778,19H17.222A1.778,1.778,0,0,0,19,17.222V11H17.222Z" transform="translate(-3 -3)" /></svg>');
 }
 
