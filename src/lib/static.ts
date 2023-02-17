@@ -5,11 +5,9 @@ export const getDatabaseStaticProps = async () => {
   const filePathSip = path.join(process.cwd(), './data/sip_database.json')
   const dataSip = await fsPromises.readFile(filePathSip)
   const objectDataSip = JSON.parse(dataSip.toString())
-  const objectDataSipConcat = objectDataSip.map(
-    (item: any) => {
-      return { type: 'sip', ...item }
-    }
-  )
+  const objectDataSipConcat = objectDataSip.map((item: any) => {
+    return { type: 'sip', ...item }
+  })
 
   const filePathSipColumn = path.join(
     process.cwd(),
@@ -24,11 +22,13 @@ export const getDatabaseStaticProps = async () => {
   )
   const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
   const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
-  const objectDataIntegbioConcat = objectDataIntegbio.map(
-    (item: any) => {
-      return { type: 'integbio', integbio_group_name: 'Integbio Database Catalog', ...item }
+  const objectDataIntegbioConcat = objectDataIntegbio.map((item: any) => {
+    return {
+      type: 'integbio',
+      integbio_group_name: 'Integbio Database Catalog',
+      ...item,
     }
-  )
+  })
 
   const filePathIntegbioColumn = path.join(
     process.cwd(),

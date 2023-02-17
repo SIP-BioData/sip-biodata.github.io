@@ -12,7 +12,7 @@ export const getSearchWordsFromQuery = (query: ParsedUrlQuery) => {
 }
 
 export const getDatabaseTypeFromQuery = (query: ParsedUrlQuery) => {
-  return query['database'] ? String(query['database']) : '';
+  return query['database'] ? String(query['database']) : ''
 }
 
 export const updateRoute = (

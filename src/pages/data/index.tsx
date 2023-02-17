@@ -14,9 +14,9 @@ import { getDatabaseStaticProps } from '@/lib/static'
 import {
   buildParams,
   debounce,
+  getDatabaseTypeFromQuery,
   getFilteredItems,
   getSearchWordsFromQuery,
-  getDatabaseTypeFromQuery,
   getSortedItems,
   updateRoute,
 } from '@/lib/utils'
@@ -95,7 +95,7 @@ const DataIndex = (props: Props) => {
   const defaultDatabase = {
     sip: props.sipDatabase,
     integbio: props.integbioDatabase,
-    merged: [...props.sipDatabase, ...props.integbioDatabase]
+    merged: [...props.sipDatabase, ...props.integbioDatabase],
   }
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
@@ -113,7 +113,9 @@ const DataIndex = (props: Props) => {
   }, [props])
 
   useEffect(() => {
-    const currentDatabase = database.filter((item) => item.type === databaseType)
+    const currentDatabase = database.filter(
+      (item) => item.type === databaseType
+    )
     setCurrentDatabase(currentDatabase)
     setCurrentPage(1)
     setSortValue(null)
@@ -150,7 +152,7 @@ const DataIndex = (props: Props) => {
   })
 
   const handleUpdateDatabaseRoute = debounce((dataType) => {
-    updateRoute(router, params, { 'database': dataType })
+    updateRoute(router, params, { database: dataType })
   })
 
   const onChangeKeyword = (keywordList: string[]) => {
@@ -209,7 +211,9 @@ const DataIndex = (props: Props) => {
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <div>
             <button onClick={() => handleChangeTab('sip')}>SIP</button>
-            <button onClick={() => handleChangeTab('integbio')}>Integbio</button>
+            <button onClick={() => handleChangeTab('integbio')}>
+              Integbio
+            </button>
           </div>
           <div css={flexStyleAll}>
             <Records num={count} />
