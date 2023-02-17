@@ -135,6 +135,11 @@ const DataIndex = (props: Props) => {
     integbio: props.integbioDatabase,
     all: [...props.sipDatabase, ...props.integbioDatabase],
   }
+  const defaultCounts = {
+    sip: props.sipDatabase.length,
+    integbio: props.integbioDatabase.length,
+    all: [...props.sipDatabase, ...props.integbioDatabase].length,
+  }
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
@@ -170,16 +175,8 @@ const DataIndex = (props: Props) => {
 
   useEffect(() => {
     setDatabaseType('all')
-    setDatabase({
-      sip: defaultDatabase.sip,
-      integbio: defaultDatabase.integbio,
-      all: defaultDatabase.all,
-    })
-    setCounts({
-      sip: defaultDatabase.sip.length,
-      integbio: defaultDatabase.integbio.length,
-      all: defaultDatabase.all.length,
-    })
+    setDatabase(defaultDatabase)
+    setCounts(defaultCounts)
     setCurrentDatabase(database.all)
     setCurrentPage(1)
   }, [props])
@@ -236,28 +233,18 @@ const DataIndex = (props: Props) => {
   })
 
   const onChangeKeyword = (keywordList: string[]) => {
-    const sipFilteredDatabase =
-      keywordList.length > 0
-        ? getFilteredItems(defaultDatabase.sip, keywordList)
-        : defaultDatabase.sip
-    const integbioFilteredDatabase =
-      keywordList.length > 0
-        ? getFilteredItems(defaultDatabase.integbio, keywordList)
-        : defaultDatabase.integbio
-    const allFilteredDatabase =
-      keywordList.length > 0
-        ? getFilteredItems(defaultDatabase.all, keywordList)
-        : defaultDatabase.all
-    setDatabase({
-      sip: sipFilteredDatabase,
-      integbio: integbioFilteredDatabase,
-      all: allFilteredDatabase,
-    })
-    setCounts({
-      sip: sipFilteredDatabase.length,
-      integbio: integbioFilteredDatabase.length,
-      all: allFilteredDatabase.length,
-    })
+    const filteredDatabase = {
+      sip: getFilteredItems(defaultDatabase.sip, keywordList),
+      integbio: getFilteredItems(defaultDatabase.integbio, keywordList),
+      all: getFilteredItems(defaultDatabase.all, keywordList),
+    }
+    const filteredCounts = {
+      sip: filteredDatabase.sip.length,
+      integbio: filteredDatabase.integbio.length,
+      all: filteredDatabase.all.length,
+    }
+    setDatabase(keywordList.length > 0 ? filteredDatabase : defaultDatabase)
+    setCounts(keywordList.length > 0 ? filteredCounts : defaultCounts)
     setCurrentPage(1)
     setSortValue(null)
     if (keywordList.length > 0) {
