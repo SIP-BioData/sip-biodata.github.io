@@ -9,6 +9,7 @@ import Layout from '@/components/Layout/Layout'
 import LowerPageLayout from '@/components/Layout/LowerPageLayout'
 import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
 import Pagination from '@/components/Navigation/Pagination'
+import Tab from '@/components/Navigation/Tab'
 import { getDatabaseStaticProps } from '@/lib/static'
 import {
   buildParams,
@@ -84,42 +85,6 @@ const tabContainerStyle = css`
   margin-top: 44px;
 `
 
-const tabStyle = css`
-  display: flex;
-  align-items: end;
-  gap: 22px;
-  padding: 0 3px;
-  margin-bottom: -1px;
-  overflow: hidden;
-`
-
-const tabItemStyle = css`
-  flex: 1 1 50%;
-  box-shadow: var(--shadow-wide);
-  background-color: var(--col-bg-gray);
-  border-radius: 8px 8px 0 0;
-  padding: 8px 0;
-`
-
-const tabItemCurrentStyle = css`
-  ${tabItemStyle};
-  border-top: 8px solid var(--col-light-gray);
-  background-color: var(--col-wh);
-  padding-top: 0;
-`
-
-const buttonStyle = css`
-  width: 100%;
-  font-size: 18px;
-  text-align: center;
-  padding: 16px;
-  border: none;
-  border-radius: 4px;
-  appearance: none;
-  background: none;
-  cursor: pointer;
-`
-
 const itemsForSort = [
   {
     label: 'データ／DB：昇順',
@@ -188,6 +153,21 @@ const DataIndex = (props: Props) => {
     [searchWords]
   )
 
+  const tabItems = [
+    {
+      label: `All (${counts.all})`,
+      value: 'all',
+    },
+    {
+      label: `SIP (${counts.sip})`,
+      value: 'sip',
+    },
+    {
+      label: `Integbio (${counts.integbio})`,
+      value: 'integbio',
+    },
+  ]
+
   useEffect(() => {
     setDatabaseType('all')
     setDatabase({
@@ -241,11 +221,11 @@ const DataIndex = (props: Props) => {
     }
   }, [router.query, router.isReady])
 
-  const handleResetFilter = () => {
+  const handleResetFilter = debounce(() => {
     if (router.isReady) {
       updateRoute(router, {}, {})
     }
-  }
+  })
 
   const handleUpdateSearchRoute = debounce((searchWords) => {
     updateRoute(router, params, { 'search[]': searchWords })
@@ -334,46 +314,11 @@ const DataIndex = (props: Props) => {
           </p>
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <div css={tabContainerStyle}>
-            <ul css={tabStyle}>
-              <li
-                css={
-                  databaseType === 'all' ? tabItemCurrentStyle : tabItemStyle
-                }
-              >
-                <button
-                  css={buttonStyle}
-                  onClick={() => handleChangeTab('all')}
-                >
-                  All ({counts.all})
-                </button>
-              </li>
-              <li
-                css={
-                  databaseType === 'sip' ? tabItemCurrentStyle : tabItemStyle
-                }
-              >
-                <button
-                  css={buttonStyle}
-                  onClick={() => handleChangeTab('sip')}
-                >
-                  SIP ({counts.sip})
-                </button>
-              </li>
-              <li
-                css={
-                  databaseType === 'integbio'
-                    ? tabItemCurrentStyle
-                    : tabItemStyle
-                }
-              >
-                <button
-                  css={buttonStyle}
-                  onClick={() => handleChangeTab('integbio')}
-                >
-                  Integbio ({counts.integbio})
-                </button>
-              </li>
-            </ul>
+            <Tab
+              items={tabItems}
+              current={databaseType}
+              onClickItem={handleChangeTab}
+            />
           </div>
           <div css={functionUiContainerStyle}>
             <Pagination
