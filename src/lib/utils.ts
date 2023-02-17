@@ -117,14 +117,13 @@ export const getSortedItems = (items: any[], value: string, order: string) => {
   const keyArray = value.split('|')
   return items.sort((a, b) => {
     const itemA =
-      halfWidthString(a[keyArray[0]]) ?? halfWidthString(a[keyArray[1]])
+      halfWidthString(a[keyArray[0]]) ?? halfWidthString(a[keyArray[1]]) ?? ''
     const itemB =
-      halfWidthString(b[keyArray[0]]) ?? halfWidthString(b[keyArray[1]])
-    if (itemA < itemB) {
-      return order === 'asc' ? -1 : order === 'desc' ? 1 : 0
-    }
-    if (itemA > itemB) {
-      return order === 'asc' ? 1 : order === 'desc' ? -1 : 0
+      halfWidthString(b[keyArray[0]]) ?? halfWidthString(b[keyArray[1]]) ?? ''
+    if (order === 'asc') {
+      return itemA.localeCompare(itemB, 'ja', { sensitivity: 'base' })
+    } else if (order === 'desc') {
+      return itemB.localeCompare(itemA, 'ja', { sensitivity: 'base' })
     }
     return 0
   })
