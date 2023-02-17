@@ -1,27 +1,4 @@
-import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
-import Layout from '@/components/Layout/Layout'
-import LowerPageLayout from '@/components/Layout/LowerPageLayout'
-import MdxLayout from '@/components/Layout/MdxLayout'
-import GroupDetailList from '@/components/Elements/GroupDetailList'
-import BackToDataLink from '@/components/Navigation/BackToDataLink'
 import Image from 'next/image'
-import { getSipDatabaseStaticProps } from '@/lib/static'
-
-export const getStaticProps = getSipDatabaseStaticProps
-
-export const groupId = '1B'
-export const groupName = '精密ゲノム編集'
-export const breadcrumbs = [
-  {
-    label: '研究グループ',
-    path: '/group',
-  },
-  {
-    label: groupName,
-  },
-]
-
-# 研究グループ：精密ゲノム編集
 
 遺伝子を設計通りに精密に書き換えられるゲノム編集技術を開発しています。すでに、1 塩基のみを目印としてターゲットを認識する技術、 DNA フリーのゲノム編集技術を開発しています(下図)。 また、Web サイト「バイオステーション」を通じて、ゲノム編集等のバイオテクノロジーに関する最新情報を発信しています。
 
@@ -56,22 +33,3 @@ C(シトシン)1 塩基のみを目印にゲノム編集のターゲットを認
 />
 
 ---
-
-## データ一覧
-
-export default (props) => {
-  const data = props.database.filter((v) => v.sip_group_id === groupId)
-  return (
-    <Layout title={groupName}>
-      {/* prettier-ignore */}
-      <LowerPageLayout>
-        <Breadcrumbs items={breadcrumbs} />
-        <MdxLayout>
-          {props.children}
-          <GroupDetailList list={data} columns={props.columns} />
-          <BackToDataLink />
-        </MdxLayout>
-      </LowerPageLayout>
-    </Layout>
-  )
-}

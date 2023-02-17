@@ -1,27 +1,4 @@
-import Breadcrumbs from '@/components/Navigation/Breadcrumbs'
-import Layout from '@/components/Layout/Layout'
-import LowerPageLayout from '@/components/Layout/LowerPageLayout'
-import MdxLayout from '@/components/Layout/MdxLayout'
-import GroupDetailList from '@/components/Elements/GroupDetailList'
-import BackToDataLink from '@/components/Navigation/BackToDataLink'
 import Image from 'next/image'
-import { getSipDatabaseStaticProps } from '@/lib/static'
-
-export const getStaticProps = getSipDatabaseStaticProps
-
-export const groupId = '3B'
-export const groupName = '高機能バイオマテリアル設計・生産技術'
-export const breadcrumbs = [
-  {
-    label: '研究グループ',
-    path: '/group',
-  },
-  {
-    label: groupName,
-  },
-]
-
-# 研究グループ：高機能バイオマテリアル設計・生産技術
 
 脂肪族に偏っているバイオ由来の材料開発を芳香族に拡張するため、バイオ由来芳香族マテリアルを用いた革新的高機能材料の設計・生産技術、それを支えるバイオモノマーの分子設計技術や効率的生産技術を開発しています。 史上最高の耐熱性を有する高性能バイオプラスチックや電気化学的安定性に優れた二次電池電解質の開発に成功しています(下図)。
 
@@ -76,23 +53,3 @@ EV 自動車用二次電池の材料として有望
 PBI 系イオンゲル電解質を用いた半電池による LED 点灯
 
 ---
-
-## データ一覧
-
-export default (props) => {
-    const data = props.database.filter((v) => v.sip_group_id === groupId)
-  return (
-    <Layout title={groupName}>
-      {/* prettier-ignore */}
-      <LowerPageLayout>
-        <Breadcrumbs items={breadcrumbs} />
-        <MdxLayout>
-          {props.children}
-          <GroupDetailList list={data} columns={props.columns} />
-          <BackToDataLink />
-        </MdxLayout>
-      </LowerPageLayout>
-    </Layout>
-  )
-
-}

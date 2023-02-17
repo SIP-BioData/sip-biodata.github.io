@@ -1,4 +1,6 @@
+import fs from 'fs'
 import fsPromises from 'fs/promises'
+import { serialize } from 'next-mdx-remote/serialize'
 import path from 'path'
 
 export const getDatabaseStaticProps = async () => {
@@ -99,6 +101,59 @@ export const getDataStaticPaths = async () => {
 
   return {
     paths: pathsSip,
+    fallback: false,
+  }
+}
+
+export const getSipGroupStaticProps = async (context: {
+  params: { group_id: string }
+}) => {
+  const groupId = context.params.group_id
+  const markdownDirectory = path.join(process.cwd(), 'src/markdown')
+
+  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
+  const dataSip = await fsPromises.readFile(filePathSip)
+  const objectDataSip = JSON.parse(dataSip.toString())
+
+  const filePathSipColumn = path.join(
+    process.cwd(),
+    './data/sip_database_column.json'
+  )
+  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
+  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+
+  const groupData = objectDataSip.filter(
+    (v: { sip_group_id: string }) => v.sip_group_id === groupId
+  )
+  const groupName = groupData[0].sip_group_name
+
+  const fileContent = fs.readFileSync(
+    `${markdownDirectory}/group/${groupId}.mdx`,
+    'utf-8'
+  )
+  const mdxSource = await serialize(fileContent)
+
+  return {
+    props: {
+      groupData,
+      groupName,
+      source: mdxSource,
+      columns: objectDataSipColumn[0],
+    },
+  }
+}
+
+export const getGroupStaticPaths = async () => {
+  const markdownDirectory = path.join(process.cwd(), 'src/markdown')
+  const files = fs.readdirSync(`${markdownDirectory}/group`)
+  const paths = files.map((fileName) => ({
+    params: {
+      group_id: fileName.replace(/\.mdx$/, ''),
+    },
+  }))
+
+  return {
+    paths,
     fallback: false,
   }
 }
