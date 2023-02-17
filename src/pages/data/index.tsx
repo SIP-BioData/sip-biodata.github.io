@@ -327,12 +327,7 @@ const DataIndex = (props: Props) => {
           <h1 css={marginStyle}>データリスト</h1>
           <p css={marginStyle}>
             SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
-            <a
-              css={linkStyle}
-              href="#"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a css={linkStyle} href="#" target="_blank" rel="noreferrer">
               Integbioデータベースカタログ
             </a>
             に掲載されているデータベースのメタデータが一覧できます。リスト内の情報を検索することにより、SIPデータとSIP以外で公開されているデータから、興味あるデータを絞り込んで表示することが可能です。
