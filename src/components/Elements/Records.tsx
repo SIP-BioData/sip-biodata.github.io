@@ -5,18 +5,14 @@ type Props = {
 }
 
 const style = css`
-  font-size: 14px;
-
-  span {
-    display: inline-flex;
-    margin-left: 8px;
-  }
+  padding-left: 8px;
 `
+
 const Records = ({ num }: Props) => {
   return (
-    <p css={style}>
+    <p>
       {num}
-      <span>records</span>
+      <span css={style}>records</span>
     </p>
   )
 }

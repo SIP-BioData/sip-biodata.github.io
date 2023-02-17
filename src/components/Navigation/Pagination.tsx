@@ -9,16 +9,15 @@ type Props = {
 }
 
 const containerStyle = css`
-  display: flex;
+  display: grid;
+  grid-template-columns: 65px auto 65px;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   max-width: 430px;
   margin-left: 28px;
 `
 
 const listStyle = css`
-  flex: 1 1 100%;
   display: flex;
   justify-content: center;
 `
@@ -46,8 +45,11 @@ const ellipseStyle = css`
 `
 
 const buttonStyle = css`
+  font-size: 14px;
+  padding: 10px;
+  border: var(--border-base);
+  border-radius: 4px;
   appearance: none;
-  border: 0;
   background: none;
   cursor: pointer;
 `
@@ -90,9 +92,13 @@ const Pagination = (props: Props) => {
 
   return (
     <div css={containerStyle}>
-      <button css={buttonStyle} onClick={() => handleBack()}>
-        ＜
-      </button>
+      <div>
+        {currentPage !== 1 && (
+          <button css={buttonStyle} onClick={() => handleBack()}>
+            &lt; Prev
+          </button>
+        )}
+      </div>
       <ul css={listStyle}>
         {[...Array.from({ length: totalPage }, (_, i) => i + 1)].map((page) =>
           page === 1 ||
@@ -112,9 +118,13 @@ const Pagination = (props: Props) => {
           ) : null
         )}
       </ul>
-      <button css={buttonStyle} onClick={() => handleForward()}>
-        ＞
-      </button>
+      <div>
+        {currentPage !== totalPage && (
+          <button css={buttonStyle} onClick={() => handleForward()}>
+            Next &gt;
+          </button>
+        )}
+      </div>
     </div>
   )
 }
