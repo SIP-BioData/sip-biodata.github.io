@@ -34,8 +34,7 @@ const selectStyle = css`
   }
 
   select {
-    width: 160px;
-    padding: 14px;
+    padding: 14px 28px 14px 14px;
     border: var(--border-base);
     border-radius: 5px;
     appearance: none;
