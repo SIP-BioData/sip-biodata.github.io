@@ -97,7 +97,7 @@ const defaultKeys = [
 
 const DatabaseItem = (props: Props) => {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
-  const displayItems = (({ sip_id, sip_group_id, integbio_id, ...rest }) =>
+  const displayItems = (({ type, sip_id, sip_group_id, integbio_id, ...rest }) =>
     rest)(props.item)
 
   useEffect(() => {

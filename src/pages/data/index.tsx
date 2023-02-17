@@ -16,6 +16,7 @@ import {
   debounce,
   getFilteredItems,
   getSearchWordsFromQuery,
+  getDatabaseTypeFromQuery,
   getSortedItems,
   updateRoute,
 } from '@/lib/utils'
@@ -42,7 +43,7 @@ const containerStyle = css`
 `
 
 const titleStyle = css`
-  margin-top: 48px;
+  margin-bottom: 48px;
 `
 
 const flexStyleAll = css`
@@ -80,15 +81,22 @@ const itemsForSort = [
 const DataIndex = (props: Props) => {
   const router = useRouter()
   const searchWords = getSearchWordsFromQuery(router.query)
+  const dataType = getDatabaseTypeFromQuery(router.query)
   const params = buildParams(router)
   const [count, setCount] = useState(0)
   const [keywords, setKeywords] = useState<Array<string>>([])
   const [database, setDatabase] = useState<Array<Item>>([])
+  const [currentDatabase, setCurrentDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortValue, setSortValue] = useState<string | null>(null)
+  const [databaseType, setDatabaseType] = useState<string>('')
   const perPage = 20
-  const mergedDatabase = [...props.sipDatabase, ...props.integbioDatabase]
+  const defaultDatabase = {
+    sip: props.sipDatabase,
+    integbio: props.integbioDatabase,
+    merged: [...props.sipDatabase, ...props.integbioDatabase]
+  }
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
@@ -98,22 +106,31 @@ const DataIndex = (props: Props) => {
   )
 
   useEffect(() => {
-    if (router.query) {
-      return
-    }
-    setDatabase(mergedDatabase)
-    setCount(mergedDatabase.length)
+    setDatabaseType('sip')
+    setDatabase(defaultDatabase.merged)
+    setCount(defaultDatabase.sip.length)
     setCurrentPage(1)
   }, [props])
 
   useEffect(() => {
-    handlePaginate(1)
+    const currentDatabase = database.filter((item) => item.type === databaseType)
+    setCurrentDatabase(currentDatabase)
+    setCurrentPage(1)
     setSortValue(null)
-  }, [database])
+  }, [database, databaseType])
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      handlePaginate(currentPage)
+    }
+  }, [currentPage, currentDatabase])
 
   useEffect(() => {
     if (!router.isReady) {
       return
+    }
+    if (dataType) {
+      setDatabaseType(dataType)
     }
     if (searchWords.length > 0) {
       setDatabase(searchWordsQuery)
@@ -128,20 +145,24 @@ const DataIndex = (props: Props) => {
     }
   }
 
-  const handleUpdateRoute = debounce((searchWords) => {
+  const handleUpdateSearchRoute = debounce((searchWords) => {
     updateRoute(router, params, { 'search[]': searchWords })
+  })
+
+  const handleUpdateDatabaseRoute = debounce((dataType) => {
+    updateRoute(router, params, { 'database': dataType })
   })
 
   const onChangeKeyword = (keywordList: string[]) => {
     const filteredDatabase =
       keywordList.length > 0
-        ? getFilteredItems(mergedDatabase, keywordList)
-        : mergedDatabase
+        ? getFilteredItems(defaultDatabase.merged, keywordList)
+        : defaultDatabase.merged
     setDatabase(filteredDatabase)
     setCount(filteredDatabase.length)
     setCurrentPage(1)
     if (keywordList.length > 0) {
-      handleUpdateRoute(keywordList)
+      handleUpdateSearchRoute(keywordList)
     } else {
       handleResetFilter()
     }
@@ -149,7 +170,8 @@ const DataIndex = (props: Props) => {
   }
 
   const handlePaginate = (page: number) => {
-    const currentPageItems = database.filter(
+    setCount(currentDatabase.length)
+    const currentPageItems = currentDatabase.filter(
       (_, index) => index >= (page - 1) * perPage && index < page * perPage
     )
     setCurrentPage(page)
@@ -159,17 +181,23 @@ const DataIndex = (props: Props) => {
   const handleSort = (item: string | null) => {
     if (item) {
       const [value, order] = item.split(':')
-      const sortedDatabase = getSortedItems(database, value, order)
+      const sortedDatabase = getSortedItems(currentDatabase, value, order)
       setDatabase(sortedDatabase)
     } else {
       const filteredDatabase =
         keywords.length > 0
-          ? getFilteredItems(mergedDatabase, keywords)
-          : mergedDatabase
+          ? getFilteredItems(defaultDatabase.merged, keywords)
+          : defaultDatabase.merged
       setDatabase(filteredDatabase)
     }
     setSortValue(item)
     handlePaginate(1)
+  }
+
+  const handleChangeTab = (type: string) => {
+    setDatabaseType(type)
+    setCurrentPage(1)
+    handleUpdateDatabaseRoute(type)
   }
 
   return (
@@ -177,8 +205,12 @@ const DataIndex = (props: Props) => {
       <LowerPageLayout>
         <Breadcrumbs items={breadcrumbs} />
         <div css={containerStyle}>
-          <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <h1 css={titleStyle}>データリスト</h1>
+          <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
+          <div>
+            <button onClick={() => handleChangeTab('sip')}>SIP</button>
+            <button onClick={() => handleChangeTab('integbio')}>Integbio</button>
+          </div>
           <div css={flexStyleAll}>
             <Records num={count} />
             <Pagination
