@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 
 import DatabaseItem from '@/components/Elements/DatabaseItem'
-import Records from '@/components/Elements/Records'
 import SearchForm from '@/components/Elements/SearchForm'
 import SelectBox from '@/components/Elements/SelectBox'
 import Layout from '@/components/Layout/Layout'
@@ -28,6 +27,18 @@ type Props = {
   integbioDatabase: Item[]
   sipDatabaseColumn: Item[]
   integbioDatabaseColumn: Item[]
+}
+
+type CountType = {
+  sip: number
+  integbio: number
+  all: number
+}
+
+type DatabaseType = {
+  sip: Item[]
+  integbio: Item[]
+  all: Item[]
 }
 
 const breadcrumbs = [
@@ -123,9 +134,17 @@ const DataIndex = (props: Props) => {
   const searchWords = getSearchWordsFromQuery(router.query)
   const dataType = getDatabaseTypeFromQuery(router.query)
   const params = buildParams(router)
-  const [count, setCount] = useState(0)
+  const [counts, setCounts] = useState<CountType>({
+    sip: 0,
+    integbio: 0,
+    all: 0,
+  })
   const [keywords, setKeywords] = useState<Array<string>>([])
-  const [database, setDatabase] = useState<Array<Item>>([])
+  const [database, setDatabase] = useState<DatabaseType>({
+    sip: [],
+    integbio: [],
+    all: [],
+  })
   const [currentDatabase, setCurrentDatabase] = useState<Array<Item>>([])
   const [dataPerPage, setDataPerPage] = useState<Array<Item>>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -135,28 +154,48 @@ const DataIndex = (props: Props) => {
   const defaultDatabase = {
     sip: props.sipDatabase,
     integbio: props.integbioDatabase,
-    merged: [...props.sipDatabase, ...props.integbioDatabase],
+    all: [...props.sipDatabase, ...props.integbioDatabase],
   }
   const columns = [...props.sipDatabaseColumn, ...props.integbioDatabaseColumn]
   const columnsObject = Object.assign(columns[0], columns[1])
 
-  const searchWordsQuery = useMemo(
-    () => getFilteredItems(database, searchWords),
+  const sipSearchWordsQuery = useMemo(
+    () => getFilteredItems(database.sip, searchWords),
+    [searchWords]
+  )
+
+  const integbioSearchWordsQuery = useMemo(
+    () => getFilteredItems(database.integbio, searchWords),
+    [searchWords]
+  )
+
+  const allSearchWordsQuery = useMemo(
+    () => getFilteredItems(database.all, searchWords),
     [searchWords]
   )
 
   useEffect(() => {
-    setDatabaseType('sip')
-    setDatabase(defaultDatabase.merged)
-    setCount(defaultDatabase.sip.length)
+    setDatabaseType('all')
+    setDatabase({
+      sip: defaultDatabase.sip,
+      integbio: defaultDatabase.integbio,
+      all: defaultDatabase.all,
+    })
+    setCounts({
+      sip: defaultDatabase.sip.length,
+      integbio: defaultDatabase.integbio.length,
+      all: defaultDatabase.all.length,
+    })
+    setCurrentDatabase(database.all)
     setCurrentPage(1)
   }, [props])
 
   useEffect(() => {
-    const currentDatabase = database.filter(
-      (item) => item.type === databaseType
-    )
-    setCurrentDatabase(currentDatabase)
+    const currentChangedDatabase =
+      databaseType !== 'all'
+        ? currentDatabase.filter((item) => item.type === databaseType)
+        : currentDatabase
+    setCurrentDatabase(currentChangedDatabase)
     setCurrentPage(1)
   }, [database, databaseType])
 
@@ -164,7 +203,7 @@ const DataIndex = (props: Props) => {
     if (currentPage === 1) {
       handlePaginate(currentPage)
     }
-  }, [currentPage, currentDatabase])
+  }, [currentDatabase, currentPage])
 
   useEffect(() => {
     if (!router.isReady) {
@@ -174,8 +213,16 @@ const DataIndex = (props: Props) => {
       setDatabaseType(dataType)
     }
     if (searchWords.length > 0) {
-      setDatabase(searchWordsQuery)
-      setCount(searchWordsQuery.length)
+      setDatabase({
+        sip: sipSearchWordsQuery,
+        integbio: integbioSearchWordsQuery,
+        all: allSearchWordsQuery,
+      })
+      setCounts({
+        sip: sipSearchWordsQuery.length,
+        integbio: integbioSearchWordsQuery.length,
+        all: allSearchWordsQuery.length,
+      })
       setKeywords(searchWords)
     }
   }, [router.query, router.isReady])
@@ -195,12 +242,28 @@ const DataIndex = (props: Props) => {
   })
 
   const onChangeKeyword = (keywordList: string[]) => {
-    const filteredDatabase =
+    const sipFilteredDatabase =
       keywordList.length > 0
-        ? getFilteredItems(defaultDatabase.merged, keywordList)
-        : defaultDatabase.merged
-    setDatabase(filteredDatabase)
-    setCount(filteredDatabase.length)
+        ? getFilteredItems(defaultDatabase.sip, keywordList)
+        : defaultDatabase.sip
+    const integbioFilteredDatabase =
+      keywordList.length > 0
+        ? getFilteredItems(defaultDatabase.integbio, keywordList)
+        : defaultDatabase.integbio
+    const allFilteredDatabase =
+      keywordList.length > 0
+        ? getFilteredItems(defaultDatabase.all, keywordList)
+        : defaultDatabase.all
+    setDatabase({
+      sip: sipFilteredDatabase,
+      integbio: integbioFilteredDatabase,
+      all: allFilteredDatabase,
+    })
+    setCounts({
+      sip: sipFilteredDatabase.length,
+      integbio: integbioFilteredDatabase.length,
+      all: allFilteredDatabase.length,
+    })
     setCurrentPage(1)
     setSortValue(null)
     if (keywordList.length > 0) {
@@ -212,7 +275,6 @@ const DataIndex = (props: Props) => {
   }
 
   const handlePaginate = (page: number) => {
-    setCount(currentDatabase.length)
     const currentPageItems = currentDatabase.filter(
       (_, index) => index >= (page - 1) * perPage && index < page * perPage
     )
@@ -224,13 +286,13 @@ const DataIndex = (props: Props) => {
     if (item) {
       const [value, order] = item.split(':')
       const sortedDatabase = getSortedItems(currentDatabase, value, order)
-      setDatabase(sortedDatabase)
+      setCurrentDatabase(sortedDatabase)
     } else {
       const filteredDatabase =
         keywords.length > 0
-          ? getFilteredItems(defaultDatabase.merged, keywords)
-          : defaultDatabase.merged
-      setDatabase(filteredDatabase)
+          ? getFilteredItems(defaultDatabase.all, keywords)
+          : defaultDatabase.all
+      setCurrentDatabase(filteredDatabase)
     }
     setSortValue(item)
     handlePaginate(1)
@@ -252,20 +314,49 @@ const DataIndex = (props: Props) => {
           <SearchForm keywords={keywords} onChangeKeyword={onChangeKeyword} />
           <div css={tabContainerStyle}>
             <ul css={tabStyle}>
-              <li css={databaseType === 'sip' ? tabItemCurrentStyle : tabItemStyle}>
-                <button css={buttonStyle} onClick={() => handleChangeTab('sip')}>SIP</button>
+              <li
+                css={
+                  databaseType === 'all' ? tabItemCurrentStyle : tabItemStyle
+                }
+              >
+                <button
+                  css={buttonStyle}
+                  onClick={() => handleChangeTab('all')}
+                >
+                  All ({counts.all})
+                </button>
               </li>
-              <li css={databaseType === 'integbio' ? tabItemCurrentStyle : tabItemStyle}>
-                <button css={buttonStyle} onClick={() => handleChangeTab('integbio')}>
-                  Integbio
+              <li
+                css={
+                  databaseType === 'sip' ? tabItemCurrentStyle : tabItemStyle
+                }
+              >
+                <button
+                  css={buttonStyle}
+                  onClick={() => handleChangeTab('sip')}
+                >
+                  SIP ({counts.sip})
+                </button>
+              </li>
+              <li
+                css={
+                  databaseType === 'integbio'
+                    ? tabItemCurrentStyle
+                    : tabItemStyle
+                }
+              >
+                <button
+                  css={buttonStyle}
+                  onClick={() => handleChangeTab('integbio')}
+                >
+                  Integbio ({counts.integbio})
                 </button>
               </li>
             </ul>
           </div>
           <div css={functionUiContainerStyle}>
-            <Records num={count} />
             <Pagination
-              sum={count}
+              sum={counts[databaseType as keyof CountType]}
               perPage={perPage}
               current={currentPage}
               onChange={handlePaginate}
