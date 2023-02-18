@@ -48,6 +48,11 @@ const wrapStyleThin = css`
   min-width: 280px;
 `
 
+const wrapStyleMini = css`
+  ${wrapStyle};
+  min-width: 200px;
+`
+
 const linkStyle = css`
   font-size: 14px;
   color: var(--col-bl);
@@ -99,7 +104,9 @@ const GroupDetailList = (props: Props) => {
                   <td
                     key={`cell-${i}`}
                     css={
-                      k === 'sip_publication_status'
+                      k === 'sip_group_name'
+                        ? wrapStyleMini
+                        : k === 'sip_publication_status'
                         ? wrapStyleWide
                         : noWrapStyle
                     }
