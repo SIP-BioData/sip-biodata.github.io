@@ -48,10 +48,18 @@ const breadcrumbs = [
   },
 ]
 
+const mq = {
+  mini: '@media (max-width: 600px)',
+}
+
 const containerStyle = css`
+  flex: 1 1 100%;
   background-color: var(--col-wh);
   margin: 26px 0 100px;
   padding: 60px;
+  ${mq.mini} {
+    padding: 60px 16px;
+  }
 `
 
 const marginStyle = css`

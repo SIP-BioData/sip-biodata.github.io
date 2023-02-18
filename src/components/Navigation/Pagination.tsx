@@ -93,7 +93,7 @@ const Pagination = (props: Props) => {
   return (
     <div css={containerStyle}>
       <div>
-        {currentPage !== 1 && (
+        {currentPage > 1 && (
           <button css={buttonStyle} onClick={() => handleBack()}>
             &lt; Prev
           </button>
@@ -119,7 +119,7 @@ const Pagination = (props: Props) => {
         )}
       </ul>
       <div>
-        {currentPage !== totalPage && (
+        {totalPage > 0 && currentPage !== totalPage && (
           <button css={buttonStyle} onClick={() => handleForward()}>
             Next &gt;
           </button>
