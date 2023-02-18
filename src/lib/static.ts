@@ -105,6 +105,31 @@ export const getDataStaticPaths = async () => {
   }
 }
 
+export const getSipGroupIndexStaticProps = async () => {
+  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
+  const dataSip = await fsPromises.readFile(filePathSip)
+  const objectDataSip = JSON.parse(dataSip.toString())
+
+  const groups = objectDataSip.map((item: any) => {
+    return { groupId: item.sip_group_id, groupName: item.sip_group_name }
+  })
+
+  const groupList = Array.from(
+    new Map(
+      groups.map((item: { groupId: string; groupName: string }) => [
+        item.groupId,
+        item,
+      ])
+    ).values()
+  )
+
+  return {
+    props: {
+      groupList,
+    },
+  }
+}
+
 export const getSipGroupStaticProps = async (context: {
   params: { group_id: string }
 }) => {
