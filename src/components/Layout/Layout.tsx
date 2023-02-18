@@ -19,8 +19,6 @@ const containerStyle = css`
 
 const mainStyle = css`
   flex: 1 1 100%;
-  display: flex;
-  flex-direction: column;
 `
 
 const footerStyle = css`

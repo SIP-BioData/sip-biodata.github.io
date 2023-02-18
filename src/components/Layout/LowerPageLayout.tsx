@@ -6,7 +6,6 @@ type Props = {
 }
 
 const style = css`
-  flex: 1 1 100%;
   display: flex;
   flex-direction: column;
   max-width: var(--conts-inn);
