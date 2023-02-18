@@ -88,7 +88,7 @@ const components: MDXComponents = {
   hr: HorizontalLine,
 }
 
-const GroupPage = (props: Props) => {
+const GroupDetail = (props: Props) => {
   const breadcrumbs = [
     {
       label: '研究グループ',
@@ -115,4 +115,4 @@ const GroupPage = (props: Props) => {
   )
 }
 
-export default GroupPage
+export default GroupDetail
