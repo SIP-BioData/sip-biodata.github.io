@@ -109,7 +109,7 @@ const Home = () => {
             SIP「スマートバイオ産業・農業基盤技術」の各プロジェクト由来のデータベースに加え、
             <a
               css={invertedColorLinkStyle}
-              href="#"
+              href="https://integbio.jp/dbcatalog/"
               target="_blank"
               rel="noreferrer"
             >
@@ -188,7 +188,7 @@ const Home = () => {
             戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。
           </p>
           <div css={buttonContainerStyle}>
-            <LinkButton path="#" rightIcon={linkEX}>
+            <LinkButton path="https://www8.cao.go.jp/cstp/gaiyo/sip/" rightIcon={linkEX}>
               サイトをみる
             </LinkButton>
           </div>
