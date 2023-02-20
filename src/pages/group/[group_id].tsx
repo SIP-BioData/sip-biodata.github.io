@@ -42,6 +42,7 @@ const textStyle = css`
 const linkStyle = css`
   color: var(--col-bl);
   word-break: break-all;
+  margin-right: 8px;
   &::after {
     content: '';
     display: inline-block;
@@ -49,8 +50,18 @@ const linkStyle = css`
     height: 14px;
     background-color: var(--col-bl);
     mask: var(--link-icon-url) no-repeat;
-    margin-left: 12px;
+    margin-left: 8px;
   }
+`
+
+const listStyle = css`
+  margin-bottom: 30px;
+  list-style: disc;
+  margin-left: 1.5em;
+`
+
+const listItemStyle = css`
+  margin-bottom: 12px;
 `
 
 const lineStyle = css`
@@ -78,6 +89,14 @@ const Link = (props: { children?: ReactNode }) => (
   </a>
 )
 
+const List = (props: { children?: ReactNode }) => (
+  <ul css={listStyle}>{props.children}</ul>
+)
+
+const ListItem = (props: { children?: ReactNode }) => (
+  <li css={listItemStyle}>{props.children}</li>
+)
+
 const HorizontalLine = () => <hr css={lineStyle} />
 
 const components: MDXComponents = {
@@ -85,6 +104,8 @@ const components: MDXComponents = {
   h2: Heading2,
   p: Text,
   a: Link,
+  ul: List,
+  li: ListItem,
   hr: HorizontalLine,
 }
 
