@@ -67,18 +67,29 @@ const itemWithBgImgStyle = css`
 
 const imgStyle = css`
   max-width: var(--w875);
-  margin: 60px auto 0;
+  margin: 60px auto 16px;
 `
 
 const imgInnerStyle = css`
   background-color: var(--col-wh);
-  margin: 60px auto 0;
   padding: 18px 22px;
   border-radius: 10px;
 `
 
-const quotationStyle = css`
-  margin: 16px 0 0;
+const smartbioHeaderStyle = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 76px;
+
+  h2 {
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0;
+  }
 `
 
 const Home = () => {
@@ -139,46 +150,58 @@ const Home = () => {
       </HomeItem>
       <div css={itemWithBgImgStyle} id="sfs">
         <HomeItem>
-          <h2>スマートバイオ産業・農業基盤技術について</h2>
-          <p>
-            我が国のバイオエコノミーの拡大と関連産業の競争力強化等のため、府省連携により、バイオとデジタルの融合によるイノベーションの基盤を構築し、「食」による健康増進社会の実現や革新的なバイオ素材・製品産業の振興・創出を図ります。
-          </p>
-          <p>
-            また、「食」を生産する農業にあっては、生産から加工・流通・販売・消費・輸出までデータを相互活用するスマートフードチェーンの構築や様々なデータにより駆動する革新的なスマート農業技術・システムの開発、データ駆動型育種を推進するための技術開発等を実施します。基礎研究から実用化・事業化まで一気通貫の取組を通じ、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化を目指します。
-          </p>
-          <p>
-            本課題が対象とする領域は、グローバルレベルでイノベーションが加速しています。食、医薬品、素材、エネルギー等々、私たちの日々の暮らしから地球環境まで、本領域におけるイノベーションのインパクトは、あらゆる領域に及びます。非連続の成長発展が期待される市場ゆえに新規参入も活発であり、ダイナミックな変革が起きています。
-          </p>
-          <p>
-            このような認識のもと、本課題においては、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化とともに、
-          </p>
-          <ul>
-            <li>
-              資源少国の日本が、画期的な高機能資源を創造したり、資源を再利用したりすることを可能にすること
-            </li>
-            <li>
-              アイデアや思いを持つ誰もが参画しやすい研究開発環境づくりをすること
-            </li>
-            <li>
-              さらには、日本の弱点とされている「標準化(国際標準化)」、「協調領域(スケーラビリティ)の構築」、「国際市場における競争領域(戦略的アライアンス)の創出」
-            </li>
-          </ul>
-          <p>
-            を目指すことを視野に入れて研究開発を推進し、社会実装が可能なプロトタイプを開発することとします。
-          </p>
-          <div css={imgStyle}>
-            <div css={imgInnerStyle}>
-              <Image
-                src={aboutImg}
-                alt="スマートバイオ産業・農業基盤技術についての画像"
-                max-width={830}
-              />
-            </div>
-            <div css={quotationStyle}>
-              https://www.naro.go.jp/laboratory/brain/sip/sip2/about/sfs.html
-              より引用
-            </div>
+          <div css={smartbioHeaderStyle}>
+            <header>
+              <h2>スマートバイオ産業・農業基盤技術について</h2>
+              <p>
+                https://www.naro.go.jp/laboratory/brain/sip/sip2/about.html
+                より引用
+              </p>
+            </header>
           </div>
+          <blockquote cite="https://www.naro.go.jp/laboratory/brain/sip/sip2/about.html">
+            <p>
+              我が国のバイオエコノミーの拡大と関連産業の競争力強化等のため、府省連携により、バイオとデジタルの融合によるイノベーションの基盤を構築し、「食」による健康増進社会の実現や革新的なバイオ素材・製品産業の振興・創出を図ります。
+            </p>
+            <p>
+              また、「食」を生産する農業にあっては、生産から加工・流通・販売・消費・輸出までデータを相互活用するスマートフードチェーンの構築や様々なデータにより駆動する革新的なスマート農業技術・システムの開発、データ駆動型育種を推進するための技術開発等を実施します。基礎研究から実用化・事業化まで一気通貫の取組を通じ、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化を目指します。
+            </p>
+            <p>
+              本課題が対象とする領域は、グローバルレベルでイノベーションが加速しています。食、医薬品、素材、エネルギー等々、私たちの日々の暮らしから地球環境まで、本領域におけるイノベーションのインパクトは、あらゆる領域に及びます。非連続の成長発展が期待される市場ゆえに新規参入も活発であり、ダイナミックな変革が起きています。
+            </p>
+            <p>
+              このような認識のもと、本課題においては、持続可能な成長社会の実現や農林水産業・食品産業の生産性革命・競争力強化とともに、
+            </p>
+            <ul>
+              <li>
+                資源少国の日本が、画期的な高機能資源を創造したり、資源を再利用したりすることを可能にすること
+              </li>
+              <li>
+                アイデアや思いを持つ誰もが参画しやすい研究開発環境づくりをすること
+              </li>
+              <li>
+                さらには、日本の弱点とされている「標準化(国際標準化)」、「協調領域(スケーラビリティ)の構築」、「国際市場における競争領域(戦略的アライアンス)の創出」
+              </li>
+            </ul>
+            <p>
+              を目指すことを視野に入れて研究開発を推進し、社会実装が可能なプロトタイプを開発することとします。
+            </p>
+          </blockquote>
+          <blockquote cite="https://www.naro.go.jp/laboratory/brain/sip/sip2/about/sfs.html">
+            <div css={imgStyle}>
+              <div css={imgInnerStyle}>
+                <Image
+                  src={aboutImg}
+                  alt="スマートバイオ産業・農業基盤技術についての画像"
+                  max-width={830}
+                />
+              </div>
+            </div>
+          </blockquote>
+          <p>
+            https://www.naro.go.jp/laboratory/brain/sip/sip2/about/sfs.html
+            より引用
+          </p>
         </HomeItem>
       </div>
       <div id="sip">
@@ -188,7 +211,10 @@ const Home = () => {
             戦略的イノベーション創造プログラム（SIP）は、総合科学技術・イノベーション会議が司令塔機能を発揮し、府省の枠を超え、基礎研究から実用化・事業化まで一気通貫で研究開発を推進し、イノベーションの実現を目指すプログラムです。
           </p>
           <div css={buttonContainerStyle}>
-            <LinkButton path="https://www8.cao.go.jp/cstp/gaiyo/sip/" rightIcon={linkEX}>
+            <LinkButton
+              path="https://www8.cao.go.jp/cstp/gaiyo/sip/"
+              rightIcon={linkEX}
+            >
               サイトをみる
             </LinkButton>
           </div>
