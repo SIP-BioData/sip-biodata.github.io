@@ -28,8 +28,9 @@ const menuStyle = css`
   max-width: var(--inn1000);
   margin: 48px auto 0;
   display: flex;
+  flex-wrap: wrap;
   li {
-    margin-right: 36px;
+    margin: 0 36px 16px 0;
   }
 `
 
@@ -57,6 +58,9 @@ const Footer = () => {
       <ul css={menuStyle}>
         <li>
           <Link href="/data">データリスト</Link>
+        </li>
+        <li>
+          <Link href="/group">研究グループ一覧</Link>
         </li>
         <li>
           <a
