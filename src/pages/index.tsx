@@ -84,11 +84,12 @@ const smartbioHeaderStyle = css`
   margin-bottom: 76px;
 
   h2 {
-    margin-bottom: 12px;
+    margin-bottom: 12px !important;
   }
 
   p {
     margin: 0;
+    text-align: right;
   }
 `
 
