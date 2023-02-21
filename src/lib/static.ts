@@ -3,17 +3,34 @@ import fsPromises from 'fs/promises'
 import { serialize } from 'next-mdx-remote/serialize'
 import path from 'path'
 
-export const getDatabaseStaticProps = async () => {
+const getArrayHiddenGroup = async () => {
+  const filePathHiddenGroup = path.join(process.cwd(), './data/hiddenGroup.txt')
+  const dataHiddenGroup = await fsPromises.readFile(
+    filePathHiddenGroup,
+    'utf-8'
+  )
+  return dataHiddenGroup.split(/\r\n|\n/).filter((v) => v !== '')
+}
+
+const getDataSip = async () => {
   const filePathSip = path.join(process.cwd(), './data/sip_database.json')
   const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
+  return JSON.parse(dataSip.toString())
+}
 
+const getDataSipColumn = async () => {
   const filePathSipColumn = path.join(
     process.cwd(),
     './data/sip_database_column.json'
   )
   const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
-  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+  return JSON.parse(dataSipColumn.toString())
+}
+
+export const getDatabaseStaticProps = async () => {
+  const objectDataSip = await getDataSip()
+  const objectDataSipColumn = await getDataSipColumn()
+  const arrayHiddenGroup = await getArrayHiddenGroup()
 
   const filePathIntegbio = path.join(
     process.cwd(),
@@ -40,21 +57,14 @@ export const getDatabaseStaticProps = async () => {
       integbioDatabase: objectDataIntegbioConcatGroupName,
       sipDatabaseColumn: objectDataSipColumn,
       integbioDatabaseColumn: objectDataIntegbioColumn,
+      hiddenGroup: arrayHiddenGroup,
     },
   }
 }
 
 export const getSipDatabaseStaticProps = async () => {
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
-
-  const filePathSipColumn = path.join(
-    process.cwd(),
-    './data/sip_database_column.json'
-  )
-  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
-  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+  const objectDataSip = await getDataSip()
+  const objectDataSipColumn = await getDataSipColumn()
 
   return {
     props: {
@@ -69,16 +79,8 @@ export const getDataStaticProps = async (context: {
 }) => {
   const id = context.params.id
 
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
-
-  const filePathSipColumn = path.join(
-    process.cwd(),
-    './data/sip_database_column.json'
-  )
-  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
-  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+  const objectDataSip = await getDataSip()
+  const objectDataSipColumn = await getDataSipColumn()
 
   const currentData =
     objectDataSip.find((v: { sip_id: string }) => v.sip_id === id) || null
@@ -92,9 +94,7 @@ export const getDataStaticProps = async (context: {
 }
 
 export const getDataStaticPaths = async () => {
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
+  const objectDataSip = await getDataSip()
   const pathsSip = objectDataSip.map(
     (item: { sip_id: string }) => `/data/${item.sip_id}`
   )
@@ -106,9 +106,8 @@ export const getDataStaticPaths = async () => {
 }
 
 export const getSipGroupIndexStaticProps = async () => {
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
+  const objectDataSip = await getDataSip()
+  const arrayHiddenGroup = await getArrayHiddenGroup()
 
   const groups = objectDataSip.map((item: any) => {
     return { groupId: item.sip_group_id, groupName: item.sip_group_name }
@@ -123,9 +122,13 @@ export const getSipGroupIndexStaticProps = async () => {
     ).values()
   )
 
+  const filteredGroupList = groupList.filter(
+    (v: any) => !arrayHiddenGroup.includes(v.groupId)
+  )
+
   return {
     props: {
-      groupList,
+      groupList: filteredGroupList,
     },
   }
 }
@@ -136,16 +139,8 @@ export const getSipGroupStaticProps = async (context: {
   const groupId = context.params.group_id
   const markdownDirectory = path.join(process.cwd(), 'src/markdown')
 
-  const filePathSip = path.join(process.cwd(), './data/sip_database.json')
-  const dataSip = await fsPromises.readFile(filePathSip)
-  const objectDataSip = JSON.parse(dataSip.toString())
-
-  const filePathSipColumn = path.join(
-    process.cwd(),
-    './data/sip_database_column.json'
-  )
-  const dataSipColumn = await fsPromises.readFile(filePathSipColumn)
-  const objectDataSipColumn = JSON.parse(dataSipColumn.toString())
+  const objectDataSip = await getDataSip()
+  const objectDataSipColumn = await getDataSipColumn()
 
   const groupData = objectDataSip.filter(
     (v: { sip_group_id: string }) => v.sip_group_id === groupId
@@ -169,11 +164,26 @@ export const getSipGroupStaticProps = async (context: {
 }
 
 export const getGroupStaticPaths = async () => {
-  const markdownDirectory = path.join(process.cwd(), 'src/markdown')
-  const files = fs.readdirSync(`${markdownDirectory}/group`)
-  const paths = files.map((fileName) => ({
+  const objectDataSip = await getDataSip()
+  const arrayHiddenGroup = await getArrayHiddenGroup()
+
+  const groups = objectDataSip.map((item: any) => {
+    return { groupId: item.sip_group_id }
+  })
+
+  const groupList = Array.from(
+    new Map(
+      groups.map((item: { groupId: string }) => [item.groupId, item])
+    ).values()
+  ) as { groupId: string }[]
+
+  const filteredGroupList = groupList.filter(
+    (v: { groupId: string }) => !arrayHiddenGroup.includes(v.groupId)
+  )
+
+  const paths = filteredGroupList.map((item) => ({
     params: {
-      group_id: fileName.replace(/\.mdx$/, ''),
+      group_id: item.groupId,
     },
   }))
 

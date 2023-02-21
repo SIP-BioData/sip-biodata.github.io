@@ -27,6 +27,7 @@ type Props = {
   integbioDatabase: Item[]
   sipDatabaseColumn: Item[]
   integbioDatabaseColumn: Item[]
+  hiddenGroup: string[]
 }
 
 const breadcrumbs = [
@@ -200,6 +201,7 @@ const DataIndex = (props: Props) => {
                 item={item}
                 columns={columnsObject}
                 resetStateItem={dataPerPage}
+                hiddenGroup={props.hiddenGroup}
               />
             ))}
         </div>
