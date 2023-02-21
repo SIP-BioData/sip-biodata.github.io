@@ -57,7 +57,7 @@ export const getDatabaseStaticProps = async () => {
       integbioDatabase: objectDataIntegbioConcatGroupName,
       sipDatabaseColumn: objectDataSipColumn,
       integbioDatabaseColumn: objectDataIntegbioColumn,
-      hiddenGroup: arrayHiddenGroup,
+      hiddenGroups: arrayHiddenGroup,
     },
   }
 }
