@@ -6,6 +6,7 @@ type Props = {
   item: Item
   columns: Item
   resetStateItem: string | number | (string | number | Item)[]
+  hiddenGroup: string[]
 }
 
 type LinkItemProps = {
@@ -130,6 +131,9 @@ const DatabaseItem = memo(function DatabaseItem(props: Props) {
                   <LinkItem item={props.item} target="sip_id" route="data">
                     {value}
                   </LinkItem>
+                ) : key === 'sip_group_name' &&
+                  props.hiddenGroup.includes(props.item.sip_group_id) ? (
+                  value
                 ) : key === 'sip_group_name' ? (
                   <LinkItem
                     item={props.item}
