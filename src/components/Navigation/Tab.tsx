@@ -60,6 +60,10 @@ const Tab = (props: Props) => {
     props.onClickItem(value)
   }, [isFirstRender, value])
 
+  useEffect(() => {
+    setValue(props.current)
+  }, [props.current])
+
   const handleClick = (value: string) => {
     setValue(value)
   }

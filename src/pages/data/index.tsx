@@ -289,7 +289,6 @@ const DataIndex = (props: Props) => {
   }
 
   const handleChangeTab = (type: string) => {
-    setDatabaseType(type)
     setCurrentPage(1)
     setSortValue(null)
     handleUpdateDatabaseRoute(type)
