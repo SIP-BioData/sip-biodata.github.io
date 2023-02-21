@@ -5,7 +5,7 @@ export const getSearchWordsFromQuery = (query: ParsedUrlQuery) => {
   if (query['search[]']) {
     return Array.isArray(query['search[]'])
       ? query['search[]'].map((v) => String(v))
-      : [query['search[]']]
+      : [String(query['search[]'])]
   } else {
     return []
   }

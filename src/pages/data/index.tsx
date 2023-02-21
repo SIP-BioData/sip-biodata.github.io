@@ -183,7 +183,6 @@ const DataIndex = (props: Props) => {
   ]
 
   useEffect(() => {
-    setDatabaseType('all')
     setDatabase(defaultDatabase)
     setCounts(defaultCounts)
     setCurrentDatabase(database.all)
@@ -211,6 +210,8 @@ const DataIndex = (props: Props) => {
     }
     if (dataType) {
       setDatabaseType(dataType)
+    } else {
+      setDatabaseType('all')
     }
     if (searchWords.length > 0) {
       setDatabase({
