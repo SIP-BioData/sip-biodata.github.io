@@ -33,6 +33,11 @@ const containerStyle = css`
   ${mq.mini} {
     padding: 60px 16px;
   }
+
+  img {
+    display: block;
+    margin-bottom: 30px;
+  }
 `
 
 const h1Style = css`
@@ -79,6 +84,11 @@ const lineStyle = css`
   border-top: var(--border-base);
 `
 
+const emStyle = css`
+  font-style: normal;
+  font-weight: bold;
+`
+
 const Heading1 = (props: { children?: ReactNode }) => (
   <h1 css={h1Style}>{props.children}</h1>
 )
@@ -107,6 +117,10 @@ const ListItem = (props: { children?: ReactNode }) => (
 
 const HorizontalLine = () => <hr css={lineStyle} />
 
+const Em = (props: { children?: ReactNode }) => (
+  <em css={emStyle}>{props.children}</em>
+)
+
 const components: MDXComponents = {
   h1: Heading1,
   h2: Heading2,
@@ -115,6 +129,7 @@ const components: MDXComponents = {
   ul: List,
   li: ListItem,
   hr: HorizontalLine,
+  em: Em,
 }
 
 const GroupDetail = (props: Props) => {
