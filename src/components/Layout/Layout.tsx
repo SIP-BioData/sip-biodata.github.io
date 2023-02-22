@@ -43,6 +43,7 @@ const Layout = (props: Props) => {
         />
         <meta property="og:description" content={siteDescription} />
         <meta property="og:image" content="https://sip-db.dbcls.jp/ogp.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div css={containerStyle}>
         <Header />
