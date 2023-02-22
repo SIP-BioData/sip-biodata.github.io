@@ -9,21 +9,27 @@ type Props = {
   title?: string
 }
 
-const Layout = ({
-  children,
-  title = 'SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル',
-}: Props) => {
+const siteTitle = 'SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル'
+const siteDescription =
+  '「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。'
+
+const Layout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>
+          {props.title ? `${props.title} | ${siteTitle}` : siteTitle}
+        </title>
+        <meta name="description" content={siteDescription} key="desc" />
         <meta
-          name="description"
-          content="「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。"
+          property="og:title"
+          content={props.title ? `${props.title} | ${siteTitle}` : siteTitle}
         />
+        <meta property="og:description" content={siteDescription} />
+        <meta property="og:image" content="https://sip-db.dbcls.jp/ogp.png" />
       </Head>
       <Header />
-      <main>{children}</main>
+      <main>{props.children}</main>
       <Footer />
     </>
   )
