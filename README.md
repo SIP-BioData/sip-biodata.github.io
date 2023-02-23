@@ -36,6 +36,10 @@ $ npm run dev
 
 ```
 .
+├── .babelrc
+├── .eslintrc.json
+├── .gitignore
+├── README.md
 ├── data # サイト表示に必要なデータ
 │     ├── hiddenGroup.txt
 │     ├── integbio_database.json # 自動生成のため編集不可
