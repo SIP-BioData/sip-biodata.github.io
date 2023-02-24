@@ -5,10 +5,14 @@ export const getSearchWordsFromQuery = (query: ParsedUrlQuery) => {
   if (query['search[]']) {
     return Array.isArray(query['search[]'])
       ? query['search[]'].map((v) => String(v))
-      : [query['search[]']]
+      : [String(query['search[]'])]
   } else {
     return []
   }
+}
+
+export const getDatabaseTypeFromQuery = (query: ParsedUrlQuery) => {
+  return query['database'] ? String(query['database']) : ''
 }
 
 export const updateRoute = (
@@ -56,14 +60,17 @@ export const updateRoute = (
 
 export const buildParams = (router: NextRouter, additionalParams?: object) => {
   const searchWords = getSearchWordsFromQuery(router.query)
+  const dataType = getDatabaseTypeFromQuery(router.query)
 
   type paramsType = {
     search: string[] | null
+    database: string | null
     [key: string]: any
   }
 
   const params: paramsType = {
     search: searchWords,
+    database: dataType,
   }
 
   if (additionalParams) {

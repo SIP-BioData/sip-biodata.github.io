@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import Link from 'next/link'
-import { Fragment, ReactNode, useEffect, useState } from 'react'
+import { Fragment, memo, ReactNode, useEffect, useState } from 'react'
 
 type Props = {
   item: Item
@@ -96,10 +96,15 @@ const defaultKeys = [
   'integbio_type_tag',
 ]
 
-const DatabaseItem = (props: Props) => {
+const DatabaseItem = memo(function DatabaseItem(props: Props) {
   const [isDisplayAll, setIsDisplayAll] = useState(false)
-  const displayItems = (({ sip_id, sip_group_id, integbio_id, ...rest }) =>
-    rest)(props.item)
+  const displayItems = (({
+    type,
+    sip_id,
+    sip_group_id,
+    integbio_id,
+    ...rest
+  }) => rest)(props.item)
 
   useEffect(() => {
     setIsDisplayAll(false)
@@ -195,6 +200,6 @@ const DatabaseItem = (props: Props) => {
       )}
     </section>
   )
-}
+})
 
 export default DatabaseItem

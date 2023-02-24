@@ -29,6 +29,10 @@ const getDataSipColumn = async () => {
 
 export const getDatabaseStaticProps = async () => {
   const objectDataSip = await getDataSip()
+  const objectDataSipConcat = objectDataSip.map((item: any) => {
+    return { type: 'sip', ...item }
+  })
+
   const objectDataSipColumn = await getDataSipColumn()
   const arrayHiddenGroup = await getArrayHiddenGroup()
 
@@ -38,11 +42,13 @@ export const getDatabaseStaticProps = async () => {
   )
   const dataIntegbio = await fsPromises.readFile(filePathIntegbio)
   const objectDataIntegbio = JSON.parse(dataIntegbio.toString())
-  const objectDataIntegbioConcatGroupName = objectDataIntegbio.map(
-    (item: any) => {
-      return { integbio_group_name: 'Integbio Database Catalog', ...item }
+  const objectDataIntegbioConcat = objectDataIntegbio.map((item: any) => {
+    return {
+      type: 'integbio',
+      integbio_group_name: 'Integbio Database Catalog',
+      ...item,
     }
-  )
+  })
 
   const filePathIntegbioColumn = path.join(
     process.cwd(),
@@ -53,8 +59,8 @@ export const getDatabaseStaticProps = async () => {
 
   return {
     props: {
-      sipDatabase: objectDataSip,
-      integbioDatabase: objectDataIntegbioConcatGroupName,
+      sipDatabase: objectDataSipConcat,
+      integbioDatabase: objectDataIntegbioConcat,
       sipDatabaseColumn: objectDataSipColumn,
       integbioDatabaseColumn: objectDataIntegbioColumn,
       hiddenGroups: arrayHiddenGroup,

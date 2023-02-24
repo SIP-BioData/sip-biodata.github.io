@@ -6,6 +6,8 @@ type Props = {
 }
 
 const style = css`
+  display: flex;
+  flex-direction: column;
   max-width: var(--conts-inn);
   margin: 0 auto;
   padding: 140px 16px 0;

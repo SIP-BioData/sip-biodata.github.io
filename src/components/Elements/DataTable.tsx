@@ -68,7 +68,7 @@ const LinkItem = (itemProps: LinkItemProps) => {
 
 const DataTable = (props: Props) => {
   const displayItems = props.item
-    ? (({ sip_id, sip_group_id, ...rest }) => rest)(props.item)
+    ? (({ type, sip_id, sip_group_id, ...rest }) => rest)(props.item)
     : null
 
   return (

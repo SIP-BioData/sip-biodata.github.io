@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 
@@ -8,6 +9,21 @@ type Props = {
   children: ReactNode
   title?: string
 }
+
+const containerStyle = css`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100vw;
+`
+
+const mainStyle = css`
+  flex: 1 1 100%;
+`
+
+const footerStyle = css`
+  margin-top: auto;
+`
 
 const siteTitle = 'SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル'
 const siteDescription =
@@ -29,9 +45,13 @@ const Layout = (props: Props) => {
         <meta property="og:image" content="https://sip-db.dbcls.jp/ogp.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Header />
-      <main>{props.children}</main>
-      <Footer />
+      <div css={containerStyle}>
+        <Header />
+        <main css={mainStyle}>{props.children}</main>
+        <div css={footerStyle}>
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }
