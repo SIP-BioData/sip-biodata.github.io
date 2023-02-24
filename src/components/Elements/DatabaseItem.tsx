@@ -84,13 +84,13 @@ const LinkItem = (itemProps: LinkItemProps) => {
 }
 
 const defaultKeys = [
-  'sip_group_name',
   'sip_name',
+  'sip_group_name',
   'sip_format',
   'sip_administrator',
   'sip_publication_status',
-  'integbio_group_name',
   'integbio_name',
+  'integbio_group_name',
   'integbio_asset_manager_name',
   'integbio_target_tag',
   'integbio_type_tag',
