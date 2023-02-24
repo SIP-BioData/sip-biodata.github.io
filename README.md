@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル
 
-## Getting Started
+「スマートバイオ産業・農業基盤技術」の研究開発から生み出されたデータの利活用を目的として、どのようなデータがあるのかを国内の研究者の方々に知っていただくためのサイトです。
 
-First, run the development server:
+## Getting Started / スタートガイド
 
-```bash
-npm run dev
-# or
-yarn dev
+プロジェクトを複製してローカル端末で実行し、開発や検証ができるまでの手順を説明します。
+
+### Prerequisites / 必要条件
+
+```
+Node.js >= v18.x
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installing / インストール
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+$ npm install
+$ npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[http://localhost:3000](http://localhost:3000)にアクセスしてください。
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deployment / デプロイ
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+このリポジトリのGitHub Pagesに反映するには、mainブランチにソースコードをgit pushしてください。
+自動でGitHub Actionsが起動してデプロイを行います。
 
-## Learn More
+## Built With / 協働するシステム
 
-To learn more about Next.js, take a look at the following resources:
+* [Next.js](https://nextjs.org/) - 使用した web フレームワーク
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Directory and File Structure / ディレクトリ・ファイル構成
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+※ 2023年2月現在
 
-## Deploy on Vercel
+```
+.
+├── .babelrc
+├── .eslintrc.json
+├── .gitignore
+├── README.md
+├── data # サイト表示に必要なデータ
+│     ├── hiddenGroup.txt
+│     ├── integbio_database.json # 自動生成のため編集不可
+│     ├── integbio_database_column.json # 自動生成のため編集不可
+│     ├── sip_database.json # 自動生成のため編集不可
+│     └── sip_database_column.json # 自動生成のため編集不可
+├── next.config.js
+├── node_modules # 依存ライブラリ（※ npm installで生成されます。git管理外です）
+├── out # 最終的な出力（※ npm run exportで生成されます。git管理外です）
+├── package-lock.json
+├── package.json
+├── prettier.config.js
+├── public # サイトに使用している画像などのアセット
+├── src
+│     ├── @types
+│     ├── components
+│     │     ├── Elements
+│     │     ├── Footer
+│     │     ├── Header
+│     │     ├── Layout
+│     │     └── Navigation
+│     ├── lib
+│     ├── markdown
+│     │     └── group # 研究グループ詳細ページ
+│     │         ├── 1A.mdx
+│     │         ├── 1B.mdx
+│     │         ├── 1C.mdx
+│     │         ├── 2B.mdx
+│     │         ├── 3A.mdx
+│     │         ├── 3B.mdx
+│     │         ├── 3C.mdx
+│     │         ├── 3D.mdx
+│     │         ├── 4ADB.mdx
+│     │         └── 4Amicrobe.mdx
+│     ├── pages
+│     │     ├── _app.tsx
+│     │     ├── _document.tsx
+│     │     ├── data
+│     │     │     ├── [id].tsx
+│     │     │     └── index.tsx
+│     │     ├── group
+│     │     │     ├── [group_id].tsx
+│     │     │     └── index.tsx
+│     │     └── index.tsx
+│     └── styles
+├── stylelint.config.js
+└── tsconfig.json
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How to edit content / コンテンツの編集方法
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 指定の研究グループ詳細ページを非表示にする
+
+1. `data/hiddenGroup.txt` に非表示にしたい研究グループのIDを記入します。
+   - 複数ある場合は、改行して記入してください。
+   - 記入例
+     ```
+     2A
+     3B
+     ```
+2. 保存してgit commitします。
+3. mainブランチにgit pushします。
