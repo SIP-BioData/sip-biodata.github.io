@@ -23,7 +23,7 @@ $ npm run dev
 
 ## Deployment / デプロイ
 
-このリポジトリのGitHub Pagesに反映するには、mainブランチにソースコードをpushしてください。
+このリポジトリのGitHub Pagesに反映するには、mainブランチにソースコードをgit pushしてください。
 自動でGitHub Actionsが起動してデプロイを行います。
 
 ## Built With / 協働するシステム
@@ -88,3 +88,17 @@ $ npm run dev
 ├── stylelint.config.js
 └── tsconfig.json
 ```
+
+## How to edit content / コンテンツの編集方法
+
+### 指定の研究グループ詳細ページを非表示にする
+
+1. `data/hiddenGroup.txt` に非表示にしたい研究グループのIDを記入します。
+   - 複数ある場合は、改行して記入してください。
+   - 記入例
+     ```
+     2A
+     3B
+     ```
+2. 保存してgit commitします。
+3. mainブランチにgit pushします。
