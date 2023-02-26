@@ -16,6 +16,10 @@ type LinkItemProps = {
   route: string
 }
 
+const mq = {
+  mini: '@media (max-width: 600px)',
+}
+
 const style = css`
   border: var(--border-gray);
   margin-top: 32px;
@@ -32,6 +36,10 @@ const style = css`
     padding: 0 12px 16px 0;
     margin-bottom: 16px;
     border-bottom: 1px solid #eaeaea;
+    ${mq.mini} {
+      flex-basis: 100%;
+      border: none;
+    }
   }
 
   dd {
@@ -41,6 +49,9 @@ const style = css`
     word-break: break-word;
     border-bottom: 1px solid #eaeaea;
     white-space: pre-wrap;
+    ${mq.mini} {
+      flex-basis: 100%;
+    }
   }
 
   button {

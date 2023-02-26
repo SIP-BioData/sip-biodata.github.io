@@ -14,6 +14,10 @@ type LinkItemProps = {
   route: string
 }
 
+const mq = {
+  mini: '@media (max-width: 600px)',
+}
+
 const tableStyle = css`
   width: 100%;
   border: var(--border-gray);
@@ -26,6 +30,11 @@ const thStyle = css`
   background-color: #f7f7f7;
   border: var(--border-gray);
   text-align: left;
+  ${mq.mini} {
+    display: block;
+    width: 100%;
+    border-bottom: none;
+  }
 `
 
 const cellStyle = css`
@@ -33,6 +42,10 @@ const cellStyle = css`
   border: var(--border-gray);
   word-break: break-word;
   white-space: pre-wrap;
+  ${mq.mini} {
+    display: block;
+    width: 100%;
+  }
 `
 
 const linkStyle = css`
