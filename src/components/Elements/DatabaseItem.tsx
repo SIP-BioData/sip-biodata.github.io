@@ -71,6 +71,13 @@ const externalLinkStyle = css`
   }
 `
 
+const ellipsisStyle = css`
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+`
+
 const LinkItem = (itemProps: LinkItemProps) => {
   return (
     <Link
@@ -84,13 +91,13 @@ const LinkItem = (itemProps: LinkItemProps) => {
 }
 
 const defaultKeys = [
-  'sip_group_name',
   'sip_name',
+  'sip_group_name',
   'sip_format',
   'sip_administrator',
-  'sip_publication_status',
-  'integbio_group_name',
+  'sip_description',
   'integbio_name',
+  'integbio_group_name',
   'integbio_asset_manager_name',
   'integbio_target_tag',
   'integbio_type_tag',
@@ -142,6 +149,10 @@ const DatabaseItem = memo(function DatabaseItem(props: Props) {
                   >
                     {value}
                   </LinkItem>
+                )  : key === 'sip_description' ? (
+                  <div css={!isDisplayAll ? ellipsisStyle : undefined}>
+                    {value}
+                  </div>
                 ) : key === 'integbio_name' ? (
                   <a
                     href={`https://integbio.jp/dbcatalog/record/${props.item.integbio_id.toLowerCase()}`}

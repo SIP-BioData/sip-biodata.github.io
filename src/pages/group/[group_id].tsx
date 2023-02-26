@@ -34,7 +34,7 @@ const containerStyle = css`
     padding: 60px 16px;
   }
 
-  img {
+  > img {
     display: block;
     margin-bottom: 30px;
   }

@@ -30,7 +30,11 @@ const getDataSipColumn = async () => {
 export const getDatabaseStaticProps = async () => {
   const objectDataSip = await getDataSip()
   const objectDataSipConcat = objectDataSip.map((item: any) => {
-    return { type: 'sip', ...item }
+    return {
+      type: 'sip',
+      sip_name: item.sip_name,
+      sip_group_name: item.sip_group_name,
+      ...item }
   })
 
   const objectDataSipColumn = await getDataSipColumn()
@@ -45,6 +49,7 @@ export const getDatabaseStaticProps = async () => {
   const objectDataIntegbioConcat = objectDataIntegbio.map((item: any) => {
     return {
       type: 'integbio',
+      integbio_name: item.integbio_name,
       integbio_group_name: 'Integbio Database Catalog',
       ...item,
     }
@@ -68,28 +73,22 @@ export const getDatabaseStaticProps = async () => {
   }
 }
 
-export const getSipDatabaseStaticProps = async () => {
-  const objectDataSip = await getDataSip()
-  const objectDataSipColumn = await getDataSipColumn()
-
-  return {
-    props: {
-      database: objectDataSip,
-      columns: objectDataSipColumn[0],
-    },
-  }
-}
-
 export const getDataStaticProps = async (context: {
   params: { id: string }
 }) => {
   const id = context.params.id
 
   const objectDataSip = await getDataSip()
+  const objectDataSipConcat = objectDataSip.map((item: any) => {
+    return {
+      sip_name: item.sip_name,
+      sip_group_name: item.sip_group_name,
+      ...item }
+  })
   const objectDataSipColumn = await getDataSipColumn()
 
   const currentData =
-    objectDataSip.find((v: { sip_id: string }) => v.sip_id === id) || null
+    objectDataSipConcat.find((v: { sip_id: string }) => v.sip_id === id) || null
 
   return {
     props: {
