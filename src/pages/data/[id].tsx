@@ -18,10 +18,17 @@ type Props = {
   columns: Item
 }
 
+const mq = {
+  mini: '@media (max-width: 600px)',
+}
+
 const containerStyle = css`
   background: var(--col-wh);
   margin: 26px 0 100px;
   padding: 60px;
+  ${mq.mini} {
+    padding: 60px 16px;
+  }
 `
 
 const buttonContainerStyle = css`
