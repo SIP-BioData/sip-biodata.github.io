@@ -76,21 +76,8 @@ const imgInnerStyle = css`
   border-radius: 10px;
 `
 
-const smartbioHeaderStyle = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 76px;
-
-  h2 {
-    margin-bottom: 12px !important;
-  }
-
-  p {
-    margin: 0;
-    text-align: right;
-  }
+const alignRightStyle = css`
+  text-align: right;
 `
 
 const Home = () => {
@@ -151,15 +138,7 @@ const Home = () => {
       </HomeItem>
       <div css={itemWithBgImgStyle} id="sfs">
         <HomeItem>
-          <div css={smartbioHeaderStyle}>
-            <header>
-              <h2>スマートバイオ産業・農業基盤技術について</h2>
-              <p>
-                https://www.naro.go.jp/laboratory/brain/sip/sip2/about.html
-                より引用
-              </p>
-            </header>
-          </div>
+          <h2>スマートバイオ産業・農業基盤技術について</h2>
           <blockquote cite="https://www.naro.go.jp/laboratory/brain/sip/sip2/about.html">
             <p>
               我が国のバイオエコノミーの拡大と関連産業の競争力強化等のため、府省連携により、バイオとデジタルの融合によるイノベーションの基盤を構築し、「食」による健康増進社会の実現や革新的なバイオ素材・製品産業の振興・創出を図ります。
@@ -188,6 +167,10 @@ const Home = () => {
               を目指すことを視野に入れて研究開発を推進し、社会実装が可能なプロトタイプを開発することとします。
             </p>
           </blockquote>
+          <p css={alignRightStyle}>
+            https://www.naro.go.jp/laboratory/brain/sip/sip2/about.html
+            より引用
+          </p>
           <blockquote cite="https://www.naro.go.jp/laboratory/brain/sip/sip2/about/sfs.html">
             <div css={imgStyle}>
               <div css={imgInnerStyle}>
@@ -199,7 +182,7 @@ const Home = () => {
               </div>
             </div>
           </blockquote>
-          <p>
+          <p css={alignRightStyle}>
             https://www.naro.go.jp/laboratory/brain/sip/sip2/about/sfs.html
             より引用
           </p>
