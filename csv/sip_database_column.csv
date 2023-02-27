@@ -1,0 +1,2 @@
+データID,研究グループID,研究グループ,データ,データ内容,データ格納場所,データ形式,提供者,データ管理者,公開（予定）・非公開,利用条件,連携可能なデータベース,参考
+sip_id,sip_group_id,sip_group_name,sip_name,sip_description,sip_storage_location,sip_format,sip_supplier,sip_administrator,sip_publication_status,sip_terms_of_use,sip_integration,sip_reference
