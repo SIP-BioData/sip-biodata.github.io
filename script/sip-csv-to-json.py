@@ -4,7 +4,7 @@ import pandas as pd
 df_sip_column = pd.read_csv("../csv/sip_database_column.csv")
 columns = df_sip_column[1:1]
 cols = [str(column) for column in columns]
-df_sip = pd.read_csv("../sip_database.csv", usecols=cols)
+df_sip = pd.read_csv("../sip_database.csv", encoding="shift_jis", usecols=cols)
 print(df_sip)
 
 with open("../csv/sip_database_column.csv", "r") as csv_sip_column:
