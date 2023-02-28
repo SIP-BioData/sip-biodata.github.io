@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
 
-df_sip = pd.read_csv("../sip_database.csv", encoding="shift_jis")
+df_sip = pd.read_csv("../sip_database.csv", encoding="cp932")
 df_sip_column = pd.read_csv("../csv/sip_database_column.csv")
 
 with open("../csv/sip_database_column.csv", "r") as csv_sip_column:
