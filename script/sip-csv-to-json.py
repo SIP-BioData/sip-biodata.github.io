@@ -3,7 +3,7 @@ import pandas as pd
 
 df_sip_column = pd.read_csv("../csv/sip_database_column.csv")
 columns = df_sip_column[1:1]
-cols = columns.astype(str)
+cols = [str(column) for column in columns]
 print(cols)
 df_sip = pd.read_csv("../sip_database.csv", encoding="utf-8", usecols=cols)
 
