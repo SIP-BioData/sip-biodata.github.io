@@ -55,6 +55,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: develop
+          message: 'update integbio data ${date}'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
