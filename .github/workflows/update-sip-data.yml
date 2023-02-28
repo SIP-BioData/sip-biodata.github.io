@@ -3,7 +3,7 @@ name: Update SIP data
 on: workflow_dispatch
 
 jobs:
-  get-file:
+  generate-json:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -12,11 +12,6 @@ jobs:
         uses: wei/wget@v1
         with:
           args: -O sip_database.csv ${{secrets.SIP_DATABASE}}
-
-  generate-json:
-    runs-on: ubuntu-latest
-    needs: get-file
-    steps:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
