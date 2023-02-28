@@ -70,4 +70,4 @@ jobs:
         if: ${{ steps.cpr.outputs.pull-request-url }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
+        run: gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge --admin
