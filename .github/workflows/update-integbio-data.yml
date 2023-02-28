@@ -2,7 +2,7 @@ name: Update Integbio data
 
 on:
   schedule:
-    - cron: '00 18 * * *'
+    - cron: '00 9 * * *'
 
   workflow_dispatch:
 
