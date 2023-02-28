@@ -9,7 +9,7 @@ jobs:
       - name: wget
         uses: wei/wget@v1
         with:
-          args: -O ./csv/sip_database.csv ${{secrets.SIP_DATABASE}}
+          args: -O sip_database.csv ${{secrets.SIP_DATABASE}}
 
   generate-json:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
           python ./script/sip-csv-to-json.py
       - name: Delete csv
         run: |
-          rm ./csv/sip_database.csv
+          rm sip_database.csv
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
