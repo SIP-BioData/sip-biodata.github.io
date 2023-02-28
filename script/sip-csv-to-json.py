@@ -2,9 +2,10 @@ import csv
 import pandas as pd
 
 df_sip_column = pd.read_csv("../csv/sip_database_column.csv")
-df_sip_column = df_sip_column[1:1]
-print(df_sip_column)
-df_sip = pd.read_csv("../sip_database.csv", encoding="utf-8", usecols=df_sip_column)
+columns = df_sip_column[1:1]
+cols = columns.astype(str)
+print(cols)
+df_sip = pd.read_csv("../sip_database.csv", encoding="utf-8", usecols=cols)
 
 with open("../csv/sip_database_column.csv", "r") as csv_sip_column:
     dict_sip_column = csv.DictReader(csv_sip_column)
