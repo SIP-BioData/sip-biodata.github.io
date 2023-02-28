@@ -37,8 +37,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: develop
-          message: 'update sip data ${date}'
+          message: 'update sip data'
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,3 +49,7 @@ jobs:
           title: Update SIP data
           branch-suffix: 'short-commit-hash'
           delete-branch: true
+      - name: Merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
