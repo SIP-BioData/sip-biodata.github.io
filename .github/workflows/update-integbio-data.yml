@@ -22,9 +22,8 @@ jobs:
           TZ: 'Asia/Tokyo'
         run: echo "CURRENT_DATE=$(date --date '18 hour ago' +'%Y%m%d')" >> $GITHUB_OUTPUT
       - name: wget
-        uses: wei/wget@v1
-        with:
-          args: -O integbio_dbcatalog.zip '${{secrets.INTEGBIO_DATABASE}}${{ steps.current-date.outputs.CURRENT_DATE }}_utf8.csv.zip'
+        run: |
+          wget -O integbio_dbcatalog.zip '${{secrets.INTEGBIO_DATABASE}}${{ steps.current-date.outputs.CURRENT_DATE }}_utf8.csv.zip'
       - name: unzip
         uses: montudor/action-zip@v1
         with:

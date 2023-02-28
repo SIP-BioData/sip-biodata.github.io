@@ -13,9 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: wget
-        uses: wei/wget@v1
-        with:
-          args: -O sip_database.csv ${{secrets.SIP_DATABASE}}
+        run: |
+          wget -O sip_database.csv ${{secrets.SIP_DATABASE}}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
