@@ -31,7 +31,7 @@ jobs:
           args: unzip -qq integbio_dbcatalog.zip
       - name: Delete zip
         run: |
-          mv 'integbio_dbcatalog_cc0_${{ steps.current-date.outputs.CURRENT_DATE }}_utf8.csv' ./script/integbio_dbcatalog.csv
+          mv 'integbio_dbcatalog_cc0_${{ steps.current-date.outputs.CURRENT_DATE }}_utf8.csv' integbio_dbcatalog.csv
           rm integbio_dbcatalog.zip
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -49,7 +49,7 @@ jobs:
           cd ..
       - name: Delete csv
         run: |
-          rm ./script/integbio_dbcatalog.csv
+          rm integbio_dbcatalog.csv
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

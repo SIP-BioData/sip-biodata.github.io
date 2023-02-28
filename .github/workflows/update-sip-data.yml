@@ -15,7 +15,7 @@ jobs:
       - name: wget
         uses: wei/wget@v1
         with:
-          args: -O ./script/sip_database.csv ${{secrets.SIP_DATABASE}}
+          args: -O sip_database.csv ${{secrets.SIP_DATABASE}}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -32,7 +32,7 @@ jobs:
           cd ..
       - name: Delete csv
         run: |
-          rm ./script/sip_database.csv
+          rm sip_database.csv
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
