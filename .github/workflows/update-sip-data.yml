@@ -2,6 +2,10 @@ name: Update SIP data
 
 on: workflow_dispatch
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   generate-json:
     runs-on: ubuntu-latest
