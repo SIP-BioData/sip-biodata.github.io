@@ -28,7 +28,9 @@ jobs:
           pip install -r ./script/requirements.txt
       - name: Run script
         run: |
-          python ./script/sip-csv-to-json.py
+          cd script
+          python sip-csv-to-json.py
+          cd ..
       - name: Delete csv
         run: |
           rm sip_database.csv

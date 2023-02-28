@@ -45,7 +45,9 @@ jobs:
           pip install -r ./script/requirements.txt
       - name: Run script
         run: |
-          python ./script/integbio-csv-to-json.py
+          cd script
+          python integbio-csv-to-json.py
+          cd ..
       - name: Delete csv
         run: |
           rm integbio_dbcatalog.csv
