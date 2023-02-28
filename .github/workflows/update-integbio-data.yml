@@ -10,6 +10,8 @@ jobs:
   get-file:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Set current date
         id: current-date
         env:
@@ -32,8 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-file
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
