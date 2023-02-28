@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
 
-df_integbio = pd.read_csv("../integbio_dbcatalog.csv")
+df_integbio = pd.read_csv("integbio_dbcatalog.csv")
 df_integbio_column = pd.read_csv("../csv/integbio_dbcatalog_column.csv")
 
 with open("../csv/integbio_dbcatalog_column.csv", "r") as csv_integbio_column:
