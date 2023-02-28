@@ -1,13 +1,10 @@
 import csv
 import pandas as pd
 
-with open("../csv/sip_database.csv") as f:
-    print(f.read())
-
 df_sip_column = pd.read_csv("../csv/sip_database_column.csv")
 columns = df_sip_column[1:1]
 cols = [str(column) for column in columns]
-df_sip = pd.read_csv("../csv/sip_database.csv", usecols=cols)
+df_sip = pd.read_csv("../sip_database.csv", usecols=cols)
 
 with open("../csv/sip_database_column.csv", "r") as csv_sip_column:
     dict_sip_column = csv.DictReader(csv_sip_column)
