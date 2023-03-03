@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import logoPic from '../../../public/logo.png'
+import logoImg from '../../../public/logo.png'
 
 const footerStyle = css`
   background: var(--col-bk);
@@ -13,10 +13,14 @@ const footerLogoStyle = css`
   max-width: var(--inn1000);
   margin: 0 auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   @media (max-width: 680px) {
     align-items: flex-start;
   }
+`
+
+const logoStyle = css`
+  flex: 0 1 auto;
 `
 
 const titleStyle = css`
@@ -50,7 +54,9 @@ const Footer = () => {
   return (
     <footer css={footerStyle}>
       <div css={footerLogoStyle}>
-        <Image src={logoPic} alt="SIP" />
+        <div css={logoStyle}>
+          <Image src={logoImg} alt="SIP" />
+        </div>
         <div css={titleStyle}>
           SIP「スマートバイオ産業・農業基盤技術」データ連携ポータル
         </div>
