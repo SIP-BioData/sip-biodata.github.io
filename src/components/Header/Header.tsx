@@ -39,7 +39,7 @@ const logoStyle = css`
   max-width: ${logoSize.max};
   aspect-ratio: 1;
   background-color: var(--col-wh);
-  padding: 12px;
+  padding: 12px 0;
   border-radius: 0 0 10px 0;
   box-shadow: var(--shadow);
 `
