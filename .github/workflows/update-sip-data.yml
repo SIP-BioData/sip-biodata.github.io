@@ -48,11 +48,10 @@ jobs:
           commit-message: Update SIP data
           title: Update SIP data
           branch-suffix: 'short-commit-hash'
-          delete-branch: true
       - name: Merge PR
         if: ${{ steps.cpr.outputs.pull-request-url }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           gh pr review ${{ steps.cpr.outputs.pull-request-url }} --approve
-          gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge --admin
+          gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge --admin --delete-branch
