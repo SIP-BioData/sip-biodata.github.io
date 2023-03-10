@@ -132,7 +132,7 @@ export const getSortedItems = (items: any[], value: string, order: string) => {
 export const getFilteredItems = (items: Item[], keywords: string[]) => {
   return items.filter((item) =>
     Object.values(item).find((v: string) =>
-      v != null ? keywords.some((str) => v.includes(str)) : false
+      v != null ? keywords.some((str) => v.toLowerCase().includes(str.toLowerCase())) : false
     )
   )
 }
