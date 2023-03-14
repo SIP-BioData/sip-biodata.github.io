@@ -20,7 +20,7 @@ jobs:
         id: current-date
         env:
           TZ: 'Asia/Tokyo'
-        run: echo "CURRENT_DATE=$(date --date '18 hour ago' +'%Y%m%d')" >> $GITHUB_OUTPUT
+        run: echo "CURRENT_DATE=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
       - name: wget
         run: |
           wget -O integbio_dbcatalog.zip '${{secrets.INTEGBIO_DATABASE}}${{ steps.current-date.outputs.CURRENT_DATE }}_utf8.csv.zip'
